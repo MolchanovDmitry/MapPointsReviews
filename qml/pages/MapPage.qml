@@ -153,6 +153,10 @@ Page {
                     anchors.fill: parent
                     preventStealing: false
                     onClicked: {
+
+                    }
+
+                    onPressAndHold: {
                         console.log("mouse.x" + mouse.x)
 
                         var coord = map.toCoordinate(Qt.point(mouse.x, mouse.y))
