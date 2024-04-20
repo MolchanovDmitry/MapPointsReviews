@@ -108,12 +108,12 @@
 <context>
     <name>MapPage</name>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="46"/>
+        <location filename="../qml/pages/MapPage.qml" line="48"/>
         <source>Satellite map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="53"/>
+        <location filename="../qml/pages/MapPage.qml" line="55"/>
         <source>Location information</source>
         <translation type="unfinished"></translation>
     </message>

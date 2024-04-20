@@ -9,6 +9,8 @@ import ru.auroraos.PointsMapReviews 1.0
 import "../assets"
 
 Page {
+    property int markerSize: 75
+
     objectName: "mapPage"
 
     Compass {
@@ -119,8 +121,8 @@ Page {
             }
 
             Map {
-                id: map
 
+                id: map
                 objectName: "map"
                 anchors.fill: parent
                 plugin: mapPlugin
@@ -130,13 +132,14 @@ Page {
                 center: gpsInfoProvider.coordinate
 
                 MapItemView {
+
                     model: markermodel
                     delegate: MapQuickItem {
                         coordinate: model.position
                         sourceItem: Image {
-                            width: 50
-                            height: 50
-                            source: "../graphics/footprints.svg"
+                            width: markerSize
+                            height: markerSize
+                            source: "../graphics/marker.svg"
                         }
 
                         MouseArea {
@@ -152,14 +155,12 @@ Page {
                 MouseArea {
                     anchors.fill: parent
                     preventStealing: false
-                    onClicked: {
-
-                    }
-
                     onPressAndHold: {
                         console.log("mouse.x" + mouse.x)
 
-                        var coord = map.toCoordinate(Qt.point(mouse.x, mouse.y))
+                        var coord = map.toCoordinate(
+                                    Qt.point(mouse.x - markerSize / 2,
+                                             mouse.y - markerSize / 2))
                         markermodel.append({
                                                "position": coord
                                            })
