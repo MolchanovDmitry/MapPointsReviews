@@ -7,4 +7,5 @@ ApplicationWindow {
     cover: Qt.resolvedUrl("cover/DefaultCoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
     displayMode: Orientation.PortraitMask
+    statusbarForceVisible: true
 }

@@ -3,6 +3,7 @@
 import QtQuick 2.6
 import QtSensors 5.2
 import QtLocation 5.0
+import QtQuick.Layouts 1.0
 import QtPositioning 5.3
 import Sailfish.Silica 1.0
 import ru.auroraos.PointsMapReviews 1.0
@@ -127,9 +128,9 @@ Page {
                 objectName: "map"
                 anchors.fill: parent
                 plugin: mapPlugin
-                minimumZoomLevel: 2.5
-                maximumZoomLevel: 19.0
-                zoomLevel: zoomSlider.value
+                minimumZoomLevel: 5
+                maximumZoomLevel: 17
+                zoomLevel: 13
                 center: gpsInfoProvider.coordinate
 
                 MapItemView {
@@ -172,24 +173,55 @@ Page {
                     center = QtPositioning.coordinate(56.85836, 35.90057)
                 }
             }
+        }
 
-            Button {
+        ColumnLayout {
+            anchors {
+                right: parent.right
+                verticalCenter: parent.verticalCenter
+                margins: Theme.paddingLarge
+            }
+            spacing: Theme.paddingMedium
+
+            MapButton {
+                objectName: "plusButton"
+                sourceIcon: "image://theme/icon-l-add?%1"
+                onClicked: {
+                    map.zoomLevel = map.zoomLevel + 1
+                }
+            }
+
+            MapButton {
+                objectName: "minusButton"
+                sourceIcon: "image://theme/icon-l-remove?%1"
+                onClicked: {
+                    map.zoomLevel = map.zoomLevel - 1
+                }
+            }
+        }
+
+        ColumnLayout {
+            anchors {
+                right: parent.right
+                bottom: parent.bottom
+                margins: Theme.paddingLarge
+            }
+            spacing: Theme.paddingMedium
+
+            MapButton {
+                objectName: "centerButton"
+                sourceIcon: "image://theme/icon-l-whereami?%1"
+                onClicked: {
+                    //map.zoomLevel = map.maximumZoomLevel
+                    map.center.latitude = 0
+                    map.center.longitude = 0
+                    map.center = positionCircle.center
+                }
+            }
+
+            MapButton {
                 objectName: "menuButton"
-                anchors {
-                    left: parent.left
-                    bottom: parent.bottom
-                    margins: Theme.paddingLarge
-                }
-                width: height
-                color: Theme.highlightDimmerColor
-                border {
-                    color: Theme.rgba(color, Theme.opacityFaint)
-                    highlightColor: Theme.rgba(highlightBackgroundColor,
-                                               Theme.highlightBackgroundOpacity)
-                }
-                icon.source: "image://theme/icon-m-menu?%1".arg(
-                                 Theme.highlightDimmerColor)
-
+                sourceIcon: "image://theme/icon-l-menu?%1"
                 onClicked: {
                     if (drawer.opened) {
                         drawer.hide()
@@ -198,51 +230,22 @@ Page {
                     }
                 }
             }
-
-            Button {
-                objectName: "centerButton"
-                anchors {
-                    right: parent.right
-                    bottom: parent.bottom
-                    margins: Theme.paddingLarge
-                }
-                width: height
-                color: Theme.highlightDimmerColor
-                border {
-                    color: Theme.rgba(color, Theme.opacityFaint)
-                    highlightColor: Theme.rgba(highlightBackgroundColor,
-                                               Theme.highlightBackgroundOpacity)
-                }
-                icon.source: "image://theme/icon-m-whereami?%1".arg(
-                                 Theme.highlightDimmerColor)
-
-                onClicked: {
-                    //map.zoomLevel = map.maximumZoomLevel
-                    map.center.latitude = 0
-                    map.center.longitude = 0
-                    map.center = positionCircle.center
-                }
-            }
         }
 
-        Component.onCompleted: {
-
-        }
-
-        Slider {
-            id: zoomSlider
-            anchors {
-                left: parent.left
-                right: parent.right
-                top: parent.top
-                bottomMargin: Theme.paddingLarge
-            }
-            color: "red"
-            highlightColor: "red"
-            minimumValue: map.minimumZoomLevel
-            maximumValue: map.maximumZoomLevel
-            value: 11
-        }
+        //        Slider {
+        //            id: zoomSlider
+        //            anchors {
+        //                left: parent.left
+        //                right: parent.right
+        //                top: parent.top
+        //                bottomMargin: Theme.paddingLarge
+        //            }
+        //            color: "red"
+        //            highlightColor: "red"
+        //            minimumValue: map.minimumZoomLevel
+        //            maximumValue: map.maximumZoomLevel
+        //            value: 11
+        //        }
     }
 
     PullDownMenu {
