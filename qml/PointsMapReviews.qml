@@ -6,4 +6,5 @@ ApplicationWindow {
     initialPage: Qt.resolvedUrl("pages/MapPage.qml")
     cover: Qt.resolvedUrl("cover/DefaultCoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
+    displayMode: Orientation.PortraitMask
 }

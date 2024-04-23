@@ -30,6 +30,8 @@ Page {
     Drawer {
         id: drawer
 
+        dock: Dock.Bottom
+
         objectName: "drawer"
         anchors {
             top: parent.top
@@ -60,7 +62,6 @@ Page {
                 }]
             delegate: BackgroundItem {
                 id: drawerMenuItem
-
                 objectName: "drawerMenuItem_%1".arg(index)
                 anchors {
                     left: parent.left
@@ -241,6 +242,15 @@ Page {
             minimumValue: map.minimumZoomLevel
             maximumValue: map.maximumZoomLevel
             value: 11
+        }
+    }
+
+    PullDownMenu {
+        MenuItem {
+            text: qsTr("Add_note")
+            onClicked: {
+                console.log("kokoke")
+            }
         }
     }
 }
