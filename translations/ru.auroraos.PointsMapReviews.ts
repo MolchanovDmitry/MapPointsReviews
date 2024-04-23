@@ -32,6 +32,19 @@
     </message>
 </context>
 <context>
+    <name>AddMapPointPage</name>
+    <message>
+        <location filename="../qml/pages/AddMapPointPage.qml" line="12"/>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AddMapPointPage.qml" line="13"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DefaultCoverPage</name>
     <message>
         <location filename="../qml/cover/DefaultCoverPage.qml" line="10"/>
@@ -109,16 +122,11 @@
     <name>MapPage</name>
     <message>
         <location filename="../qml/pages/MapPage.qml" line="51"/>
-        <source>Satellite map</source>
+        <source>Добавить точку</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="58"/>
-        <source>Location information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/MapPage.qml" line="251"/>
+        <location filename="../qml/pages/MapPage.qml" line="238"/>
         <source>Add_note</source>
         <translation type="unfinished"></translation>
     </message>

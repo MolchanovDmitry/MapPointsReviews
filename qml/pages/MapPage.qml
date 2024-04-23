@@ -48,16 +48,10 @@ Page {
             objectName: "backgroundView"
             anchors.fill: parent
             model: [{
-                    "labelText": qsTr("Satellite map"),
+                    "labelText": qsTr("Добавить точку"),
                     "destinationPage": "SatelliteInfoPage",
                     "destinationProperties": {
                         "compass": compass,
-                        "gpsInfoProvider": gpsInfoProvider
-                    }
-                }, {
-                    "labelText": qsTr("Location information"),
-                    "destinationPage": "LocationInfoPage",
-                    "destinationProperties": {
                         "gpsInfoProvider": gpsInfoProvider
                     }
                 }]
@@ -157,6 +151,12 @@ Page {
                 MouseArea {
                     anchors.fill: parent
                     preventStealing: false
+                    onClicked: {
+                        if (drawer.opened) {
+                            drawer.hide()
+                        }
+                    }
+
                     onPressAndHold: {
                         console.log("mouse.x" + mouse.x)
 
@@ -231,21 +231,6 @@ Page {
                 }
             }
         }
-
-        //        Slider {
-        //            id: zoomSlider
-        //            anchors {
-        //                left: parent.left
-        //                right: parent.right
-        //                top: parent.top
-        //                bottomMargin: Theme.paddingLarge
-        //            }
-        //            color: "red"
-        //            highlightColor: "red"
-        //            minimumValue: map.minimumZoomLevel
-        //            maximumValue: map.maximumZoomLevel
-        //            value: 11
-        //        }
     }
 
     PullDownMenu {

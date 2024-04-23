@@ -1,6 +1,9 @@
 TARGET = ru.auroraos.PointsMapReviews
 
-QT += network sensors positioning location
+QT += network \
+    sensors \
+    positioning \
+    location
 
 CONFIG += \
     auroraapp \
