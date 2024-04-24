@@ -29,10 +29,34 @@ Dialog {
 
             model: imageModel
 
-            delegate: Image {
-                source: imgSource
+            delegate: Item {
                 height: parent.height
-                fillMode: Image.PreserveAspectFit
+                width: mainImage.width
+
+                Rectangle {
+                    id: container
+                    width: parent.width
+                    height: parent.height
+                    color: "lightblue"
+
+                    Image {
+                        id: mainImage
+                        source: imgSource
+                        height: parent.height
+                        fillMode: Image.PreserveAspectFit
+                    }
+
+                    Image {
+                        id: removeIcon
+                        anchors.right: parent.right
+                        anchors.top: parent.top
+                        source: "image://theme/icon-m-delete"
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: imageModel.remove(index)
+                        }
+                    }
+                }
             }
         }
 
