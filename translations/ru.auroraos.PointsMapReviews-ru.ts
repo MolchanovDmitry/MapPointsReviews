@@ -34,12 +34,12 @@
 <context>
     <name>AddMapPointPage</name>
     <message>
-        <location filename="../qml/pages/AddMapPointPage.qml" line="14"/>
+        <location filename="../qml/pages/AddMapPointPage.qml" line="22"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AddMapPointPage.qml" line="15"/>
+        <location filename="../qml/pages/AddMapPointPage.qml" line="23"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -126,7 +126,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="238"/>
+        <location filename="../qml/pages/MapPage.qml" line="237"/>
         <source>Add_note</source>
         <translation type="unfinished"></translation>
     </message>

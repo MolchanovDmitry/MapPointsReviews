@@ -3,10 +3,17 @@ import Sailfish.Silica 1.0
 import QtQuick.Layouts 1.0
 import Sailfish.Pickers 1.0
 import "../assets"
+import com.current.project 1.0
 
+// TODO добавить координаты
+// TODO добавить валидацию полей
 Dialog {
     objectName: "aboutPage"
     allowedOrientations: Orientation.All
+
+    property variant imageUrls: []
+    property string title: "test1"
+    property string description: "test2"
 
     Column {
         anchors.fill: parent
@@ -95,6 +102,7 @@ Dialog {
             console.log(url)
 
             if (!isImageAlreadyExists(url)) {
+                imageUrls.push(url)
                 imageModel.append({
                                       "imgSource": url
                                   })
@@ -111,7 +119,15 @@ Dialog {
         return false
     }
 
-    onAccepted: {
+    AddMapPointListener {
+        id: addMapPointListener
+    }
 
+    onAccepted: {
+        addMapPointListener.onMapPointAddRequest(title.text,
+                                                 descriptionText.text,
+                                                 imageUrls, 0, 0)
+        title = titleText.text
+        description = descriptionText.text
     }
 }

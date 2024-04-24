@@ -13,10 +13,12 @@ PKGCONFIG += \
 
 HEADERS += \
     src/gpsinfoprovider/gpsinfoprovider.h \
+    src/presentation/addmappointlistener.h \
     src/satelliteinfo/satelliteinfo.h \
 
 SOURCES += \
     src/gpsinfoprovider/gpsinfoprovider.cpp \
+    src/presentation/addmappointlistener.cpp \
     src/satelliteinfo/satelliteinfo.cpp \
     src/main.cpp \
 

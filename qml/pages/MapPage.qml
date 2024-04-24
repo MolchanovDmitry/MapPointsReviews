@@ -49,11 +49,7 @@ Page {
             anchors.fill: parent
             model: [{
                     "labelText": qsTr("Добавить точку"),
-                    "destinationPage": "SatelliteInfoPage",
-                    "destinationProperties": {
-                        "compass": compass,
-                        "gpsInfoProvider": gpsInfoProvider
-                    }
+                    "destinationPage": "AddMapPointPage"
                 }]
             delegate: BackgroundItem {
                 id: drawerMenuItem
@@ -67,10 +63,13 @@ Page {
 
                 onClicked: {
                     drawer.hide()
-                    pageStack.push(Qt.resolvedUrl(
-                                       "%1.qml".arg(
-                                           modelData.destinationPage)),
-                                   modelData.destinationProperties)
+                    var dialog = pageStack.push(
+                                Qt.resolvedUrl("%1.qml".arg(
+                                                   modelData.destinationPage)))
+                    dialog.onAccepted.connect(function () {
+                        console.log(dialog.imageUrls + " " + dialog.title + " "
+                                    + dialog.description)
+                    })
                 }
 
                 Label {
@@ -213,9 +212,9 @@ Page {
                 sourceIcon: "image://theme/icon-l-whereami?%1"
                 onClicked: {
                     //map.zoomLevel = map.maximumZoomLevel
-                    map.center.latitude = 0
-                    map.center.longitude = 0
-                    map.center = positionCircle.center
+                    map.center.latitude = gpsInfoProvider.coordinate.latitude
+                    map.center.longitude = gpsInfoProvider.coordinate.longitude
+                    //map.center = gpsInfoProvider.coordinate.center
                 }
             }
 

@@ -3,6 +3,7 @@
 #include <QtPositioning/QGeoPositionInfo>
 #include <auroraapp.h>
 
+#include "presentation/addmappointlistener.h"
 #include "gpsinfoprovider/gpsinfoprovider.h"
 
 int main(int argc, char *argv[])
@@ -10,6 +11,8 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<GpsInfoProvider>("ru.auroraos.PointsMapReviews", 1, 0, "GpsInfoProvider");
     qRegisterMetaType<QGeoPositionInfo>("QGeoPositionInfo");
+
+    qmlRegisterType<AddMapPointListener>("com.current.project", 1, 0, "AddMapPointListener");
 
     QScopedPointer<QGuiApplication> application(Aurora::Application::application(argc, argv));
     application->setOrganizationName(QStringLiteral("ru.auroraos"));
