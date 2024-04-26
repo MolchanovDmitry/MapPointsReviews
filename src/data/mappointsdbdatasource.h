@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QList>
 #include <QSqlDatabase>
+
+#include "mappointsqlmodel.h"
 #include "../domain/mappoint.h"
 
 class MapPointsDbDataSource : public QObject
@@ -24,6 +26,7 @@ public:
 
 private:
     QSqlDatabase db;
+    MapPointSqlModel *mapPointSqlModel = new MapPointSqlModel(parent());
 
 };
 

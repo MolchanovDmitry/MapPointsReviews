@@ -14,6 +14,7 @@ PKGCONFIG += \
 
 HEADERS += \
     src/data/mappointsdbdatasource.h \
+    src/data/mappointsqlmodel.h \
     src/data/repository.h \
     src/domain/mappoint.h \
     src/gpsinfoprovider/gpsinfoprovider.h \
@@ -22,8 +23,8 @@ HEADERS += \
 
 SOURCES += \
     src/data/mappointsdbdatasource.cpp \
+    src/data/mappointsqlmodel.cpp \
     src/data/repository.cpp \
-    src/domain/mappoint.cpp \
     src/gpsinfoprovider/gpsinfoprovider.cpp \
     src/presentation/addmappointlistener.cpp \
     src/satelliteinfo/satelliteinfo.cpp \

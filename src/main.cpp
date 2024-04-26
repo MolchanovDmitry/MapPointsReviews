@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
     Repository *repository = new Repository();
     QList<MapPoint> mapPoints = repository->getAllMapPoints();
 
+    qDebug()<<"количество результатов: "<<mapPoints.count();
     foreach(MapPoint mapPoint, mapPoints){
         qDebug()<<"результат: "<<mapPoint.title;
     }

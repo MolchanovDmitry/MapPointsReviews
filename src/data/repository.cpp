@@ -9,8 +9,9 @@ Repository::Repository(QObject *parent) : QObject(parent)
     db.setDatabaseName("PointsMapReviews.db");
 
     this->dataSource = new MapPointsDbDataSource(db, parent);
-
+    this->dataSource->createTable();
     addFakeData();
+    this->dataSource->getRowCount();//TODO удалить
 }
 
 void Repository::addFakeData()
