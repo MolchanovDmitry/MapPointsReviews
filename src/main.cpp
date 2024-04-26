@@ -6,7 +6,7 @@
 
 #include "presentation/addmappointlistener.h"
 #include "gpsinfoprovider/gpsinfoprovider.h"
-#include "data/repository.h"
+#include "presentation/mapviewmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,20 +20,31 @@ int main(int argc, char *argv[])
     application->setOrganizationName(QStringLiteral("ru.auroraos"));
     application->setApplicationName(QStringLiteral("PointsMapReviews"));
 
+    Repository *repository = new Repository();
+    MapViewModel mapViewModel(repository);
+    MapPointsUiModel &mapPointsUiModel = mapViewModel.getMapPointsUiModel();
+
     QScopedPointer<QQuickView> view(Aurora::Application::createView());
     view->setSource(Aurora::Application::pathTo(QStringLiteral("qml/PointsMapReviews.qml")));
+    view->rootContext()->setContextProperty("mapPointsUiModel", QVariant::fromValue(&mapPointsUiModel));
     view->show();
 
-    Repository *repository = new Repository();
 
-    auto model = repository->getAllMapPoints();
 
-    auto result = model->getMapPoints();
 
-    //QList<MapPoint> mapPoints = repository->getAllMapPoints();
+//    auto model = repository->getAllMapPoints();
 
-    qDebug()<<"количество результатов: "<<result.count();
-    foreach(MapPoint mapPoint, result){
+//    auto result = model->getMapPoints();
+
+//    //QList<MapPoint> mapPoints = repository->getAllMapPoints();
+
+//    qDebug()<<"количество результатов: "<<result.count();
+//    foreach(MapPoint mapPoint, result){
+//        qDebug()<<"результат: "<<mapPoint.title;
+//    }
+
+    qDebug()<<"количество результатов: "<<mapPointsUiModel.getMapPoints().count();
+    foreach(MapPoint mapPoint, mapPointsUiModel.getMapPoints()){
         qDebug()<<"результат: "<<mapPoint.title;
     }
 

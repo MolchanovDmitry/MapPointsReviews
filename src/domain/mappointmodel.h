@@ -15,10 +15,13 @@ public:
     }
 
 public slots:
-    void onMapPointsUpdated(QList<MapPoint> mapPoints){
+    void updateMapPoints(QList<MapPoint> mapPoints){
         this->mapPoints = mapPoints;
+        emit mapPointsUpdated(this->mapPoints);
     }
 
+signals:
+    void mapPointsUpdated(QList<MapPoint> mapPoints);
 
 private:
     QList<MapPoint> mapPoints = QList<MapPoint>();

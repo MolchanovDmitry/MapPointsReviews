@@ -2,7 +2,6 @@
 
 #include <QSqlDatabase>
 #include <QDebug>
-#include <QSqlRecord> // TODO
 
 Repository::Repository(QObject *parent) : QObject(parent)
 {
@@ -14,14 +13,14 @@ Repository::Repository(QObject *parent) : QObject(parent)
     addFakeData();
 
     connect(this->dataSource->mapPointSqlModel,&MapPointSqlModel::mapPointsFromDataUpdated,
-            this->mapPointModel, &MapPointModel::onMapPointsUpdated);
+            this->mapPointModel, &MapPointModel::updateMapPoints);
 }
 
 void Repository::addFakeData()
 {
     int rowCount = dataSource->getRowCount();
     if(rowCount == 0){
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 100; ++i) {
             auto mapPoint = MapPoint();
             mapPoint.title = QString("Title %1").arg(i + 1);
             mapPoint.description = QString("Description %1").arg(i + 1);
@@ -33,10 +32,9 @@ void Repository::addFakeData()
     }
 }
 
-MapPointModel* Repository::getAllMapPoints()
+void Repository::fetchAllMapPoints()
 {
     dataSource->getAll();
-    return mapPointModel;
 }
 
 

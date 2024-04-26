@@ -20,6 +20,8 @@ HEADERS += \
     src/domain/mappointmodel.h \
     src/gpsinfoprovider/gpsinfoprovider.h \
     src/presentation/addmappointlistener.h \
+    src/presentation/mappointsuimodel.h \
+    src/presentation/mapviewmodel.h \
     src/satelliteinfo/satelliteinfo.h \
 
 SOURCES += \
@@ -29,6 +31,8 @@ SOURCES += \
     src/domain/mappointmodel.cpp \
     src/gpsinfoprovider/gpsinfoprovider.cpp \
     src/presentation/addmappointlistener.cpp \
+    src/presentation/mappointsuimodel.cpp \
+    src/presentation/mapviewmodel.cpp \
     src/satelliteinfo/satelliteinfo.cpp \
     src/main.cpp \
 

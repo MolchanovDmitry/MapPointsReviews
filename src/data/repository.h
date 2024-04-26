@@ -12,12 +12,12 @@ class Repository : public QObject
 public:
     explicit Repository(QObject *parent = nullptr);
 
-    MapPointModel* getAllMapPoints();
+    MapPointModel* mapPointModel = new MapPointModel();
+
+    void fetchAllMapPoints();
 
 private:
     MapPointsDbDataSource* dataSource;
-
-    MapPointModel* mapPointModel = new MapPointModel();
 
     void addFakeData();
 
