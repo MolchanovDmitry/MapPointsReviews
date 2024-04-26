@@ -12,20 +12,9 @@ Repository::Repository(QObject *parent) : QObject(parent)
     this->dataSource = new MapPointsDbDataSource(db, parent);
     this->dataSource->createTable();
     addFakeData();
-    this->dataSource->getRowCount();//TODO удалить
-
-    qDebug()<<"check 1";
-    connect(this->dataSource->mapPointSqlModel, &MapPointSqlModel::dataChanged, this->dataSource->mapPointSqlModel, &MapPointSqlModel::onDataChanged);
-
-    connect(this->dataSource->mapPointSqlModel, &MapPointSqlModel::modelReset, [this]() {
-        qDebug() << "Model was reset";
-    });
-
-    connect(this->dataSource->mapPointSqlModel, &QSqlQueryModel::modelReset, this->dataSource->mapPointSqlModel, &MapPointSqlModel::onDataChanged);
 
     connect(this->dataSource->mapPointSqlModel,&MapPointSqlModel::mapPointsFromDataUpdated,
             this->mapPointModel, &MapPointModel::onMapPointsUpdated);
-    qDebug()<<"check 2";
 }
 
 void Repository::addFakeData()
@@ -47,20 +36,6 @@ void Repository::addFakeData()
 MapPointModel* Repository::getAllMapPoints()
 {
     dataSource->getAll();
-
-    for(int i = 0; i < dataSource->mapPointSqlModel->rowCount(); ++i) {
-        QSqlRecord record = dataSource->mapPointSqlModel->record(i);
-
-        // Доступ к данным ваших полей
-        //int id = record.value("id").toInt();
-        QString title = record.value("title").toString();
-        QString description = record.value("description").toString();
-        double latitude = record.value("latitude").toDouble();
-        double longitude = record.value("longitude").toDouble();
-
-        // Здесь вы можете сделать что-то с этими данными
-        qDebug()<<"Тестовая печать: 1 " << title << description << latitude << longitude;
-    }
     return mapPointModel;
 }
 

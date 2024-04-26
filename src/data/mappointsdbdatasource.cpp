@@ -96,7 +96,6 @@ int MapPointsDbDataSource::getRowCount()
 void MapPointsDbDataSource::getAll()
 {
     db.transaction();
-    QList result = QList<MapPoint>();
     try {
         QSqlQuery query;
         QString selectAll = "SELECT title, description, latitude, longitude FROM MapPoints;";
@@ -109,20 +108,4 @@ void MapPointsDbDataSource::getAll()
         qCritical()<<"Ошибка получении всех точек: "<<e.what();
     }
     db.commit();
-
-    qDebug()<<"Тестовая печать: "<<mapPointSqlModel->rowCount();
-
-    for(int i = 0; i < mapPointSqlModel->rowCount(); ++i) {
-        QSqlRecord record = mapPointSqlModel->record(i);
-
-        // Доступ к данным ваших полей
-        //int id = record.value("id").toInt();
-        QString title = record.value("title").toString();
-        QString description = record.value("description").toString();
-        double latitude = record.value("latitude").toDouble();
-        double longitude = record.value("longitude").toDouble();
-
-        // Здесь вы можете сделать что-то с этими данными
-        qDebug()<<"Тестовая печать: " << title << description << latitude << longitude;
-    }
 }
