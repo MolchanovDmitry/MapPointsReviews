@@ -2,9 +2,11 @@
 #include <QtQuick/QQuickView>
 #include <QtPositioning/QGeoPositionInfo>
 #include <auroraapp.h>
+#include <QDebug>
 
 #include "presentation/addmappointlistener.h"
 #include "gpsinfoprovider/gpsinfoprovider.h"
+#include "data/repository.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,6 +23,13 @@ int main(int argc, char *argv[])
     QScopedPointer<QQuickView> view(Aurora::Application::createView());
     view->setSource(Aurora::Application::pathTo(QStringLiteral("qml/PointsMapReviews.qml")));
     view->show();
+
+    Repository *repository = new Repository();
+    QList<MapPoint> mapPoints = repository->getAllMapPoints();
+
+    foreach(MapPoint mapPoint, mapPoints){
+        qDebug()<<"результат: "<<mapPoint.title;
+    }
 
     return application->exec();
 }

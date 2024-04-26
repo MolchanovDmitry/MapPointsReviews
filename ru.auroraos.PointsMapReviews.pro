@@ -3,7 +3,8 @@ TARGET = ru.auroraos.PointsMapReviews
 QT += network \
     sensors \
     positioning \
-    location
+    location \
+    sql
 
 CONFIG += \
     auroraapp \
@@ -12,11 +13,17 @@ CONFIG += \
 PKGCONFIG += \
 
 HEADERS += \
+    src/data/mappointsdbdatasource.h \
+    src/data/repository.h \
+    src/domain/mappoint.h \
     src/gpsinfoprovider/gpsinfoprovider.h \
     src/presentation/addmappointlistener.h \
     src/satelliteinfo/satelliteinfo.h \
 
 SOURCES += \
+    src/data/mappointsdbdatasource.cpp \
+    src/data/repository.cpp \
+    src/domain/mappoint.cpp \
     src/gpsinfoprovider/gpsinfoprovider.cpp \
     src/presentation/addmappointlistener.cpp \
     src/satelliteinfo/satelliteinfo.cpp \

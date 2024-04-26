@@ -77,15 +77,25 @@ Dialog {
             }
         }
 
-        TextArea {
+        TextField {
             id: titleText
             placeholderText: "Введите наименование заведения"
+            validator: RegExpValidator {
+                regExp: /^[A-Za-zА-Яа-я0-9\s\-_,\.;:()]+$/
+            }
+            onErrorHighlightChanged: {
+                canAccept = !errorHighlight
+            }
         }
 
         TextArea {
             id: descriptionText
             placeholderText: "Введите описание заведения"
         }
+    }
+
+    Component.onCompleted: {
+        canAccept = false
     }
 
     Component {
