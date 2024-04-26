@@ -17,6 +17,7 @@ HEADERS += \
     src/data/mappointsqlmodel.h \
     src/data/repository.h \
     src/domain/mappoint.h \
+    src/domain/mappointmodel.h \
     src/gpsinfoprovider/gpsinfoprovider.h \
     src/presentation/addmappointlistener.h \
     src/satelliteinfo/satelliteinfo.h \
@@ -25,6 +26,7 @@ SOURCES += \
     src/data/mappointsdbdatasource.cpp \
     src/data/mappointsqlmodel.cpp \
     src/data/repository.cpp \
+    src/domain/mappointmodel.cpp \
     src/gpsinfoprovider/gpsinfoprovider.cpp \
     src/presentation/addmappointlistener.cpp \
     src/satelliteinfo/satelliteinfo.cpp \

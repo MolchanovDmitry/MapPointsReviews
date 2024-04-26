@@ -92,7 +92,8 @@ int MapPointsDbDataSource::getRowCount()
     return result;
 }
 
-const QList<MapPoint> MapPointsDbDataSource::getAll()
+// TODO
+void MapPointsDbDataSource::getAll()
 {
     db.transaction();
     QList result = QList<MapPoint>();
@@ -104,14 +105,6 @@ const QList<MapPoint> MapPointsDbDataSource::getAll()
         }
 
         mapPointSqlModel->setQuery(query);
-//        auto mapPoint = MapPoint();
-//        //mapPoint.id = query.value(0).toLongLong();
-//        mapPoint.title = query.value(0).toString();
-//        mapPoint.description = query.value(1).toString();
-//        mapPoint.latitude = query.value(2).toDouble();
-//        mapPoint.longitude = query.value(3).toDouble();
-
-//        result.append(mapPoint);
     }  catch (const QException& e) {
         qCritical()<<"Ошибка получении всех точек: "<<e.what();
     }
@@ -132,8 +125,4 @@ const QList<MapPoint> MapPointsDbDataSource::getAll()
         // Здесь вы можете сделать что-то с этими данными
         qDebug()<<"Тестовая печать: " << title << description << latitude << longitude;
     }
-
-
-
-    return result;
 }

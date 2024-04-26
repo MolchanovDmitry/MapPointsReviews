@@ -14,6 +14,8 @@ class MapPointsDbDataSource : public QObject
 public:
     explicit MapPointsDbDataSource(QSqlDatabase db, QObject *parent = nullptr);
 
+    MapPointSqlModel *mapPointSqlModel = new MapPointSqlModel(parent());
+
     void createTable();
 
     void addRow(const MapPoint mapPoint);
@@ -22,11 +24,12 @@ public:
 
     int getRowCount();
 
-    const QList<MapPoint> getAll();
+    void getAll();
+
+
 
 private:
     QSqlDatabase db;
-    MapPointSqlModel *mapPointSqlModel = new MapPointSqlModel(parent());
 
 };
 

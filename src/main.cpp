@@ -25,10 +25,15 @@ int main(int argc, char *argv[])
     view->show();
 
     Repository *repository = new Repository();
-    QList<MapPoint> mapPoints = repository->getAllMapPoints();
 
-    qDebug()<<"количество результатов: "<<mapPoints.count();
-    foreach(MapPoint mapPoint, mapPoints){
+    auto model = repository->getAllMapPoints();
+
+    auto result = model->getMapPoints();
+
+    //QList<MapPoint> mapPoints = repository->getAllMapPoints();
+
+    qDebug()<<"количество результатов: "<<result.count();
+    foreach(MapPoint mapPoint, result){
         qDebug()<<"результат: "<<mapPoint.title;
     }
 

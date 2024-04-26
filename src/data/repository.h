@@ -4,6 +4,7 @@
 #include <QObject>
 
 #include "mappointsdbdatasource.h"
+#include "../domain/mappointmodel.h"
 
 class Repository : public QObject
 {
@@ -11,12 +12,15 @@ class Repository : public QObject
 public:
     explicit Repository(QObject *parent = nullptr);
 
-    const QList<MapPoint> getAllMapPoints();
+    MapPointModel* getAllMapPoints();
 
 private:
-    MapPointsDbDataSource *dataSource;
+    MapPointsDbDataSource* dataSource;
+
+    MapPointModel* mapPointModel = new MapPointModel();
 
     void addFakeData();
+
 };
 
 #endif // REPOSITORY_H
