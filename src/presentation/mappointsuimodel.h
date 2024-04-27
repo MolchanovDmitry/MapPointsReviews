@@ -13,6 +13,7 @@ class MapPointsUiModel : public QAbstractListModel
 public:
 
     enum Roles {
+        IdRole,
         TitleRole = Qt::UserRole + 1,
         DescriptionRole,
         LatitudeRole,
@@ -26,10 +27,6 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
 
     QHash<int, QByteArray> roleNames() const override;
-
-    QList<MapPointUi*> getUiMapPoints() {
-        return mapPoints;
-    }
 
 public slots: //TODO
     void updateMapPoints(QList<MapPoint*> mapPoints);

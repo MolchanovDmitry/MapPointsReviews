@@ -25,10 +25,8 @@ public slots:
         for(int i = 0; i < rowCount(); i++){
            QSqlRecord record = this->record(i);
 
-           int id = record.value("id").toInt();
-           qDebug()<<"Идентификатор  = "<<id;
-
            MapPoint* mapPoint = new MapPoint();
+           mapPoint->id = record.value("id").toLongLong();
            mapPoint->title = record.value("title").toString();
            mapPoint->description = record.value("description").toString();
            mapPoint->latitude = record.value("latitude").toDouble();

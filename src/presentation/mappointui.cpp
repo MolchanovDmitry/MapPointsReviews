@@ -2,6 +2,7 @@
 
 MapPointUi::MapPointUi(QObject* parent)
     : QObject(parent)
+    , id(0)
     , title("")
     , description("")
     , latitude(0.0)
@@ -9,13 +10,19 @@ MapPointUi::MapPointUi(QObject* parent)
 {
 }
 
-MapPointUi::MapPointUi(QString title, QString description, double latitude, double longitude, QObject *parent)
+MapPointUi::MapPointUi(qlonglong id, QString title, QString description, double latitude, double longitude, QObject *parent)
     : QObject(parent)
+    , id(id)
     , title(title)
     , description(description)
     , latitude(latitude)
     , longitude(longitude)
 {
+}
+
+qlonglong MapPointUi::getId() const
+{
+    return id;
 }
 
 QString MapPointUi::getTitle() const
@@ -38,34 +45,3 @@ double MapPointUi::getLongitude() const
     return longitude;
 }
 
-void MapPointUi::setTitle(const QString &title)
-{
-    if (this->title != title) {
-        this->title = title;
-        emit titleChanged();
-    }
-}
-
-void MapPointUi::setDescription(const QString &description)
-{
-    if (this->description != description) {
-        this->description = description;
-        emit descriptionChanged();
-    }
-}
-
-void MapPointUi::setLatitude(double latitude)
-{
-    if (qFuzzyCompare(this->latitude, latitude) == false) {
-        this->latitude = latitude;
-        emit latitudeChanged();
-    }
-}
-
-void MapPointUi::setLongitude(double longitude)
-{
-    if (qFuzzyCompare(this->longitude, longitude) == false) {
-        this->longitude = longitude;
-        emit longitudeChanged();
-    }
-}

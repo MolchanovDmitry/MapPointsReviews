@@ -16,6 +16,8 @@ QVariant MapPointsUiModel::data(const QModelIndex &index, int role) const {
 
     MapPointUi *point = mapPoints[index.row()];
     switch (role) {
+    case IdRole:
+        return QVariant(point->getId());
     case TitleRole:
         return QVariant(point->getTitle());
     case DescriptionRole:
@@ -31,6 +33,7 @@ QVariant MapPointsUiModel::data(const QModelIndex &index, int role) const {
 
 QHash<int, QByteArray> MapPointsUiModel::roleNames() const {
     QHash<int, QByteArray> roles;
+    roles[IdRole] = "id";
     roles[TitleRole] = "title";
     roles[DescriptionRole] = "description";
     roles[LatitudeRole] = "latitude";
@@ -38,6 +41,7 @@ QHash<int, QByteArray> MapPointsUiModel::roleNames() const {
     return roles;
 }
 
+// TODO вынести в мапер
 void MapPointsUiModel::updateMapPoints(QList<MapPoint *> mapPoints)
 {
     qDebug()<<"MapPointsUiModel updateMapPoints";
@@ -46,7 +50,7 @@ void MapPointsUiModel::updateMapPoints(QList<MapPoint *> mapPoints)
 
     QList<MapPointUi*> uiMapPoints = QList<MapPointUi*>();
     foreach(MapPoint *mapPoint, mapPoints){
-        uiMapPoints << new MapPointUi(mapPoint->title, mapPoint->description, mapPoint->latitude, mapPoint->longitude);
+        uiMapPoints << new MapPointUi(mapPoint->id, mapPoint->title, mapPoint->description, mapPoint->latitude, mapPoint->longitude);
     }
     this->mapPoints << uiMapPoints;
 

@@ -3,35 +3,28 @@
 
 #include <QObject>
 
+// TODO убрать сет
 class MapPointUi : public QObject
 {
     Q_OBJECT
-       Q_PROPERTY(QString getTitle READ getTitle WRITE setTitle NOTIFY titleChanged)
-       Q_PROPERTY(QString getDescription READ getDescription WRITE setDescription NOTIFY descriptionChanged)
-       Q_PROPERTY(double getLatitude READ getLatitude WRITE setLatitude NOTIFY latitudeChanged)
-       Q_PROPERTY(double getLongitude READ getLongitude WRITE setLongitude NOTIFY longitudeChanged)
+       Q_PROPERTY(qlonglong getId READ getId)
+       Q_PROPERTY(QString getTitle READ getTitle)
+       Q_PROPERTY(QString getDescription READ getDescription)
+       Q_PROPERTY(double getLatitude READ getLatitude)
+       Q_PROPERTY(double getLongitude READ getLongitude)
 
    public:
        explicit MapPointUi(QObject* parent = nullptr);
-       MapPointUi(QString title, QString description, double latitude, double longitude, QObject *parent = nullptr);
+       MapPointUi(qlonglong id, QString title, QString description, double latitude, double longitude, QObject *parent = nullptr);
 
+       qlonglong getId() const;
        QString getTitle() const;
        QString getDescription() const;
        double getLatitude() const;
        double getLongitude() const;
 
-       void setTitle(const QString &title);
-       void setDescription(const QString &description);
-       void setLatitude(double latitude);
-       void setLongitude(double longitude);
-
-   signals:
-       void titleChanged();
-       void descriptionChanged();
-       void latitudeChanged();
-       void longitudeChanged();
-
    private:
+       qlonglong id;
        QString title;
        QString description;
        double latitude;
