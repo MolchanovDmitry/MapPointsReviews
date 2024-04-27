@@ -1,31 +1,45 @@
 #ifndef MAPPOINTSUIMODEL_H
 #define MAPPOINTSUIMODEL_H
 
-#include <QObject>
+#include <QAbstractListModel>
+#include <QDebug>
+#include <QQmlListProperty>
 #include "../domain/mappoint.h"
+#include "mappointui.h"
 
-class MapPointsUiModel : public QObject
+class MapPointsUiModel : public QAbstractListModel
 {
     Q_OBJECT
-    Q_PROPERTY(QList<MapPoint> mapPoints READ getMapPoints WRITE updateMapPoints NOTIFY onMapPointsUpdated)
 public:
+
+    enum Roles {
+        TitleRole = Qt::UserRole + 1,
+        DescriptionRole,
+        LatitudeRole,
+        LongitudeRole
+    };
+
+
     explicit MapPointsUiModel(QObject *parent = nullptr);
 
-    QList<MapPoint> getMapPoints() {
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+
+    QHash<int, QByteArray> roleNames() const override;
+
+    QList<MapPointUi*> getUiMapPoints() {
         return mapPoints;
     }
 
-public slots:
-    void updateMapPoints(QList<MapPoint> mapPoints){
-        this->mapPoints = mapPoints;
-    }
+public slots: //TODO
+    void updateMapPoints(QList<MapPoint*> mapPoints);
 
-signals:
-    void onMapPointsUpdated(QString text);
+signals://TODO
+    // void onMapPointsUpdated(QString text);
 
 
 private:
-    QList<MapPoint> mapPoints = QList<MapPoint>();
+    QList<MapPointUi*> mapPoints = QList<MapPointUi*>();
 
 };
 

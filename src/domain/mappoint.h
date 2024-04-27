@@ -16,8 +16,8 @@ struct MapPoint
     double longitude;
 };
 
-static void printMapPoint(MapPoint mapPoint, QString tag = ""){
-    qDebug()<<tag<<mapPoint.title<<" "<<mapPoint.description<<" "<<mapPoint.latitude<<" "<<mapPoint.longitude;
+static void printMapPoint(MapPoint *mapPoint, QString tag = ""){
+    qDebug()<<tag<<mapPoint->title<<" "<<mapPoint->description<<" "<<mapPoint->latitude<<" "<<mapPoint->longitude;
 }
 
 #endif // MAPPOINT_H

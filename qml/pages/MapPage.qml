@@ -128,9 +128,10 @@ Page {
 
                 MapItemView {
 
-                    model: markermodel
+                    model: mapPointsUiModel
                     delegate: MapQuickItem {
-                        coordinate: model.position
+                        coordinate: QtPositioning.coordinate(latitude,
+                                                             longitude)
                         sourceItem: Image {
                             width: markerSize
                             height: markerSize
@@ -170,6 +171,21 @@ Page {
 
                 Component.onCompleted: {
                     center = QtPositioning.coordinate(56.85836, 35.90057)
+
+                    console.log("*********************** Connections ********************")
+                    markermodel.clear() // Очищаем текущие элементы
+                    var mapPoints = mapPointsUiModel
+                    console.log("mapPoints = " + mapPoints)
+                    //                    for (var i = 0; i < mapPoints.count; i++) {
+                    //                        var point = mapPoints[i]
+                    //                        console.log("point = " + point)
+                    //                        //markermodel.append(point) // Добавляем новую точку
+                    //                        //                        var coord = map.toCoordinate(point.latitude,
+                    //                        //                                                     point.longitude)
+                    //                        //                        markermodel.append({
+                    //                        //                                               "position": coord
+                    //                        //                                           })
+                    //                    }
                 }
             }
         }

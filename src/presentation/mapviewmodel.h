@@ -11,12 +11,12 @@ class MapViewModel : public QObject
 public:
     explicit MapViewModel(Repository* repository, QObject *parent = nullptr);
 
-    MapPointsUiModel& getMapPointsUiModel();
+    MapPointsUiModel* getMapPointsUiModel();
 
 signals:
 
 private:
-    MapPointsUiModel mapPointsUiModel;
+    MapPointsUiModel *mapPointsUiModel = new MapPointsUiModel();
     Repository *repository;
 };
 

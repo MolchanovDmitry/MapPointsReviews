@@ -20,7 +20,7 @@ public:
 
     void addRow(const MapPoint mapPoint);
 
-    void addRows(const QList<MapPoint> mapPoints);
+    void addRows(const QList<MapPoint*> mapPoints);
 
     int getRowCount();
 

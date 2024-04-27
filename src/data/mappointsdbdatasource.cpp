@@ -61,7 +61,7 @@ void MapPointsDbDataSource::addRow(const MapPoint mapPoint)
     db.commit();
 }
 
-void MapPointsDbDataSource::addRows(const QList<MapPoint> mapPoints)
+void MapPointsDbDataSource::addRows(const QList<MapPoint*> mapPoints)
 {
 
 }

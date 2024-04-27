@@ -126,7 +126,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="237"/>
+        <location filename="../qml/pages/MapPage.qml" line="253"/>
         <source>Add_note</source>
         <translation type="unfinished"></translation>
     </message>

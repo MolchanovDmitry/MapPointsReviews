@@ -1,12 +1,15 @@
 #include <QtGui/QGuiApplication>
 #include <QtQuick/QQuickView>
 #include <QtPositioning/QGeoPositionInfo>
+#include <QQmlEngine> // TODO
 #include <auroraapp.h>
 #include <QDebug>
 
 #include "presentation/addmappointlistener.h"
 #include "gpsinfoprovider/gpsinfoprovider.h"
 #include "presentation/mapviewmodel.h"
+#include "domain/mappoint.h" //TODO
+#include "presentation/mappointsuimodel.h" //TODO
 
 int main(int argc, char *argv[])
 {
@@ -15,6 +18,8 @@ int main(int argc, char *argv[])
     qRegisterMetaType<QGeoPositionInfo>("QGeoPositionInfo");
 
     qmlRegisterType<AddMapPointListener>("com.current.project", 1, 0, "AddMapPointListener");
+    //qmlRegisterType<MapPoint>("com.current.project", 1, 0, "MapPoint");
+    //qmlRegisterType<MapPointsUiModel>("com.current.project", 1, 0, "MapPointsUiModel");
 
     QScopedPointer<QGuiApplication> application(Aurora::Application::application(argc, argv));
     application->setOrganizationName(QStringLiteral("ru.auroraos"));
@@ -22,11 +27,11 @@ int main(int argc, char *argv[])
 
     Repository *repository = new Repository();
     MapViewModel mapViewModel(repository);
-    MapPointsUiModel &mapPointsUiModel = mapViewModel.getMapPointsUiModel();
+    MapPointsUiModel *mapPointsUiModel = mapViewModel.getMapPointsUiModel();
 
     QScopedPointer<QQuickView> view(Aurora::Application::createView());
+    view->rootContext()->setContextProperty("mapPointsUiModel", QVariant::fromValue(mapPointsUiModel));
     view->setSource(Aurora::Application::pathTo(QStringLiteral("qml/PointsMapReviews.qml")));
-    view->rootContext()->setContextProperty("mapPointsUiModel", QVariant::fromValue(&mapPointsUiModel));
     view->show();
 
 
@@ -43,10 +48,10 @@ int main(int argc, char *argv[])
 //        qDebug()<<"результат: "<<mapPoint.title;
 //    }
 
-    qDebug()<<"количество результатов: "<<mapPointsUiModel.getMapPoints().count();
-    foreach(MapPoint mapPoint, mapPointsUiModel.getMapPoints()){
-        qDebug()<<"результат: "<<mapPoint.title;
-    }
+//    qDebug()<<"количество результатов: "<<mapPointsUiModel.getMapPoints().count();
+//    foreach(MapPoint mapPoint, mapPointsUiModel.getMapPoints()){
+//        qDebug()<<"результат: "<<mapPoint.title;
+//    }
 
     return application->exec();
 }
