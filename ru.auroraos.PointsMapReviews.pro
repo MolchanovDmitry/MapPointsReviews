@@ -27,6 +27,7 @@ HEADERS += \
 SOURCES += \
     src/data/mappointsdbdatasource.cpp \
     src/data/mappointsqlmodel.cpp \
+    src/data/repext.cpp \
     src/data/repository.cpp \
     src/domain/mappointmodel.cpp \
     src/gpsinfoprovider/gpsinfoprovider.cpp \
