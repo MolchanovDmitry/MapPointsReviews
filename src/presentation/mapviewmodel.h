@@ -3,14 +3,19 @@
 
 #include <QObject>
 #include "mappointsuimodel.h"
-#include "../data/repository.h" //TODO
+#include "../domain/fetchallmappointsusecase.h"
+#include "../domain/getmappointmodelusecase.h"
 
 class MapViewModel : public QObject
 {
     Q_OBJECT
 public:
 
-    explicit MapViewModel(Repository* repository, QObject *parent = nullptr);
+    explicit MapViewModel(
+            FetchAllMapPointsUseCase *fetchAppMapPointsUseCase,
+            GetMapPointModelUseCase *getMapPointModelUseCase,
+            QObject *parent = nullptr
+            );
 
     MapPointsUiModel* getMapPointsUiModel();
 
@@ -18,7 +23,6 @@ signals:
 
 private:
     MapPointsUiModel *mapPointsUiModel = new MapPointsUiModel();
-    Repository *repository;
 
     void mapMapPointAndUpdate(QList<MapPoint*> mapPoints);
 };

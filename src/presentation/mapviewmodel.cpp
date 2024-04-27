@@ -1,13 +1,16 @@
 #include "mapviewmodel.h"
 
 
-MapViewModel::MapViewModel(Repository *repository, QObject *parent)
-    : QObject(parent) {
-    this->repository = repository;
+MapViewModel::MapViewModel(
+        FetchAllMapPointsUseCase *fetchAppMapPointsUseCase,
+        GetMapPointModelUseCase *getMapPointModelUseCase,
+        QObject *parent)
+    : QObject(parent)
+{
+    connect(getMapPointModelUseCase->run(), &MapPointModel::mapPointsUpdated,
+            this, &MapViewModel::mapMapPointAndUpdate);
 
-    connect(repository->getMapPointModel(), &MapPointModel::mapPointsUpdated, this, &MapViewModel::mapMapPointAndUpdate);
-
-    repository->fetchAllMapPoints();
+    fetchAppMapPointsUseCase->run();
 }
 
 void MapViewModel::mapMapPointAndUpdate(QList<MapPoint*> mapPoints)

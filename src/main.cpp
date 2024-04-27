@@ -10,6 +10,8 @@
 #include "presentation/mapviewmodel.h"
 #include "domain/mappoint.h" //TODO
 #include "presentation/mappointsuimodel.h" //TODO
+#include "domain/getmappointmodelusecase.h"
+#include "domain/fetchallmappointsusecase.h"
 
 int main(int argc, char *argv[])
 {
@@ -26,7 +28,9 @@ int main(int argc, char *argv[])
     application->setApplicationName(QStringLiteral("PointsMapReviews"));
 
     Repository *repository = new Repository();
-    MapViewModel mapViewModel(repository);
+    GetMapPointModelUseCase *getMapPointModelUseCase = new GetMapPointModelUseCase(repository);
+    FetchAllMapPointsUseCase *fetchAllMapPointsUseCase = new FetchAllMapPointsUseCase(repository);
+    MapViewModel mapViewModel(fetchAllMapPointsUseCase, getMapPointModelUseCase);
     MapPointsUiModel *mapPointsUiModel = mapViewModel.getMapPointsUiModel();
 
     QScopedPointer<QQuickView> view(Aurora::Application::createView());
