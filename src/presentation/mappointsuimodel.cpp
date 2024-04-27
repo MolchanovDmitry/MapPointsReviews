@@ -26,6 +26,8 @@ QVariant MapPointsUiModel::data(const QModelIndex &index, int role) const {
         return QVariant(point->getLatitude());
     case LongitudeRole:
         return QVariant(point->getLongitude());
+    case IsConfirmedRole:
+        return QVariant(point->getIsConfirmed());
     default:
         return QVariant();
     }
@@ -38,6 +40,7 @@ QHash<int, QByteArray> MapPointsUiModel::roleNames() const {
     roles[DescriptionRole] = "description";
     roles[LatitudeRole] = "latitude";
     roles[LongitudeRole] = "longitude";
+    roles[IsConfirmedRole] = "isConfirmed";
     return roles;
 }
 

@@ -24,6 +24,7 @@ QList<MapPoint*>* getMockData(QString placeName, int generateCount, double place
         mapPoint->description = QString("Описание %1 для %2").arg(i + 1).arg(placeName);
         mapPoint->latitude = (placeLatitude + (qrand() % 1000) * thresholdLatitude * getRandomSign()); // 56.8486 + "шум" в пределах 0...0.06
         mapPoint->longitude = (placeLongitude + (qrand() % 1000) * thresholdLongitude * getRandomSign()); // 35.8507 + "шум" в пределах 0...0.13
+        mapPoint->isConfirmed = true;
         result->append(mapPoint);
     }
     return result;

@@ -7,16 +7,18 @@ MapPointUi::MapPointUi(QObject* parent)
     , description("")
     , latitude(0.0)
     , longitude(0.0)
+    , isConfirmed(false)
 {
 }
 
-MapPointUi::MapPointUi(qlonglong id, QString title, QString description, double latitude, double longitude, QObject *parent)
+MapPointUi::MapPointUi(qlonglong id, QString title, QString description, double latitude, double longitude, bool isConfirmed, QObject *parent)
     : QObject(parent)
     , id(id)
     , title(title)
     , description(description)
     , latitude(latitude)
     , longitude(longitude)
+    , isConfirmed(isConfirmed)
 {
 }
 
@@ -43,5 +45,10 @@ double MapPointUi::getLatitude() const
 double MapPointUi::getLongitude() const
 {
     return longitude;
+}
+
+bool MapPointUi::getIsConfirmed() const
+{
+    return isConfirmed;
 }
 

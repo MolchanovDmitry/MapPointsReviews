@@ -14,7 +14,12 @@ void MapViewModel::mapMapPointAndUpdate(QList<MapPoint*> mapPoints)
 {
     QList<MapPointUi*> uiMapPoints = QList<MapPointUi*>();
     foreach(MapPoint *mapPoint, mapPoints){
-        uiMapPoints << new MapPointUi(mapPoint->id, mapPoint->title, mapPoint->description, mapPoint->latitude, mapPoint->longitude);
+        uiMapPoints << new MapPointUi(mapPoint->id,
+                                      mapPoint->title,
+                                      mapPoint->description,
+                                      mapPoint->latitude,
+                                      mapPoint->longitude,
+                                      mapPoint->isConfirmed);
     }
     mapPointsUiModel->updateMapPoints(uiMapPoints);
 }

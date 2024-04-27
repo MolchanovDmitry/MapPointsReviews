@@ -31,6 +31,8 @@ public slots:
            mapPoint->description = record.value("description").toString();
            mapPoint->latitude = record.value("latitude").toDouble();
            mapPoint->longitude = record.value("longitude").toDouble();
+           mapPoint->isConfirmed = record.value("confirm_status").toString() == "1";
+
            printMapPoint(mapPoint, "отлов в onDataChanged");
            mapPoints.append(mapPoint);
         }

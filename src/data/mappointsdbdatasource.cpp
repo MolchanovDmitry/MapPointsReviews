@@ -26,7 +26,8 @@ void MapPointsDbDataSource::createTable()
                                 "title TEXT, "
                                 "description TEXT, "
                                 "latitude REAL, "
-                                "longitude REAL"
+                                "longitude REAL, "
+                                "confirm_status INTEGER"
                                 ");";
 
         if(!query.exec(createTable)) {
@@ -45,12 +46,13 @@ void MapPointsDbDataSource::addRow(const MapPoint mapPoint)
     db.transaction();
     try {
         QSqlQuery query;
-        query.prepare("INSERT INTO MapPoints (title, description, latitude, longitude) "
-                                "VALUES(?, ?, ?, ?);");
+        query.prepare("INSERT INTO MapPoints (title, description, latitude, longitude, confirm_status) "
+                                "VALUES(?, ?, ?, ?, ?);");
                 query.addBindValue(mapPoint.title);
                 query.addBindValue(mapPoint.description);
                 query.addBindValue(mapPoint.latitude);
                 query.addBindValue(mapPoint.longitude);
+                query.addBindValue(mapPoint.isConfirmed ? 1 : 0);
         if(!query.exec()){
              qCritical() << "Ошибка при добавлении точки в базу: " << query.lastError().text();
         } else {
@@ -78,14 +80,15 @@ void MapPointsDbDataSource::addRows(QList<MapPoint*> *mapPoints)
             row << QString("'%1'").arg(point->title)
                 << QString("'%1'").arg(point->description)
                 << QString("%1").arg(point->latitude)
-                << QString("%1").arg(point->longitude);
+                << QString("%1").arg(point->longitude)
+                << QString("%1").arg(point->isConfirmed ? 1 : 0);
 
             rows << QString("(%1)").arg(row.join(", "));
         }
 
         QSqlQuery query;
         query.prepare(QString(
-            "INSERT INTO MapPoints (title, description, latitude, longitude) "
+            "INSERT INTO MapPoints (title, description, latitude, longitude, confirm_status) "
             "VALUES %1").arg(rows.join(", ")));
 
         if(!query.exec()) {
@@ -129,7 +132,7 @@ void MapPointsDbDataSource::getAll()
     db.transaction();
     try {
         QSqlQuery query;
-        QString selectAll = "SELECT id, title, description, latitude, longitude FROM MapPoints;";
+        QString selectAll = "SELECT id, title, description, latitude, longitude, confirm_status FROM MapPoints;";
         if(!query.exec(selectAll)){
             qCritical() << "Ошибка получении всех точек 1: " << query.lastError().text();
         }

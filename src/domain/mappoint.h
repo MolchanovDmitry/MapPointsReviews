@@ -14,10 +14,11 @@ struct MapPoint
     QString description;
     double latitude;
     double longitude;
+    bool isConfirmed;
 };
 
 static void printMapPoint(MapPoint *mapPoint, QString tag = ""){
-    qDebug()<<tag<<mapPoint->title<<" "<<mapPoint->description<<" "<<mapPoint->latitude<<" "<<mapPoint->longitude;
+    qDebug()<<tag<<mapPoint->title<<" "<<mapPoint->description<<" "<<mapPoint->latitude<<" "<<mapPoint->longitude<<" "<<mapPoint->isConfirmed;
 }
 
 #endif // MAPPOINT_H

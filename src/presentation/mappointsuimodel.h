@@ -17,7 +17,8 @@ public:
         TitleRole = Qt::UserRole + 1,
         DescriptionRole,
         LatitudeRole,
-        LongitudeRole
+        LongitudeRole,
+        IsConfirmedRole,
     };
 
 
@@ -30,10 +31,6 @@ public:
 
 public slots:
     void updateMapPoints(QList<MapPointUi*> uiMapPoints);
-
-signals://TODO
-    // void onMapPointsUpdated(QString text);
-
 
 private:
     QList<MapPointUi*> mapPoints = QList<MapPointUi*>();
