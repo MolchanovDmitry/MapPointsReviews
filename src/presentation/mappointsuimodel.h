@@ -28,8 +28,8 @@ public:
 
     QHash<int, QByteArray> roleNames() const override;
 
-public slots: //TODO
-    void updateMapPoints(QList<MapPoint*> mapPoints);
+public slots:
+    void updateMapPoints(QList<MapPointUi*> uiMapPoints);
 
 signals://TODO
     // void onMapPointsUpdated(QString text);

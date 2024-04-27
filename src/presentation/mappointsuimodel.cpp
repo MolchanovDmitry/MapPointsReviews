@@ -42,17 +42,10 @@ QHash<int, QByteArray> MapPointsUiModel::roleNames() const {
 }
 
 // TODO вынести в мапер
-void MapPointsUiModel::updateMapPoints(QList<MapPoint *> mapPoints)
+void MapPointsUiModel::updateMapPoints(QList<MapPointUi *> uiMapPoints)
 {
-    qDebug()<<"MapPointsUiModel updateMapPoints";
     beginInsertRows(QModelIndex(), rowCount(), rowCount());
     this->mapPoints.clear();
-
-    QList<MapPointUi*> uiMapPoints = QList<MapPointUi*>();
-    foreach(MapPoint *mapPoint, mapPoints){
-        uiMapPoints << new MapPointUi(mapPoint->id, mapPoint->title, mapPoint->description, mapPoint->latitude, mapPoint->longitude);
-    }
     this->mapPoints << uiMapPoints;
-
     endInsertRows();
 }
