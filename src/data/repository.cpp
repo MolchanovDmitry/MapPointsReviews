@@ -9,21 +9,26 @@ Repository::Repository(QObject *parent) : QObject(parent)
 
     auto db = getDatabase();
 
-    this->dataSource = new MapPointsDbDataSource(db, parent);
-    this->dataSource->createTable();
+    dataSource = new MapPointsDbDataSource(db, parent);
+    dataSource->createTable();
 
     bool isMockDataAddedAlready = dataSource->getRowCount() != 0;
     if(!isMockDataAddedAlready){
-        addMockMapPoints(this->dataSource);
+        addMockMapPoints(dataSource);
     }
 
-    connect(this->dataSource->mapPointSqlModel,&MapPointSqlModel::mapPointsFromDataUpdated,
-            this->mapPointModel, &MapPointModel::updateMapPoints);
+    connect(dataSource->mapPointSqlModel, &MapPointSqlModel::mapPointsFromDataUpdated,
+            mapPointModel, &MapPointModel::updateMapPoints);
 }
 
 void Repository::fetchAllMapPoints()
 {
     dataSource->getAll();
+}
+
+MapPointModel *Repository::getMapPointModel()
+{
+    return mapPointModel;
 }
 
 

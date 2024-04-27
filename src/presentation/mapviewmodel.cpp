@@ -5,7 +5,7 @@ MapViewModel::MapViewModel(Repository *repository, QObject *parent)
     : QObject(parent) {
     this->repository = repository;
 
-    connect(this->repository->mapPointModel, &MapPointModel::mapPointsUpdated, this, &MapViewModel::mapMapPointAndUpdate);
+    connect(repository->getMapPointModel(), &MapPointModel::mapPointsUpdated, this, &MapViewModel::mapMapPointAndUpdate);
 
     repository->fetchAllMapPoints();
 }
