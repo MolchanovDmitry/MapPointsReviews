@@ -8,10 +8,18 @@ MapPointUi::MapPointUi(QObject* parent)
     , latitude(0.0)
     , longitude(0.0)
     , isConfirmed(false)
+    , imageUrls(QList<QString>())
 {
 }
 
-MapPointUi::MapPointUi(qlonglong id, QString title, QString description, double latitude, double longitude, bool isConfirmed, QObject *parent)
+MapPointUi::MapPointUi(qlonglong id,
+                       QString title,
+                       QString description,
+                       double latitude,
+                       double longitude,
+                       bool isConfirmed,
+                       QList<QString> imageUrls,
+                       QObject *parent)
     : QObject(parent)
     , id(id)
     , title(title)
@@ -19,6 +27,7 @@ MapPointUi::MapPointUi(qlonglong id, QString title, QString description, double 
     , latitude(latitude)
     , longitude(longitude)
     , isConfirmed(isConfirmed)
+    , imageUrls(imageUrls)
 {
 }
 
@@ -50,5 +59,10 @@ double MapPointUi::getLongitude() const
 bool MapPointUi::getIsConfirmed() const
 {
     return isConfirmed;
+}
+
+QList<QString> MapPointUi::getImageUrsl() const
+{
+    return imageUrls;
 }
 

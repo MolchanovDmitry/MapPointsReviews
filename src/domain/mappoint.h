@@ -15,6 +15,7 @@ struct MapPoint
     double latitude;
     double longitude;
     bool isConfirmed;
+    QList<QString> imageUrls;
 };
 
 static void printMapPoint(MapPoint *mapPoint, QString tag = ""){

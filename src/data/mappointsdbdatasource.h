@@ -33,8 +33,6 @@ private:
 
     void createMapPointTable();
 
-    void createImagesTable();
-
     void createCommentsTable();
 
 };

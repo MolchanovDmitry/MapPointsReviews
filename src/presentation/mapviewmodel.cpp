@@ -22,7 +22,8 @@ void MapViewModel::mapMapPointAndUpdate(QList<MapPoint*> mapPoints)
                                       mapPoint->description,
                                       mapPoint->latitude,
                                       mapPoint->longitude,
-                                      mapPoint->isConfirmed);
+                                      mapPoint->isConfirmed,
+                                      mapPoint->imageUrls);
     }
     mapPointsUiModel->updateMapPoints(uiMapPoints);
 }

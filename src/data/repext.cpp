@@ -17,6 +17,10 @@ int getRandomSign()
 QList<MapPoint*>* getMockData(QString placeName, int generateCount, double placeLatitude, double placeLongitude, double thresholdLatitude, double thresholdLongitude){
     qDebug()<<"Добавляем "<<generateCount<<" мокнутых точек для "<<placeName;
 
+    auto urls = QList<QString>();
+    urls<<"https://samplelib.com/lib/preview/jpeg/sample-city-park-400x300.jpg";
+    urls<<"https://samplelib.com/lib/preview/jpeg/sample-birch-400x300.jpg";
+
     QList<MapPoint*> *result = new QList<MapPoint*>();
     for (int i = 0; i < generateCount; ++i) {
         auto mapPoint = new MapPoint();
@@ -25,6 +29,7 @@ QList<MapPoint*>* getMockData(QString placeName, int generateCount, double place
         mapPoint->latitude = (placeLatitude + (qrand() % 1000) * thresholdLatitude * getRandomSign()); // 56.8486 + "шум" в пределах 0...0.06
         mapPoint->longitude = (placeLongitude + (qrand() % 1000) * thresholdLongitude * getRandomSign()); // 35.8507 + "шум" в пределах 0...0.13
         mapPoint->isConfirmed = true;
+        mapPoint->imageUrls = urls;
         result->append(mapPoint);
     }
     return result;

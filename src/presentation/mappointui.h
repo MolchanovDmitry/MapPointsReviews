@@ -13,10 +13,18 @@ class MapPointUi : public QObject
     Q_PROPERTY(double getLatitude READ getLatitude)
     Q_PROPERTY(double getLongitude READ getLongitude)
     Q_PROPERTY(bool getIsConfirmed READ getIsConfirmed)
+    Q_PROPERTY(QList<QString> getImageUrsl READ getImageUrsl)
 
    public:
        explicit MapPointUi(QObject* parent = nullptr);
-       MapPointUi(qlonglong id, QString title, QString description, double latitude, double longitude, bool isConfirmed, QObject *parent = nullptr);
+       MapPointUi(qlonglong id,
+                  QString title,
+                  QString description,
+                  double latitude,
+                  double longitude,
+                  bool isConfirmed,
+                  QList<QString> imageUrls,
+                  QObject *parent = nullptr);
 
        qlonglong getId() const;
        QString getTitle() const;
@@ -24,6 +32,7 @@ class MapPointUi : public QObject
        double getLatitude() const;
        double getLongitude() const;
        bool getIsConfirmed() const;
+       QList<QString> getImageUrsl() const;
 
    private:
        qlonglong id;
@@ -32,6 +41,7 @@ class MapPointUi : public QObject
        double latitude;
        double longitude;
        bool isConfirmed;
+       QList<QString> imageUrls;
 };
 
 #endif // MAPPOINTUI_H

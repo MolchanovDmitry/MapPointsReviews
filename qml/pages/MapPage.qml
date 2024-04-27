@@ -141,8 +141,9 @@ Page {
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
-                                console.log("Нажали на точку с параметрами id:" + id + " title:"
-                                            + title + " isConfirmed:" + isConfirmed)
+                                console.log("Нажали на точку с параметрами id:"
+                                            + id + " title:" + title + " isConfirmed:"
+                                            + isConfirmed + " images:" + imageUrls)
                                 // Дополнительная обработка для нажатия на MapQuickItem
                             }
                         }

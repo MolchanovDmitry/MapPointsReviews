@@ -19,7 +19,6 @@ void MapPointsDbDataSource::createTables()
         return;
     }
     createMapPointTable();
-    createImagesTable();
 }
 
 void MapPointsDbDataSource::createMapPointTable()
@@ -37,7 +36,8 @@ void MapPointsDbDataSource::createMapPointTable()
                             "description TEXT, "
                             "latitude REAL, "
                             "longitude REAL, "
-                            "confirm_status INTEGER"
+                            "confirm_status INTEGER, "
+                            "image_urls TEXT"
                             ");";
 
     if(!query.exec(createTable)) {
@@ -49,11 +49,6 @@ void MapPointsDbDataSource::createMapPointTable()
     }
 }
 
-void MapPointsDbDataSource::createImagesTable()
-{
-
-}
-
 void MapPointsDbDataSource::addRow(const MapPoint mapPoint)
 {
     if (!db.transaction()) {
@@ -62,13 +57,14 @@ void MapPointsDbDataSource::addRow(const MapPoint mapPoint)
     }
 
     QSqlQuery query;
-    query.prepare("INSERT INTO MapPoints (title, description, latitude, longitude, confirm_status) "
+    query.prepare("INSERT INTO MapPoints (title, description, latitude, longitude, confirm_status, image_urls) "
                             "VALUES(?, ?, ?, ?, ?);");
             query.addBindValue(mapPoint.title);
             query.addBindValue(mapPoint.description);
             query.addBindValue(mapPoint.latitude);
             query.addBindValue(mapPoint.longitude);
             query.addBindValue(mapPoint.isConfirmed ? 1 : 0);
+            query.addBindValue(mapPoint.imageUrls.join("|"));
     if(!query.exec()) {
          qCritical() << "Ошибка при добавлении точки в базу: " << query.lastError().text();
          db.rollback();
@@ -94,14 +90,18 @@ void MapPointsDbDataSource::addRows(QList<MapPoint*> *mapPoints)
             << QString("'%1'").arg(point->description)
             << QString("%1").arg(point->latitude)
             << QString("%1").arg(point->longitude)
-            << QString("%1").arg(point->isConfirmed ? 1 : 0);
+            << QString("%1").arg(point->isConfirmed ? 1 : 0)
+            << QString("'%1'").arg(point->imageUrls.join("|"));;
 
-        rows << QString("(%1)").arg(row.join(", "));
+        rows << QString("(%1)").arg(row.join(","));
     }
 
     QSqlQuery query;
+    qDebug()<<QString(
+                  "INSERT INTO MapPoints (title, description, latitude, longitude, confirm_status, image_urls) "
+                  "VALUES %1").arg(rows.join(", "));
     query.prepare(QString(
-        "INSERT INTO MapPoints (title, description, latitude, longitude, confirm_status) "
+        "INSERT INTO MapPoints (title, description, latitude, longitude, confirm_status, image_urls) "
         "VALUES %1").arg(rows.join(", ")));
 
     if(!query.exec()) {
@@ -145,7 +145,7 @@ void MapPointsDbDataSource::getAll()
         return;
     }
     QSqlQuery query;
-    QString selectAll = "SELECT id, title, description, latitude, longitude, confirm_status FROM MapPoints;";
+    QString selectAll = "SELECT id, title, description, latitude, longitude, confirm_status, image_urls FROM MapPoints;";
     if(!query.exec(selectAll)) {
         qCritical() << "Ошибка получении всех точек 1: " << query.lastError().text();
         db.rollback();
