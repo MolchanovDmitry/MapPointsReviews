@@ -61,9 +61,39 @@ void MapPointsDbDataSource::addRow(const MapPoint mapPoint)
     db.commit();
 }
 
-void MapPointsDbDataSource::addRows(const QList<MapPoint*> mapPoints)
+void MapPointsDbDataSource::addRows(QList<MapPoint*> *mapPoints)
 {
+    if (!db.transaction())
+        {
+            qCritical() << "Ошибка при начале транзакции: " << db.lastError().text();
+            return;
+        }
 
+        // Строим запрос, добавляя каждую точку в "values"
+        QStringList rows;
+        for (const MapPoint* point : *mapPoints)
+        {
+            QStringList row;
+            row << QString("'%1'").arg(point->title)
+                << QString("'%1'").arg(point->description)
+                << QString("%1").arg(point->latitude)
+                << QString("%1").arg(point->longitude);
+
+            rows << QString("(%1)").arg(row.join(", "));
+        }
+
+        QSqlQuery query;
+        query.prepare(QString(
+            "INSERT INTO MapPoints (title, description, latitude, longitude) "
+            "VALUES %1").arg(rows.join(", ")));
+
+        if(!query.exec()) {
+            qCritical() << "Ошибка при добавлении точек в базу данных: " << db.lastError().text();
+            db.rollback();
+        } else {
+            qDebug() << "Точки успешно добавлены в базу данных.";
+            db.commit();
+        }
 }
 
 int MapPointsDbDataSource::getRowCount()
