@@ -45,6 +45,7 @@ SOURCES += \
     src/main.cpp \
 
 DISTFILES += \
+    qml/pages/MapPointPage.qml \
     rpm/ru.auroraos.PointsMapReviews.spec \
 
 AURORAAPP_ICONS = 86x86 108x108 128x128 172x172

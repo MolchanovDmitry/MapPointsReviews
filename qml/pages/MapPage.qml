@@ -144,7 +144,12 @@ Page {
                                 console.log("Нажали на точку с параметрами id:"
                                             + id + " title:" + title + " isConfirmed:"
                                             + isConfirmed + " images:" + imageUrls)
-                                // Дополнительная обработка для нажатия на MapQuickItem
+                                pageStack.push(Qt.resolvedUrl(
+                                                   "MapPointPage.qml"), {
+                                                   "pageTitle": title,
+                                                   "description": description,
+                                                   "imageUrls": imageUrls
+                                               })
                             }
                         }
                     }
