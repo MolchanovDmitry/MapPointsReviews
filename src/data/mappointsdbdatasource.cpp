@@ -22,7 +22,8 @@ void MapPointsDbDataSource::createTable()
 
         QString createTable = "CREATE TABLE IF NOT EXISTS "
                                 "MapPoints("
-                                "title TEXT PRIMARY KEY, "
+                                "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                "title TEXT, "
                                 "description TEXT, "
                                 "latitude REAL, "
                                 "longitude REAL"
@@ -128,7 +129,7 @@ void MapPointsDbDataSource::getAll()
     db.transaction();
     try {
         QSqlQuery query;
-        QString selectAll = "SELECT title, description, latitude, longitude FROM MapPoints;";
+        QString selectAll = "SELECT id, title, description, latitude, longitude FROM MapPoints;";
         if(!query.exec(selectAll)){
             qCritical() << "Ошибка получении всех точек 1: " << query.lastError().text();
         }
