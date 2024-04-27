@@ -12,134 +12,146 @@ MapPointsDbDataSource::MapPointsDbDataSource(QSqlDatabase db, QObject *parent) :
 
 }
 
-void MapPointsDbDataSource::createTable()
+void MapPointsDbDataSource::createTables()
 {
-    db.transaction();
-    if(db.open()) {
-        qDebug() << "База данных открыта.";
-
-        QSqlQuery query;
-
-        QString createTable = "CREATE TABLE IF NOT EXISTS "
-                                "MapPoints("
-                                "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                                "title TEXT, "
-                                "description TEXT, "
-                                "latitude REAL, "
-                                "longitude REAL, "
-                                "confirm_status INTEGER"
-                                ");";
-
-        if(!query.exec(createTable)) {
-            qCritical() << "Ошибка при создании таблицы: " << query.lastError().text();
-        } else{
-            qDebug() << "Успешный запрос на создание MapPoints";
-        }
-    } else {
+    if(!db.open()) {
         qCritical() << "Ошибка при открытии базы данных: " << db.lastError().text();
+        return;
     }
-    db.commit();
+    createMapPointTable();
+    createImagesTable();
+}
+
+void MapPointsDbDataSource::createMapPointTable()
+{
+    if (!db.transaction()) {
+        qCritical() << "Ошибка при начале транзакции: " << db.lastError().text();
+        return;
+    }
+
+    QSqlQuery query;
+    QString createTable = "CREATE TABLE IF NOT EXISTS "
+                            "MapPoints("
+                            "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                            "title TEXT, "
+                            "description TEXT, "
+                            "latitude REAL, "
+                            "longitude REAL, "
+                            "confirm_status INTEGER"
+                            ");";
+
+    if(!query.exec(createTable)) {
+        qCritical() << "Ошибка при создании таблицы: " << query.lastError().text();
+        db.rollback();
+    } else {
+        qDebug() << "Успешный запрос на создание MapPoints";
+        db.commit();
+    }
+}
+
+void MapPointsDbDataSource::createImagesTable()
+{
+
 }
 
 void MapPointsDbDataSource::addRow(const MapPoint mapPoint)
 {
-    db.transaction();
-    try {
-        QSqlQuery query;
-        query.prepare("INSERT INTO MapPoints (title, description, latitude, longitude, confirm_status) "
-                                "VALUES(?, ?, ?, ?, ?);");
-                query.addBindValue(mapPoint.title);
-                query.addBindValue(mapPoint.description);
-                query.addBindValue(mapPoint.latitude);
-                query.addBindValue(mapPoint.longitude);
-                query.addBindValue(mapPoint.isConfirmed ? 1 : 0);
-        if(!query.exec()){
-             qCritical() << "Ошибка при добавлении точки в базу: " << query.lastError().text();
-        } else {
-            qDebug()<<"Точка "<<mapPoint.title<<" успешно добавлена";
-        }
-    } catch(const QException& e){
-        qCritical()<<"Ошибка при добавлении в базу: "<<e.what();
+    if (!db.transaction()) {
+        qCritical() << "Ошибка при начале транзакции: " << db.lastError().text();
+        return;
     }
-    db.commit();
+
+    QSqlQuery query;
+    query.prepare("INSERT INTO MapPoints (title, description, latitude, longitude, confirm_status) "
+                            "VALUES(?, ?, ?, ?, ?);");
+            query.addBindValue(mapPoint.title);
+            query.addBindValue(mapPoint.description);
+            query.addBindValue(mapPoint.latitude);
+            query.addBindValue(mapPoint.longitude);
+            query.addBindValue(mapPoint.isConfirmed ? 1 : 0);
+    if(!query.exec()) {
+         qCritical() << "Ошибка при добавлении точки в базу: " << query.lastError().text();
+         db.rollback();
+    } else {
+        qDebug()<<"Точка "<<mapPoint.title<<" успешно добавлена";
+        db.commit();
+    }
 }
 
 void MapPointsDbDataSource::addRows(QList<MapPoint*> *mapPoints)
 {
-    if (!db.transaction())
-        {
-            qCritical() << "Ошибка при начале транзакции: " << db.lastError().text();
-            return;
-        }
+    if (!db.transaction()) {
+        qCritical() << "Ошибка при начале транзакции: " << db.lastError().text();
+        return;
+    }
 
-        // Строим запрос, добавляя каждую точку в "values"
-        QStringList rows;
-        for (const MapPoint* point : *mapPoints)
-        {
-            QStringList row;
-            row << QString("'%1'").arg(point->title)
-                << QString("'%1'").arg(point->description)
-                << QString("%1").arg(point->latitude)
-                << QString("%1").arg(point->longitude)
-                << QString("%1").arg(point->isConfirmed ? 1 : 0);
+    // Строим запрос, добавляя каждую точку в "values"
+    QStringList rows;
+    for (const MapPoint* point : *mapPoints)
+    {
+        QStringList row;
+        row << QString("'%1'").arg(point->title)
+            << QString("'%1'").arg(point->description)
+            << QString("%1").arg(point->latitude)
+            << QString("%1").arg(point->longitude)
+            << QString("%1").arg(point->isConfirmed ? 1 : 0);
 
-            rows << QString("(%1)").arg(row.join(", "));
-        }
+        rows << QString("(%1)").arg(row.join(", "));
+    }
 
-        QSqlQuery query;
-        query.prepare(QString(
-            "INSERT INTO MapPoints (title, description, latitude, longitude, confirm_status) "
-            "VALUES %1").arg(rows.join(", ")));
+    QSqlQuery query;
+    query.prepare(QString(
+        "INSERT INTO MapPoints (title, description, latitude, longitude, confirm_status) "
+        "VALUES %1").arg(rows.join(", ")));
 
-        if(!query.exec()) {
-            qCritical() << "Ошибка при добавлении точек в базу данных: " << db.lastError().text();
-            db.rollback();
-        } else {
-            qDebug() << "Точки успешно добавлены в базу данных.";
-            db.commit();
-        }
+    if(!query.exec()) {
+        qCritical() << "Ошибка при добавлении точек в базу данных: " << db.lastError().text();
+        db.rollback();
+    } else {
+        qDebug() << "Точки успешно добавлены в базу данных.";
+        db.commit();
+    }
 }
 
 int MapPointsDbDataSource::getRowCount()
 {
-    db.transaction();
-    int result = 0;
-    try {
-        QSqlQuery query;
-        QString countQuery = "SELECT COUNT(*) FROM MapPoints;";
-        if(!query.exec(countQuery)){
-             qCritical() << "Ошибка получении количества записей точек 1: " << query.lastError().text();
-        }
-        if(query.next()){
-             qDebug()<<"check 1: "<<query.value(0);
-            result = query.value(0).toInt();
-        } else {
-            qCritical() << "Ошибка получении количества записей точек 2: " << query.lastError().text();
-        }
-
-    }  catch (const QException& e) {
-        qCritical()<<"Ошибка получении количества строк: "<<e.what();
+    if (!db.transaction()) {
+        qCritical() << "Ошибка при начале транзакции: " << db.lastError().text();
+        return 0;
     }
-    qDebug()<<"Возвращем количество записей: "<<result;
+    int result = 0;
+    QSqlQuery query;
+    QString countQuery = "SELECT COUNT(*) FROM MapPoints;";
+    if(!query.exec(countQuery)){
+         qCritical() << "Ошибка получении количества записей точек 1: " << query.lastError().text();
+    }
+    if(query.next()){
+         qDebug()<<"check 1: "<<query.value(0);
+        result = query.value(0).toInt();
+        db.commit();
+    } else {
+        qCritical() << "Ошибка получении количества записей точек 2: " << query.lastError().text();
+        db.rollback();
+    }
 
-    db.commit();
     return result;
 }
 
 // TODO
 void MapPointsDbDataSource::getAll()
 {
-    db.transaction();
-    try {
-        QSqlQuery query;
-        QString selectAll = "SELECT id, title, description, latitude, longitude, confirm_status FROM MapPoints;";
-        if(!query.exec(selectAll)){
-            qCritical() << "Ошибка получении всех точек 1: " << query.lastError().text();
-        }
-
-        mapPointSqlModel->setQuery(query);
-    }  catch (const QException& e) {
-        qCritical()<<"Ошибка получении всех точек: "<<e.what();
+    if (!db.transaction()) {
+        qCritical() << "Ошибка при начале транзакции: " << db.lastError().text();
+        return;
     }
-    db.commit();
+    QSqlQuery query;
+    QString selectAll = "SELECT id, title, description, latitude, longitude, confirm_status FROM MapPoints;";
+    if(!query.exec(selectAll)) {
+        qCritical() << "Ошибка получении всех точек 1: " << query.lastError().text();
+        db.rollback();
+    } else {
+        db.commit();
+    }
+    mapPointSqlModel->setQuery(query);
 }
+

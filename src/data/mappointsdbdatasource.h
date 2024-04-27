@@ -16,7 +16,7 @@ public:
 
     MapPointSqlModel *mapPointSqlModel = new MapPointSqlModel(parent());
 
-    void createTable();
+    void createTables();
 
     void addRow(const MapPoint mapPoint);
 
@@ -30,6 +30,12 @@ public:
 
 private:
     QSqlDatabase db;
+
+    void createMapPointTable();
+
+    void createImagesTable();
+
+    void createCommentsTable();
 
 };
 

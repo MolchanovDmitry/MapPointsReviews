@@ -10,7 +10,7 @@ Repository::Repository(QObject *parent) : QObject(parent)
     auto db = getDatabase();
 
     dataSource = new MapPointsDbDataSource(db, parent);
-    dataSource->createTable();
+    dataSource->createTables();
 
     bool isMockDataAddedAlready = dataSource->getRowCount() != 0;
     if(!isMockDataAddedAlready){
