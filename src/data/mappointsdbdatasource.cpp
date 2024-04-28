@@ -49,25 +49,11 @@ void MapPointsDbDataSource::createMapPointTable()
     }
 }
 
-void MapPointsDbDataSource::addRow(const MapPoint mapPoint)
+void MapPointsDbDataSource::addRow(MapPoint mapPoint)
 {
-    mapPointSqlModel->setTable("MapPoints");
-
-    QSqlRecord newRecord = mapPointSqlModel->record();
-    newRecord.setValue("title", mapPoint.title);
-    newRecord.setValue("description", mapPoint.description);
-    newRecord.setValue("latitude", mapPoint.latitude);
-    newRecord.setValue("longitude", mapPoint.longitude);
-    newRecord.setValue("confirm_status", mapPoint.isConfirmed ? 1 : 0);
-    newRecord.setValue("image_urls", mapPoint.imageUrls.join("|"));
-
-    if (!mapPointSqlModel->insertRecord(-1, newRecord)) {
-        qCritical() << "Ошибка при добавлении точки в базу: " << mapPointSqlModel->lastError().text();
-    } else {
-        qDebug() << "Точка " << mapPoint.title << " успешно добавлена";
-        mapPointSqlModel->submitAll();  // Отправляем изменения в базу данных
-    }
-    mapPointSqlModel->select();  // Обновляем модель
+    auto list = new QList<MapPoint*>();
+    list->append(&mapPoint);
+    addRows(list);
 }
 
 void MapPointsDbDataSource::addRows(QList<MapPoint*> *mapPoints)
@@ -92,7 +78,7 @@ void MapPointsDbDataSource::addRows(QList<MapPoint*> *mapPoints)
     } else {
         qDebug() << "Успешное добавление новых записей. Новое количество строк в модели: " << mapPointSqlModel->rowCount();
     }
-    //mapPointSqlModel->select();
+    mapPointSqlModel->select();
 }
 
 int MapPointsDbDataSource::getRowCount()
