@@ -7,8 +7,9 @@ DependenciesProvider::DependenciesProvider(QObject *parent) : QObject(parent)
 
 MapViewModel *DependenciesProvider::provideMapViewModel()
 {
-    Repository *repository = new Repository();
-    GetMapPointModelUseCase *getMapPointModelUseCase = new GetMapPointModelUseCase(repository);
-    FetchAllMapPointsUseCase *fetchAllMapPointsUseCase = new FetchAllMapPointsUseCase(repository);
-    return new MapViewModel(fetchAllMapPointsUseCase, getMapPointModelUseCase);
+    auto repository = new Repository();
+    auto addMapPointUseCase = new AddMapPointUseCase(repository);
+    auto getMapPointModelUseCase = new GetMapPointModelUseCase(repository);
+    auto fetchAllMapPointsUseCase = new FetchAllMapPointsUseCase(repository);
+    return new MapViewModel(fetchAllMapPointsUseCase, getMapPointModelUseCase, addMapPointUseCase);
 }

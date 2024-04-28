@@ -22,7 +22,7 @@ HEADERS += \
     src/domain/fetchallmappointsusecase.h \
     src/domain/getmappointmodelusecase.h \
     src/domain/mappointmodel.h \
-    src/presentation/addmappointlistener.h \
+    src/presentation/addmappointhandler.h \
     src/presentation/mappointsuimodel.h \
     src/presentation/mappointui.h \
     src/presentation/mapviewmodel.h \
@@ -37,7 +37,7 @@ SOURCES += \
     src/domain/fetchallmappointsusecase.cpp \
     src/domain/getmappointmodelusecase.cpp \
     src/domain/mappointmodel.cpp \
-    src/presentation/addmappointlistener.cpp \
+    src/presentation/addmappointhandler.cpp \
     src/presentation/mappointsuimodel.cpp \
     src/presentation/mappointui.cpp \
     src/presentation/mapviewmodel.cpp \

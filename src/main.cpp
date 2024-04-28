@@ -7,7 +7,7 @@
 #include <QQmlContext>
 #include <QObject>
 
-#include "presentation/addmappointlistener.h"
+#include "presentation/addmappointhandler.h"
 #include "presentation/mapviewmodel.h"
 #include "dependencyprovider.h"
 

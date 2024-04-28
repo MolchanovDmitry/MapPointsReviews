@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2021-2023 Open Mobile Platform LLC <community@omp.ru>
 // SPDX-License-Identifier: BSD-3-Clause
-import QtQuick 2.6
+import QtQuick 2.0
 import QtSensors 5.2
 import QtLocation 5.0
 import QtQuick.Layouts 1.0
@@ -28,6 +28,10 @@ Page {
         //nmeaSource: "../../nmea/path.nmea"
     }
 
+    ListModel {
+        id: drawerModel
+    }
+
     Drawer {
         id: drawer
 
@@ -47,14 +51,7 @@ Page {
 
             objectName: "backgroundView"
             anchors.fill: parent
-            model: [{
-                    "labelText": qsTr("Добавить точку"),
-                    "destinationPage": "AddMapPointPage",
-                    "destinationProperties": {
-                        "latitude": latitude,
-                        "longitude": longitude
-                    }
-                }]
+            model: drawerModel
             delegate: BackgroundItem {
                 id: drawerMenuItem
                 objectName: "drawerMenuItem_%1".arg(index)
@@ -67,17 +64,14 @@ Page {
 
                 onClicked: {
                     drawer.hide()
-                    console.log("test latitude = " + latitude)
-                    pageStack.push(Qt.resolvedUrl(
-                                       "%1.qml".arg(
-                                           modelData.destinationPage)),
-                                   modelData.destinationProperties)
+                    pageStack.push(Qt.resolvedUrl("%1.qml".arg(model.page)),
+                                   model.properties)
                 }
 
                 Label {
                     objectName: "drawerItemLabel"
                     anchors.centerIn: parent
-                    text: modelData.labelText
+                    text: model.label
                 }
             }
         }
@@ -124,7 +118,7 @@ Page {
                     sourceItem: Image {
                         width: markerSize
                         height: markerSize
-                        source: "../graphics/marker.svg"
+                        source: isConfirmed ? "../graphics/marker.svg" : "../graphics/marker_unconfirmed.svg"
                     }
 
                     MouseArea {
@@ -158,9 +152,20 @@ Page {
                     var coord = map.toCoordinate(Qt.point(
                                                      mouse.x - markerSize / 2,
                                                      mouse.y - markerSize / 2))
-                    markermodel.append({
-                                           "position": coord
-                                       })
+
+                    drawerModel.clear()
+                    drawerModel.append([{
+                                            "label": qsTr("Добавить точку"),
+                                            "page": "AddMapPointPage",
+                                            "properties": {
+                                                "latitude": coord.latitude,
+                                                "longitude": coord.longitude
+                                            }
+                                        }])
+                    if (drawer.opened) {
+                        drawer.close()
+                    }
+                    drawer.show()
                 }
             }
 

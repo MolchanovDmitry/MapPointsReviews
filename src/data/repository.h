@@ -16,7 +16,7 @@ public:
 
     void addMapPoint(MapPoint mapPoint);
 
-    MapPointModel* getMapPointModel();
+    MapPointModel *getMapPointModel();
 
 private:
     MapPointsDbDataSource *dataSource;

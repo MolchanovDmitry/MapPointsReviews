@@ -1,4 +1,4 @@
-import QtQuick 2.6
+import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtQuick.Layouts 1.0
 import Sailfish.Pickers 1.0
@@ -92,7 +92,7 @@ Dialog {
             id: descriptionText
             placeholderText: "Введите описание заведения"
             Component.onCompleted: {
-                text = "Received number: " + latitude
+                text = "Received number latitude: " + latitude + " longitude: " + longitude
             }
         }
     }

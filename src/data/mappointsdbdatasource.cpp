@@ -58,7 +58,7 @@ void MapPointsDbDataSource::addRow(const MapPoint mapPoint)
 
     QSqlQuery query;
     query.prepare("INSERT INTO MapPoints (title, description, latitude, longitude, confirm_status, image_urls) "
-                            "VALUES(?, ?, ?, ?, ?);");
+                            "VALUES(?, ?, ?, ?, ?, ?);");
             query.addBindValue(mapPoint.title);
             query.addBindValue(mapPoint.description);
             query.addBindValue(mapPoint.latitude);
@@ -119,12 +119,12 @@ int MapPointsDbDataSource::getRowCount()
     }
     int result = 0;
     QSqlQuery query;
-    QString countQuery = "SELECT COUNT(*) FROM MapPoints;";
+    QString countQuery = "SELECT max(RowId) FROM MapPoints;";
     if(!query.exec(countQuery)){
          qCritical() << "Ошибка получении количества записей точек 1: " << query.lastError().text();
     }
     if(query.next()){
-         qDebug()<<"check 1: "<<query.value(0);
+        qDebug()<<"Количество записей: "<<query.value(0).toInt();
         result = query.value(0).toInt();
         db.commit();
     } else {

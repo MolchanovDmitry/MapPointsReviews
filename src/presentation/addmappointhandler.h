@@ -1,5 +1,5 @@
-#ifndef ADDMAPPOINTLISTENER_H
-#define ADDMAPPOINTLISTENER_H
+#ifndef ADDMAPPOINTHANDLER_H
+#define ADDMAPPOINTHANDLER_H
 
 #include <QObject>
 #include <QDebug>
@@ -23,4 +23,4 @@ signals:
     void onMapPointPretentderFetched(MapPoint mapPoint);
 };
 
-#endif // ADDMAPPOINTLISTENER_H
+#endif // ADDMAPPOINTHANDLER_H
