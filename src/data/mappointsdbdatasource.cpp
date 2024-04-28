@@ -51,105 +51,78 @@ void MapPointsDbDataSource::createMapPointTable()
 
 void MapPointsDbDataSource::addRow(const MapPoint mapPoint)
 {
-    if (!db.transaction()) {
-        qCritical() << "Ошибка при начале транзакции: " << db.lastError().text();
-        return;
-    }
+    mapPointSqlModel->setTable("MapPoints");
 
-    QSqlQuery query;
-    query.prepare("INSERT INTO MapPoints (title, description, latitude, longitude, confirm_status, image_urls) "
-                            "VALUES(?, ?, ?, ?, ?, ?);");
-            query.addBindValue(mapPoint.title);
-            query.addBindValue(mapPoint.description);
-            query.addBindValue(mapPoint.latitude);
-            query.addBindValue(mapPoint.longitude);
-            query.addBindValue(mapPoint.isConfirmed ? 1 : 0);
-            query.addBindValue(mapPoint.imageUrls.join("|"));
-    if(!query.exec()) {
-         qCritical() << "Ошибка при добавлении точки в базу: " << query.lastError().text();
-         db.rollback();
+    QSqlRecord newRecord = mapPointSqlModel->record();
+    newRecord.setValue("title", mapPoint.title);
+    newRecord.setValue("description", mapPoint.description);
+    newRecord.setValue("latitude", mapPoint.latitude);
+    newRecord.setValue("longitude", mapPoint.longitude);
+    newRecord.setValue("confirm_status", mapPoint.isConfirmed ? 1 : 0);
+    newRecord.setValue("image_urls", mapPoint.imageUrls.join("|"));
+
+    if (!mapPointSqlModel->insertRecord(-1, newRecord)) {
+        qCritical() << "Ошибка при добавлении точки в базу: " << mapPointSqlModel->lastError().text();
     } else {
-        qDebug()<<"Точка "<<mapPoint.title<<" успешно добавлена";
-        db.commit();
+        qDebug() << "Точка " << mapPoint.title << " успешно добавлена";
+        mapPointSqlModel->submitAll();  // Отправляем изменения в базу данных
     }
+    mapPointSqlModel->select();  // Обновляем модель
 }
 
 void MapPointsDbDataSource::addRows(QList<MapPoint*> *mapPoints)
 {
-    if (!db.transaction()) {
-        qCritical() << "Ошибка при начале транзакции: " << db.lastError().text();
-        return;
+    mapPointSqlModel->setTable("MapPoints");
+    for (MapPoint* mapPoint : *mapPoints) {
+        QSqlRecord newRecord = mapPointSqlModel->record();
+        newRecord.setValue("title", mapPoint->title);
+        newRecord.setValue("description", mapPoint->description);
+        newRecord.setValue("latitude", mapPoint->latitude);
+        newRecord.setValue("longitude", mapPoint->longitude);
+        newRecord.setValue("confirm_status", mapPoint->isConfirmed ? 1 : 0);
+        newRecord.setValue("image_urls", mapPoint->imageUrls.join("|"));
+
+        if (!mapPointSqlModel->insertRecord(-1, newRecord)) {
+            qCritical() << "Ошибка при добавлении точки в базу: " << mapPointSqlModel->lastError().text();
+        }
     }
-
-    // Строим запрос, добавляя каждую точку в "values"
-    QStringList rows;
-    for (const MapPoint* point : *mapPoints)
-    {
-        QStringList row;
-        row << QString("'%1'").arg(point->title)
-            << QString("'%1'").arg(point->description)
-            << QString("%1").arg(point->latitude)
-            << QString("%1").arg(point->longitude)
-            << QString("%1").arg(point->isConfirmed ? 1 : 0)
-            << QString("'%1'").arg(point->imageUrls.join("|"));;
-
-        rows << QString("(%1)").arg(row.join(","));
-    }
-
-    QSqlQuery query;
-
-    query.prepare(QString(
-        "INSERT INTO MapPoints (title, description, latitude, longitude, confirm_status, image_urls) "
-        "VALUES %1").arg(rows.join(", ")));
-
-    if(!query.exec()) {
-        qCritical() << "Ошибка при добавлении точек в базу данных: " << db.lastError().text();
-        db.rollback();
+    // Submit all changes to the database and update the model
+    if (!mapPointSqlModel->submitAll()) {
+        qCritical() << "Ошибка при обновлении данных в базе: " << mapPointSqlModel->lastError().text();
     } else {
-        qDebug() << "Точки успешно добавлены в базу данных.";
-        db.commit();
+        qDebug() << "Успешное добавление новых записей. Новое количество строк в модели: " << mapPointSqlModel->rowCount();
     }
+    //mapPointSqlModel->select();
 }
 
 int MapPointsDbDataSource::getRowCount()
 {
-    if (!db.transaction()) {
-        qCritical() << "Ошибка при начале транзакции: " << db.lastError().text();
+    QSqlTableModel model;
+    model.setTable("MapPoints");
+    model.select();
+
+    if (model.lastError().isValid()) {
+        qCritical() << "Ошибка при получении количества записей точек: " << model.lastError().text();
         return 0;
     }
-    int result = 0;
-    QSqlQuery query;
-    QString countQuery = "SELECT max(RowId) FROM MapPoints;";
-    if(!query.exec(countQuery)){
-         qCritical() << "Ошибка получении количества записей точек 1: " << query.lastError().text();
-    }
-    if(query.next()){
-        qDebug()<<"Количество записей: "<<query.value(0).toInt();
-        result = query.value(0).toInt();
-        db.commit();
-    } else {
-        qCritical() << "Ошибка получении количества записей точек 2: " << query.lastError().text();
-        db.rollback();
-    }
 
-    return result;
+    auto rowCount = model.rowCount();
+
+    qDebug() << "Количество записей: " << rowCount;
+    return rowCount;
 }
 
 // TODO
 void MapPointsDbDataSource::getAll()
 {
-    if (!db.transaction()) {
-        qCritical() << "Ошибка при начале транзакции: " << db.lastError().text();
-        return;
-    }
-    QSqlQuery query;
-    QString selectAll = "SELECT id, title, description, latitude, longitude, confirm_status, image_urls FROM MapPoints;";
-    if(!query.exec(selectAll)) {
-        qCritical() << "Ошибка получении всех точек 1: " << query.lastError().text();
-        db.rollback();
+    mapPointSqlModel->setTable("MapPoints");
+    mapPointSqlModel->select();
+
+    if (mapPointSqlModel->lastError().isValid()) {
+        qCritical() << "Ошибка при получении всех точек: " << mapPointSqlModel->lastError().text();
     } else {
-        db.commit();
+        int rowCount = mapPointSqlModel->rowCount();
+        qDebug() << "Успешный запрос на получение всех точек. Количество точек: " << rowCount;
     }
-    mapPointSqlModel->setQuery(query);
 }
 

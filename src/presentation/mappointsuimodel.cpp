@@ -50,8 +50,16 @@ QHash<int, QByteArray> MapPointsUiModel::roleNames() const {
 // TODO вынести в мапер
 void MapPointsUiModel::updateMapPoints(QList<MapPointUi *> uiMapPoints)
 {
-    beginInsertRows(QModelIndex(), rowCount(), rowCount());
-    this->mapPoints.clear();
-    this->mapPoints << uiMapPoints;
+    qDebug() << "MapPointsUiModel::updateMapPoints count: " << uiMapPoints.count();
+
+    if (!mapPoints.isEmpty()) {
+        beginRemoveRows(QModelIndex(), 0, mapPoints.count() - 1);
+        qDeleteAll(mapPoints);
+        mapPoints.clear();
+        endRemoveRows();
+    }
+
+    beginInsertRows(QModelIndex(), 0, uiMapPoints.count() - 1);
+    mapPoints = uiMapPoints;
     endInsertRows();
 }

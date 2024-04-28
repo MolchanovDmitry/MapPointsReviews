@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2021-2023 Open Mobile Platform LLC <community@omp.ru>
 // SPDX-License-Identifier: BSD-3-Clause
-import QtQuick 2.0
+import QtQuick 2.6
 import QtSensors 5.2
 import QtLocation 5.0
 import QtQuick.Layouts 1.0
@@ -76,11 +76,6 @@ Page {
             }
         }
 
-        ListModel {
-            id: markermodel
-            dynamicRoles: true
-        }
-
         Map {
             id: map
             anchors.fill: parent
@@ -111,7 +106,6 @@ Page {
             }
 
             MapItemView {
-
                 model: mapPointsUiModel
                 delegate: MapQuickItem {
                     coordinate: QtPositioning.coordinate(latitude, longitude)

@@ -17,6 +17,7 @@ MapViewModel::MapViewModel(
 
 void MapViewModel::mapMapPointAndUpdate(QList<MapPoint*> mapPoints)
 {
+    qDebug()<<"MapViewModel::mapMapPointAndUpdate count"<<mapPoints.count();
     QList<MapPointUi*> uiMapPoints = QList<MapPointUi*>();
     foreach(MapPoint *mapPoint, mapPoints){
         uiMapPoints << new MapPointUi(mapPoint->id,

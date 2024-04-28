@@ -4,9 +4,10 @@
 #include <QSqlQueryModel>
 #include <QDebug>
 #include <QSqlRecord>
+#include <QSqlTableModel>
 #include "../domain/mappoint.h"
 
-class MapPointSqlModel : public QSqlQueryModel
+class MapPointSqlModel : public QSqlTableModel
 {
     Q_OBJECT
 
@@ -19,7 +20,7 @@ signals:
 public slots:
     void onDataChanged() {
 
-        qDebug()<<"MapPointSqlModel onDataChanged";
+        qDebug()<<"MapPointSqlModel onDataChanged rowCount = "<<rowCount();
         QList<MapPoint*> mapPoints = QList<MapPoint*>();
 
         for(int i = 0; i < rowCount(); i++){

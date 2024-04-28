@@ -48,8 +48,8 @@ QSqlDatabase getDatabase(){
 }
 
 void addMockMapPoints(MapPointsDbDataSource* dataSource){
-    auto tverMapPoints = getMockData("Тверь", 50, 56.8486, 35.8507, 0.00006, 0.00013);
-    auto moscowMapPoints = getMockData("Москва", 500, 55.751244, 37.618423, 0.00012, 0.0002);
+    auto tverMapPoints = getMockData("Тверь", 20, 56.8486, 35.8507, 0.00006, 0.00013);
+    auto moscowMapPoints = getMockData("Москва", 100, 55.751244, 37.618423, 0.00012, 0.0002);
     dataSource->addRows(tverMapPoints);
     dataSource->addRows(moscowMapPoints);
 }

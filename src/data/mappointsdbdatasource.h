@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QList>
 #include <QSqlDatabase>
+#include <QSqlTableModel>
 
 #include "mappointsqlmodel.h"
 #include "../domain/mappoint.h"
@@ -14,11 +15,11 @@ class MapPointsDbDataSource : public QObject
 public:
     explicit MapPointsDbDataSource(QSqlDatabase db, QObject *parent = nullptr);
 
-    MapPointSqlModel *mapPointSqlModel = new MapPointSqlModel(parent());
+    MapPointSqlModel *mapPointSqlModel = new MapPointSqlModel(this);
 
     void createTables();
 
-    void addRow(const MapPoint mapPoint);
+    void addRow(MapPoint mapPoint);
 
     void addRows(QList<MapPoint*> *mapPoints);
 

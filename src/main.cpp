@@ -26,8 +26,8 @@ int main(int argc, char *argv[])
                      mapViewModel, &MapViewModel::onMapPointPretentderFetched);
 
     QScopedPointer<QQuickView> view(Aurora::Application::createView());
-    view->rootContext()->setContextProperty("mapPointsUiModel", QVariant::fromValue(mapPointsUiModel));
-    view->rootContext()->setContextProperty("addMapPointHandler", QVariant::fromValue(addMapPointHandler));
+    view->rootContext()->setContextProperty("mapPointsUiModel", mapPointsUiModel);
+    view->rootContext()->setContextProperty("addMapPointHandler", addMapPointHandler);
     view->setSource(Aurora::Application::pathTo(QStringLiteral("qml/PointsMapReviews.qml")));
     view->show();
 
