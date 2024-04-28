@@ -3,7 +3,6 @@ import Sailfish.Silica 1.0
 import QtQuick.Layouts 1.0
 import Sailfish.Pickers 1.0
 import "../assets"
-import com.current.project 1.0
 
 // TODO добавить координаты
 // TODO добавить валидацию полей
@@ -129,12 +128,9 @@ Dialog {
         return false
     }
 
-    AddMapPointListener {
-        id: addMapPointListener
-    }
-
     onAccepted: {
-        addMapPointListener.onMapPointAddRequest(title.text,
+
+        addMapPointHandler.onMapPointAddRequest1(title.text,
                                                  descriptionText.text,
                                                  imageUrls, 0, 0)
         title = titleText.text

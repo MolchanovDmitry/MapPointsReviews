@@ -34,7 +34,7 @@ public slots:
            mapPoint->isConfirmed = record.value("confirm_status").toString() == "1";
            mapPoint->imageUrls = record.value("image_urls").toString().split("|");
 
-           printMapPoint(mapPoint, "отлов в onDataChanged");
+           //printMapPoint(mapPoint, "отлов в onDataChanged");
            mapPoints.append(mapPoint);
         }
         emit mapPointsFromDataUpdated(mapPoints);

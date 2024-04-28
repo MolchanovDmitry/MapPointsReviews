@@ -97,9 +97,7 @@ void MapPointsDbDataSource::addRows(QList<MapPoint*> *mapPoints)
     }
 
     QSqlQuery query;
-    qDebug()<<QString(
-                  "INSERT INTO MapPoints (title, description, latitude, longitude, confirm_status, image_urls) "
-                  "VALUES %1").arg(rows.join(", "));
+
     query.prepare(QString(
         "INSERT INTO MapPoints (title, description, latitude, longitude, confirm_status, image_urls) "
         "VALUES %1").arg(rows.join(", ")));

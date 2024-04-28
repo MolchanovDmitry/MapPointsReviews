@@ -26,6 +26,11 @@ void Repository::fetchAllMapPoints()
     dataSource->getAll();
 }
 
+void Repository::addMapPoint(MapPoint mapPoint)
+{
+    dataSource->addRow(mapPoint);
+}
+
 MapPointModel *Repository::getMapPointModel()
 {
     return mapPointModel;

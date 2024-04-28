@@ -5,6 +5,7 @@
 #include <auroraapp.h>
 #include <QDebug>
 #include <QQmlContext>
+#include <QObject>
 
 #include "presentation/addmappointlistener.h"
 #include "presentation/mapviewmodel.h"
@@ -16,14 +17,21 @@ int main(int argc, char *argv[])
     application->setOrganizationName(QStringLiteral("ru.auroraos"));
     application->setApplicationName(QStringLiteral("PointsMapReviews"));
 
-    auto depProvider = DependenciesProvider();
-    auto mapViewModel = depProvider.provideMapViewModel();
+    auto depProvider = new DependenciesProvider();
+    auto mapViewModel = depProvider->provideMapViewModel();
     auto mapPointsUiModel = mapViewModel->getMapPointsUiModel();
+
+    auto addMapPointHandler = new AddMapPointHandler();
+    QObject::connect(addMapPointHandler, &AddMapPointHandler::onMapPointAddRequest1,
+                     mapViewModel, &MapViewModel::onMapPointAddRequest);
 
     QScopedPointer<QQuickView> view(Aurora::Application::createView());
     view->rootContext()->setContextProperty("mapPointsUiModel", QVariant::fromValue(mapPointsUiModel));
+    view->rootContext()->setContextProperty("addMapPointHandler", QVariant::fromValue(addMapPointHandler));
     view->setSource(Aurora::Application::pathTo(QStringLiteral("qml/PointsMapReviews.qml")));
     view->show();
+
+
 
     return application->exec();
 }

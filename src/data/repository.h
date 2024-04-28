@@ -14,6 +14,8 @@ public:
 
     void fetchAllMapPoints();
 
+    void addMapPoint(MapPoint mapPoint);
+
     MapPointModel* getMapPointModel();
 
 private:
