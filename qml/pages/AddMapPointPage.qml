@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
 import QtQuick.Layouts 1.0
 import Sailfish.Pickers 1.0
@@ -7,12 +7,13 @@ import "../assets"
 // TODO добавить координаты
 // TODO добавить валидацию полей
 Dialog {
+    id: addMapPointPage
     objectName: "aboutPage"
     allowedOrientations: Orientation.All
 
     property variant imageUrls: []
-    property string title: "test1"
-    property string description: "test2"
+    property real latitude
+    property real longitude
 
     Column {
         anchors.fill: parent
@@ -90,6 +91,9 @@ Dialog {
         TextArea {
             id: descriptionText
             placeholderText: "Введите описание заведения"
+            Component.onCompleted: {
+                text = "Received number: " + latitude
+            }
         }
     }
 
@@ -129,11 +133,10 @@ Dialog {
     }
 
     onAccepted: {
-
-        addMapPointHandler.onMapPointAddRequest1(title.text,
-                                                 descriptionText.text,
-                                                 imageUrls, 0, 0)
-        title = titleText.text
-        description = descriptionText.text
+        console.log("Намерение создания точки: latitude = " + latitude
+                    + " longitude = " + longitude)
+        addMapPointHandler.onMapPointAddRequest(titleText.text,
+                                                descriptionText.text,
+                                                imageUrls, latitude, longitude)
     }
 }

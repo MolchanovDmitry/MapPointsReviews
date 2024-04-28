@@ -46,8 +46,4 @@ Page {
             font.pixelSize: Theme.fontSizeMedium
         }
     }
-
-    Component.onCompleted: {
-
-    }
 }

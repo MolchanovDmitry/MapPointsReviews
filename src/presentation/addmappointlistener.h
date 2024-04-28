@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QDebug>
+#include "../domain/mappoint.h"
 
 class AddMapPointHandler : public QObject
 {
@@ -10,13 +11,16 @@ class AddMapPointHandler : public QObject
 public:
     explicit AddMapPointHandler(QObject *parent = nullptr);
 
-signals:
-    void onMapPointAddRequest1(
+public slots:
+    void onMapPointAddRequest(
             const QString title,
             const QString description,
             const QVariant imageUrls,
-            const long latitude,
-            const long longitude);
+            const double latitude,
+            const double longitude);
+
+signals:
+    void onMapPointPretentderFetched(MapPoint mapPoint);
 };
 
 #endif // ADDMAPPOINTLISTENER_H

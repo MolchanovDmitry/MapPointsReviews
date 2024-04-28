@@ -49,7 +49,11 @@ Page {
             anchors.fill: parent
             model: [{
                     "labelText": qsTr("Добавить точку"),
-                    "destinationPage": "AddMapPointPage"
+                    "destinationPage": "AddMapPointPage",
+                    "destinationProperties": {
+                        "latitude": latitude,
+                        "longitude": longitude
+                    }
                 }]
             delegate: BackgroundItem {
                 id: drawerMenuItem
@@ -63,13 +67,11 @@ Page {
 
                 onClicked: {
                     drawer.hide()
-                    var dialog = pageStack.push(
-                                Qt.resolvedUrl("%1.qml".arg(
-                                                   modelData.destinationPage)))
-                    dialog.onAccepted.connect(function () {
-                        console.log(dialog.imageUrls + " " + dialog.title + " "
-                                    + dialog.description)
-                    })
+                    console.log("test latitude = " + latitude)
+                    pageStack.push(Qt.resolvedUrl(
+                                       "%1.qml".arg(
+                                           modelData.destinationPage)),
+                                   modelData.destinationProperties)
                 }
 
                 Label {
@@ -164,8 +166,8 @@ Page {
 
             Component.onCompleted: {
                 console.log("112233 latitude = " + latitude + " longitude = " + longitude)
-                center = QtPositioning.coordinate(latitude, longitude)
-                //center = QtPositioning.coordinate(56.85836,35.90057)
+                //center = QtPositioning.coordinate(latitude, longitude)
+                center = QtPositioning.coordinate(56.85836, 35.90057)
             }
         }
 
@@ -226,12 +228,12 @@ Page {
         }
     }
 
-    PullDownMenu {
-        MenuItem {
-            text: qsTr("Add_note")
-            onClicked: {
-                console.log("kokoke")
-            }
-        }
-    }
+    //    PullDownMenu {
+    //        MenuItem {
+    //            text: qsTr("Add_note")
+    //            onClicked: {
+    //                console.log("kokoke")
+    //            }
+    //        }
+    //    }
 }

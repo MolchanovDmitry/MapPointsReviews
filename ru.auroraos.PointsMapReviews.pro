@@ -17,6 +17,7 @@ HEADERS += \
     src/data/mappointsqlmodel.h \
     src/data/repository.h \
     src/dependencyprovider.h \
+    src/domain/mappoint.h \
     src/domain/addmappointusecase.h \
     src/domain/fetchallmappointsusecase.h \
     src/domain/getmappointmodelusecase.h \

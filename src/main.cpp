@@ -22,8 +22,8 @@ int main(int argc, char *argv[])
     auto mapPointsUiModel = mapViewModel->getMapPointsUiModel();
 
     auto addMapPointHandler = new AddMapPointHandler();
-    QObject::connect(addMapPointHandler, &AddMapPointHandler::onMapPointAddRequest1,
-                     mapViewModel, &MapViewModel::onMapPointAddRequest);
+    QObject::connect(addMapPointHandler, &AddMapPointHandler::onMapPointPretentderFetched,
+                     mapViewModel, &MapViewModel::onMapPointPretentderFetched);
 
     QScopedPointer<QQuickView> view(Aurora::Application::createView());
     view->rootContext()->setContextProperty("mapPointsUiModel", QVariant::fromValue(mapPointsUiModel));
