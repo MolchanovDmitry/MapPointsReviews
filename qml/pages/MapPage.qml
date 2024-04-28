@@ -157,7 +157,7 @@ Page {
                                             }
                                         }])
                     if (drawer.opened) {
-                        drawer.close()
+                        drawer.hide()
                     }
                     drawer.show()
                 }

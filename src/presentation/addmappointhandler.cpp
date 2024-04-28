@@ -15,7 +15,7 @@ void AddMapPointHandler::onMapPointAddRequest(
     MapPoint mapPoint;
     mapPoint.title = title;
     mapPoint.description = description;
-    mapPoint.imageUrls = imageUrls.value<QList<QString>>();
+    mapPoint.imageUrls = imageUrls.toStringList();
     mapPoint.latitude = latitude;
     mapPoint.longitude = longitude;
     mapPoint.isConfirmed = false;
