@@ -5,9 +5,13 @@ MapViewModel::MapViewModel(
         FetchAllMapPointsUseCase *fetchAppMapPointsUseCase,
         GetMapPointModelUseCase *getMapPointModelUseCase,
         AddMapPointUseCase *addMapPointUseCase,
+        AddCommentUseCase *addCommentUseCase,
+        FetchCommentByMapIdUseCase *fetchCommentsUseCase,
         QObject *parent)
     : QObject(parent)
     , addMapPointUseCase(addMapPointUseCase)
+    , addCommentUseCase(addCommentUseCase)
+    , fetchCommentsUseCase(fetchCommentsUseCase)
 {
     connect(getMapPointModelUseCase->run(), &MapPointModel::mapPointsUpdated,
             this, &MapViewModel::mapMapPointAndUpdate);
@@ -39,4 +43,10 @@ MapPointsUiModel* MapViewModel::getMapPointsUiModel()
 void MapViewModel::onMapPointPretentderFetched(MapPoint mapPoint){
     printMapPoint(&mapPoint, "onMapPointPretentderFetched");
     addMapPointUseCase->run(mapPoint);
+}
+
+void MapViewModel::addComment(int mapPointId, QString comments)
+{
+    qDebug()<<"MapViewModel::addComment mapPointId = "<<mapPointId<<" comments = "<<comments;
+    addCommentUseCase->run(mapPointId, comments);
 }

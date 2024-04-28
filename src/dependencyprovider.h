@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include "presentation/mapviewmodel.h"
+#include "data/commentsdatasource.h"
+#include "data/repository.h"
 
 class DependenciesProvider : public QObject
 {

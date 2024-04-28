@@ -4,31 +4,46 @@
 #include <QSqlDatabase>
 #include "repext.cpp"
 
-Repository::Repository(QObject *parent) : QObject(parent)
+Repository::Repository(
+        MapPointsDbDataSource *mapPointsDataSource,
+        CommentsDataSource *commentsDataSource,
+        QObject *parent)
+    : QObject(parent),
+     commentsDataSource(commentsDataSource),
+     mapPointsDataSource(mapPointsDataSource)
 {
+    mapPointsDataSource->createTables();
+    commentsDataSource->createTable();
 
-    auto db = getDatabase();
-
-    dataSource = new MapPointsDbDataSource(db, parent);
-    dataSource->createTables();
-
-    bool isMockDataAddedAlready = dataSource->getRowCount() != 0;
+    bool isMockDataAddedAlready = mapPointsDataSource->getRowCount() != 0;
     if(!isMockDataAddedAlready){
-        addMockMapPoints(dataSource);
+        addMockMapPoints(mapPointsDataSource);
     }
 
-    connect(dataSource->mapPointSqlModel, &MapPointSqlModel::mapPointsFromDataUpdated,
+    connect(mapPointsDataSource->mapPointSqlModel, &MapPointSqlModel::mapPointsFromDataUpdated,
             mapPointModel, &MapPointModel::updateMapPoints);
+    connect(commentsDataSource->getTableModel(), &QSqlTableModel::modelReset,
+            []{
+            qDebug()<<"model reset";
+    });
 }
 
 void Repository::fetchAllMapPoints()
 {
-    dataSource->getAll();
+    mapPointsDataSource->getAll();
 }
 
 void Repository::addMapPoint(MapPoint mapPoint)
 {
-    dataSource->addRow(mapPoint);
+    mapPointsDataSource->addRow(mapPoint);
+}
+
+void Repository::addComment(int mapPointId, QString comment){
+    commentsDataSource->addComment(mapPointId, comment);
+}
+
+void Repository::fetchCommentsBy(int mapPointId){
+    commentsDataSource->fetchCommentsBy(mapPointId);
 }
 
 MapPointModel *Repository::getMapPointModel()

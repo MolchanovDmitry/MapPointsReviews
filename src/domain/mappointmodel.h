@@ -11,17 +11,10 @@ class MapPointModel : public QObject
 public:
     explicit MapPointModel(QObject *parent = nullptr);
 
-    QList<MapPoint*> getMapPoints() {
-        qDebug()<<"MapPointModel getMapPoints";
-        return mapPoints;
-    }
+    QList<MapPoint*> getMapPoints();
 
 public slots:
-    void updateMapPoints(QList<MapPoint*> mapPoints){
-        qDebug()<<"MapPointModel updateMapPoints";
-        this->mapPoints = mapPoints;
-        emit mapPointsUpdated(this->mapPoints);
-    }
+    void updateMapPoints(QList<MapPoint*> mapPoints);
 
 signals:
     void mapPointsUpdated(QList<MapPoint*> mapPoints);

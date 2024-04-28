@@ -47,7 +47,6 @@ QHash<int, QByteArray> MapPointsUiModel::roleNames() const {
     return roles;
 }
 
-// TODO вынести в мапер
 void MapPointsUiModel::updateMapPoints(QList<MapPointUi *> uiMapPoints)
 {
     qDebug() << "MapPointsUiModel::updateMapPoints count: " << uiMapPoints.count();

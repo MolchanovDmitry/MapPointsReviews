@@ -9,6 +9,7 @@ Page {
     property variant imageUrls: ["https://samplelib.com/lib/preview/jpeg/sample-city-park-400x300.jpg", "https://samplelib.com/lib/preview/jpeg/sample-birch-400x300.jpg"]
     property string pageTitle: "asdasdaaaaas"
     property string description: "asdasd"
+    property int mapPointId
 
     PageHeader {
         id: header
@@ -40,10 +41,47 @@ Page {
         }
 
         Text {
+            text: qsTr("description")
+            color: Theme.primaryColor
+            font.pixelSize: Theme.fontSizeMedium
+        }
+
+        Text {
             id: descriptionText
             text: description
             color: Theme.primaryColor
             font.pixelSize: Theme.fontSizeMedium
+        }
+
+        Text {
+            text: qsTr("comments")
+            color: Theme.primaryColor
+            font.pixelSize: Theme.fontSizeMedium
+        }
+
+        TextField {
+            id: commentField
+            placeholderText: "Место для комментария"
+            validator: RegExpValidator {
+                regExp: /^[A-Za-zА-Яа-я0-9\s\-_,\.;:()]+$/
+            }
+            onErrorHighlightChanged: {
+                canAccept = !errorHighlight
+            }
+
+            Component.onCompleted: {
+                text = "мой комментарий"
+            }
+        }
+
+        Button {
+            id: addComment
+            text: "Добавить комментарий"
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: {
+                console.log("addComment " + mapPointId + " " + commentField.text)
+                addCommentHandler.addComment(mapPointId, commentField.text)
+            }
         }
     }
 }

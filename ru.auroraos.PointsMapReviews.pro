@@ -13,30 +13,41 @@ CONFIG += \
 PKGCONFIG += \
 
 HEADERS += \
+    src/data/commentsdatasource.h \
     src/data/mappointsdbdatasource.h \
     src/data/mappointsqlmodel.h \
     src/data/repository.h \
     src/dependencyprovider.h \
+    src/domain/addcommentusecase.h \
+    src/domain/commentbyidmodel.h \
+    src/domain/comments.h \
+    src/domain/fetchcommentbymapidusecase.h \
     src/domain/mappoint.h \
     src/domain/addmappointusecase.h \
     src/domain/fetchallmappointsusecase.h \
     src/domain/getmappointmodelusecase.h \
     src/domain/mappointmodel.h \
+    src/presentation/addcommenthandler.h \
     src/presentation/addmappointhandler.h \
     src/presentation/mappointsuimodel.h \
     src/presentation/mappointui.h \
     src/presentation/mapviewmodel.h \
 
 SOURCES += \
+    src/data/commentsdatasource.cpp \
     src/data/mappointsdbdatasource.cpp \
     src/data/mappointsqlmodel.cpp \
     src/data/repext.cpp \
     src/data/repository.cpp \
     src/dependencyprovider.cpp \
+    src/domain/addcommentusecase.cpp \
     src/domain/addmappointusecase.cpp \
+    src/domain/commentbyidmodel.cpp \
     src/domain/fetchallmappointsusecase.cpp \
+    src/domain/fetchcommentbymapidusecase.cpp \
     src/domain/getmappointmodelusecase.cpp \
     src/domain/mappointmodel.cpp \
+    src/presentation/addcommenthandler.cpp \
     src/presentation/addmappointhandler.cpp \
     src/presentation/mappointsuimodel.cpp \
     src/presentation/mappointui.cpp \

@@ -4,22 +4,35 @@
 #include <QObject>
 
 #include "mappointsdbdatasource.h"
+#include "commentsdatasource.h"
 #include "../domain/mappointmodel.h"
+
 
 class Repository : public QObject
 {
     Q_OBJECT
 public:
-    explicit Repository(QObject *parent = nullptr);
+    explicit Repository(
+            MapPointsDbDataSource *mapPointsDbDataSource,
+            CommentsDataSource *commentsDataSource,
+            QObject *parent = nullptr
+            );
 
     void fetchAllMapPoints();
 
     void addMapPoint(MapPoint mapPoint);
 
+    void addComment(int mapPointId, QString comment);
+
+    void fetchCommentsBy(int mapPointId);
+
     MapPointModel *getMapPointModel();
 
 private:
-    MapPointsDbDataSource *dataSource;
+
+    CommentsDataSource *commentsDataSource;
+
+    MapPointsDbDataSource *mapPointsDataSource;
 
     MapPointModel *mapPointModel = new MapPointModel();
 

@@ -124,7 +124,8 @@ Page {
                             pageStack.push(Qt.resolvedUrl("MapPointPage.qml"), {
                                                "pageTitle": title,
                                                "description": description,
-                                               "imageUrls": imageUrls
+                                               "imageUrls": imageUrls,
+                                               "mapPointId": id
                                            })
                         }
                     }

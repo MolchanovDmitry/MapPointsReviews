@@ -35,18 +35,6 @@ QList<MapPoint*>* getMockData(QString placeName, int generateCount, double place
     return result;
 }
 
-QSqlDatabase getDatabase(){
-    QString path = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    qDebug()<<"Путь до базы данных: "<<path;
-    QDir dir(path);
-    if (!dir.exists()) {
-        dir.mkpath(".");
-    }
-    db.setDatabaseName(path + "/PointsMapReviews.db");
-    return db;
-}
-
 void addMockMapPoints(MapPointsDbDataSource* dataSource){
     auto tverMapPoints = getMockData("Тверь", 20, 56.8486, 35.8507, 0.00006, 0.00013);
     auto moscowMapPoints = getMockData("Москва", 100, 55.751244, 37.618423, 0.00012, 0.0002);
