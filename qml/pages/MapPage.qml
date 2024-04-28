@@ -6,7 +6,6 @@ import QtLocation 5.0
 import QtQuick.Layouts 1.0
 import QtPositioning 5.3
 import Sailfish.Silica 1.0
-import ru.auroraos.PointsMapReviews 1.0
 import "../assets"
 
 Page {
@@ -14,18 +13,19 @@ Page {
 
     objectName: "mapPage"
 
-    Compass {
-        id: compass
+    property real latitude: positionSource.position.coordinate.latitude
+    property real longitude: positionSource.position.coordinate.longitude
 
-        objectName: "compass"
-        active: true
-    }
+    // Для позиционирования либо использовать nmea,
+    // либо задать координаты через "Инструменты -> AuroraOs -> Управление эмуляцией -> Местоположение"
+    PositionSource {
+        id: positionSource
+        onPositionChanged: {
+            console.log("Position change latitude = " + latitude + " longitude = " + longitude)
+        }
 
-    GpsInfoProvider {
-        id: gpsInfoProvider
-
-        objectName: "gpsInfoProvider"
-        active: true
+        //active: true
+        //nmeaSource: "../../nmea/path.nmea"
     }
 
     Drawer {
@@ -80,120 +80,92 @@ Page {
             }
         }
 
-        Rectangle {
-            objectName: "mapRectangle"
+        ListModel {
+            id: markermodel
+            dynamicRoles: true
+        }
+
+        Map {
+            id: map
             anchors.fill: parent
+            gesture.enabled: true
+            objectName: "map"
+            minimumZoomLevel: 2
+            maximumZoomLevel: 17
+            zoomLevel: 13
 
-            Plugin {
+            plugin: Plugin {
                 id: mapPlugin
-
                 objectName: "mapPlugin"
                 name: "webtiles"
                 allowExperimental: false
 
                 PluginParameter {
-                    objectName: "schemeParameter"
                     name: "webtiles.scheme"
                     value: "https"
                 }
-
                 PluginParameter {
-                    objectName: "hostParameter"
                     name: "webtiles.host"
                     value: "tile.openstreetmap.org"
                 }
-
                 PluginParameter {
-                    objectName: "pathParameter"
                     name: "webtiles.path"
                     value: "/${z}/${x}/${y}.png"
                 }
             }
 
-            ListModel {
-                id: markermodel
-                dynamicRoles: true
+            MapItemView {
+
+                model: mapPointsUiModel
+                delegate: MapQuickItem {
+                    coordinate: QtPositioning.coordinate(latitude, longitude)
+                    sourceItem: Image {
+                        width: markerSize
+                        height: markerSize
+                        source: "../graphics/marker.svg"
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            console.log("Нажали на точку с параметрами id:" + id
+                                        + " title:" + title + " isConfirmed:"
+                                        + isConfirmed + " images:" + imageUrls)
+                            pageStack.push(Qt.resolvedUrl("MapPointPage.qml"), {
+                                               "pageTitle": title,
+                                               "description": description,
+                                               "imageUrls": imageUrls
+                                           })
+                        }
+                    }
+                }
             }
 
-            Map {
-
-                id: map
-                objectName: "map"
+            MouseArea {
                 anchors.fill: parent
-                plugin: mapPlugin
-                minimumZoomLevel: 5
-                maximumZoomLevel: 17
-                zoomLevel: 13
-                center: gpsInfoProvider.coordinate
-
-                MapItemView {
-
-                    model: mapPointsUiModel
-                    delegate: MapQuickItem {
-                        coordinate: QtPositioning.coordinate(latitude,
-                                                             longitude)
-                        sourceItem: Image {
-                            width: markerSize
-                            height: markerSize
-                            source: "../graphics/marker.svg"
-                        }
-
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: {
-                                console.log("Нажали на точку с параметрами id:"
-                                            + id + " title:" + title + " isConfirmed:"
-                                            + isConfirmed + " images:" + imageUrls)
-                                pageStack.push(Qt.resolvedUrl(
-                                                   "MapPointPage.qml"), {
-                                                   "pageTitle": title,
-                                                   "description": description,
-                                                   "imageUrls": imageUrls
-                                               })
-                            }
-                        }
+                preventStealing: false
+                onClicked: {
+                    if (drawer.opened) {
+                        drawer.hide()
                     }
                 }
 
-                MouseArea {
-                    anchors.fill: parent
-                    preventStealing: false
-                    onClicked: {
-                        if (drawer.opened) {
-                            drawer.hide()
-                        }
-                    }
+                onPressAndHold: {
+                    console.log("mouse.x" + mouse.x)
 
-                    onPressAndHold: {
-                        console.log("mouse.x" + mouse.x)
-
-                        var coord = map.toCoordinate(
-                                    Qt.point(mouse.x - markerSize / 2,
-                                             mouse.y - markerSize / 2))
-                        markermodel.append({
-                                               "position": coord
-                                           })
-                    }
+                    var coord = map.toCoordinate(Qt.point(
+                                                     mouse.x - markerSize / 2,
+                                                     mouse.y - markerSize / 2))
+                    markermodel.append({
+                                           "position": coord
+                                       })
                 }
+            }
 
-                Component.onCompleted: {
-                    center = QtPositioning.coordinate(56.85836, 35.90057)
-
-                    console.log("*********************** Connections ********************")
-                    markermodel.clear() // Очищаем текущие элементы
-                    var mapPoints = mapPointsUiModel
-                    console.log("mapPoints = " + mapPoints)
-                    //                    for (var i = 0; i < mapPoints.count; i++) {
-                    //                        var point = mapPoints[i]
-                    //                        console.log("point = " + point)
-                    //                        //markermodel.append(point) // Добавляем новую точку
-                    //                        //                        var coord = map.toCoordinate(point.latitude,
-                    //                        //                                                     point.longitude)
-                    //                        //                        markermodel.append({
-                    //                        //                                               "position": coord
-                    //                        //                                           })
-                    //                    }
-                }
+            Component.onCompleted: {
+                console.log("112233 latitude = " + latitude + " longitude = " + longitude)
+                center = QtPositioning.coordinate(latitude, longitude)
+                //center = QtPositioning.coordinate(56.85836,35.90057)
             }
         }
 
@@ -234,9 +206,8 @@ Page {
                 objectName: "centerButton"
                 sourceIcon: "image://theme/icon-l-whereami?%1"
                 onClicked: {
-                    //map.zoomLevel = map.maximumZoomLevel
-                    map.center.latitude = gpsInfoProvider.coordinate.latitude
-                    map.center.longitude = gpsInfoProvider.coordinate.longitude
+                    console.log("112233 latitude = " + latitude + " longitude = " + longitude)
+                    map.center = QtPositioning.coordinate(latitude, longitude)
                     //map.center = gpsInfoProvider.coordinate.center
                 }
             }

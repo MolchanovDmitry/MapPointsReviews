@@ -53,64 +53,6 @@
     </message>
 </context>
 <context>
-    <name>GpsInfoProvider</name>
-    <message>
-        <location filename="../src/gpsinfoprovider/gpsinfoprovider.cpp" line="89"/>
-        <source>North</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gpsinfoprovider/gpsinfoprovider.cpp" line="91"/>
-        <source>Northeast</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gpsinfoprovider/gpsinfoprovider.cpp" line="93"/>
-        <source>East</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gpsinfoprovider/gpsinfoprovider.cpp" line="95"/>
-        <source>Southeast</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gpsinfoprovider/gpsinfoprovider.cpp" line="97"/>
-        <source>South</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gpsinfoprovider/gpsinfoprovider.cpp" line="99"/>
-        <source>Southwest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gpsinfoprovider/gpsinfoprovider.cpp" line="101"/>
-        <source>West</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gpsinfoprovider/gpsinfoprovider.cpp" line="103"/>
-        <source>Northwest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gpsinfoprovider/gpsinfoprovider.cpp" line="129"/>
-        <source>Satellite and network</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gpsinfoprovider/gpsinfoprovider.cpp" line="131"/>
-        <source>Network</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gpsinfoprovider/gpsinfoprovider.cpp" line="133"/>
-        <source>Satellite</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>MainPage</name>
     <message>
         <location filename="../qml/pages/MainPage.qml" line="10"/>
@@ -126,7 +68,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="260"/>
+        <location filename="../qml/pages/MapPage.qml" line="231"/>
         <source>Add_note</source>
         <translation type="unfinished"></translation>
     </message>
