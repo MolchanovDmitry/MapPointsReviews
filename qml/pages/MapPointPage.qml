@@ -16,6 +16,7 @@ Page {
         contentHeight: column.height
         anchors.topMargin: Theme.paddingLarge
         anchors.leftMargin: Theme.horizontalPageMargin
+        anchors.rightMargin: Theme.horizontalPageMargin
 
         Column {
             id: column
@@ -48,10 +49,8 @@ Page {
                 }
             }
 
-            Text {
+            SectionHeader {
                 text: qsTr("description")
-                color: Theme.primaryColor
-                font.pixelSize: Theme.fontSizeMedium
             }
 
             Text {
@@ -61,35 +60,38 @@ Page {
                 font.pixelSize: Theme.fontSizeMedium
             }
 
-            Text {
+            SectionHeader {
                 text: qsTr("comments")
-                color: Theme.primaryColor
-                font.pixelSize: Theme.fontSizeMedium
             }
 
-            TextField {
-                id: commentField
-                height: contentHeight
-                placeholderText: "Место для комментария"
-                validator: RegExpValidator {
-                    regExp: /^[A-Za-zА-Яа-я0-9\s\-_,\.;:()]+$/
-                }
-                onErrorHighlightChanged: {
-                    canAccept = !errorHighlight
+            Row {
+                width: parent.width
+                height: commentField.height
+
+                TextField {
+                    id: commentField
+                    width: parent.width - icon.width
+                    placeholderText: "Место для комментария"
+                    validator: RegExpValidator {
+                        regExp: /^[A-Za-zА-Яа-я0-9\s\-_,\.;:()]+$/
+                    }
+                    Component.onCompleted: {
+                        text = "мой комментарий"
+                    }
                 }
 
-                Component.onCompleted: {
-                    text = "мой комментарий"
-                }
-            }
-
-            Button {
-                id: addComment
-                text: "Добавить комментарий"
-                anchors.horizontalCenter: parent.horizontalCenter
-                onClicked: {
-                    console.log("addComment " + mapPointId + " " + commentField.text)
-                    addCommentHandler.addComment(mapPointId, commentField.text)
+                Image {
+                    id: icon
+                    source: "image://theme/icon-m-send"
+                    MouseArea {
+                        id: mouseArea
+                        anchors.fill: parent
+                        onClicked: {
+                            console.log("addComment " + mapPointId + " " + commentField.text)
+                            addCommentHandler.addComment(mapPointId,
+                                                         commentField.text)
+                        }
+                    }
                 }
             }
 
@@ -100,10 +102,12 @@ Page {
                 spacing: Theme.paddingSmall
                 orientation: ListView.Vertical
                 model: commentsModel
+                anchors.leftMargin: Theme.paddingLarge
                 interactive: false
 
                 delegate: Text {
                     text: model.comment
+                    color: Theme.primaryColor
                 }
             }
         }
