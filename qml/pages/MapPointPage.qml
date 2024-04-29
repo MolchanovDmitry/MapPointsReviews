@@ -5,7 +5,6 @@ Page {
     objectName: "mapPointPage"
     allowedOrientations: Orientation.All
 
-    // TODO удалить отладочную информацию
     property variant imageUrls: []
     property string pageTitle
     property string description

@@ -1,4 +1,5 @@
 #include "addcommentusecase.h"
+#include <QtConcurrent/QtConcurrent>
 
 AddCommentUseCase::AddCommentUseCase(Repository *rep, QObject *parent)
     : QObject(parent),
@@ -8,5 +9,7 @@ AddCommentUseCase::AddCommentUseCase(Repository *rep, QObject *parent)
 }
 
 void AddCommentUseCase::run(int mapPointId, QString comment){
-    rep->addComment(mapPointId,comment);
+    QtConcurrent::run([=]() {
+        rep->addComment(mapPointId,comment);
+    });
 }

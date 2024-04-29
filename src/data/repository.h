@@ -2,6 +2,7 @@
 #define REPOSITORY_H
 
 #include <QObject>
+#include <QMutex>
 
 #include "mappointsdbdatasource.h"
 #include "commentsdatasource.h"
@@ -40,6 +41,9 @@ private:
     MapPointModel *mapPointModel = new MapPointModel();
 
     CommentsByIdModel *commentsByIdModel = new CommentsByIdModel();
+
+    QMutex commentsDataSourceMutex;
+    QMutex mapPointsDataSourceMutex;
 
     void addFakeData();
 

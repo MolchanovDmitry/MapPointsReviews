@@ -1,4 +1,5 @@
 #include "addmappointusecase.h"
+#include <QtConcurrent/QtConcurrent>
 
 AddMapPointUseCase::AddMapPointUseCase(Repository *repository, QObject *parent)
     : QObject(parent),
@@ -9,6 +10,8 @@ AddMapPointUseCase::AddMapPointUseCase(Repository *repository, QObject *parent)
 
 void AddMapPointUseCase::run(MapPoint mapPoint)
 {
-    repository->addMapPoint(mapPoint);
+    QtConcurrent::run([=]() {
+        repository->addMapPoint(mapPoint);
+    });
 
 }

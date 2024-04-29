@@ -1,4 +1,5 @@
 #include "fetchallmappointsusecase.h"
+#include <QtConcurrent/QtConcurrent>
 
 FetchAllMapPointsUseCase::FetchAllMapPointsUseCase(Repository *repository, QObject *parent) : QObject(parent), repository(repository)
 {
@@ -7,6 +8,5 @@ FetchAllMapPointsUseCase::FetchAllMapPointsUseCase(Repository *repository, QObje
 
 void FetchAllMapPointsUseCase::run()
 {
-    repository->fetchAllMapPoints();
-
+    QtConcurrent::run(repository, &Repository::fetchAllMapPoints);
 }

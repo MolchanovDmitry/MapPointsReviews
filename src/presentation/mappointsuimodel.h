@@ -4,7 +4,6 @@
 #include <QAbstractListModel>
 #include <QDebug>
 #include <QQmlListProperty>
-#include "../domain/mappoint.h"
 #include "mappointui.h"
 
 class MapPointsUiModel : public QAbstractListModel
