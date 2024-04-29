@@ -6,10 +6,11 @@ Page {
     allowedOrientations: Orientation.All
 
     // TODO удалить отладочную информацию
-    property variant imageUrls: ["https://samplelib.com/lib/preview/jpeg/sample-city-park-400x300.jpg", "https://samplelib.com/lib/preview/jpeg/sample-birch-400x300.jpg"]
-    property string pageTitle: "asdasdaaaaas"
-    property string description: "asdasd"
+    property variant imageUrls: []
+    property string pageTitle
+    property string description
     property int mapPointId
+    property bool isConfirmed
 
     SilicaFlickable {
         anchors.fill: parent
@@ -33,7 +34,8 @@ Page {
             ListView {
                 id: listView
                 width: parent.width
-                height: imageUrls.count === 0 ? 0 : Theme.dp(400)
+                height: Theme.dp(400)
+                visible: imageUrls.count > 0 || imageUrls.count !== undefined
                 orientation: ListView.Horizontal
                 spacing: Theme.paddingSmall
                 anchors.topMargin: Theme.paddingMedium
@@ -49,6 +51,12 @@ Page {
                 }
             }
 
+            Text {
+                text: qsTr("no_photos")
+                color: Theme.primaryColor
+                visible: imageUrls.count === 0 || imageUrls.count === undefined
+                font.pixelSize: Theme.fontSizeMedium
+            }
             SectionHeader {
                 text: qsTr("description")
             }
@@ -62,10 +70,12 @@ Page {
 
             SectionHeader {
                 text: qsTr("comments")
+                visible: isConfirmed
             }
 
             Row {
                 width: parent.width
+                visible: isConfirmed
                 height: commentField.height
 
                 TextField {
@@ -96,6 +106,7 @@ Page {
             }
 
             ListView {
+                visible: isConfirmed
                 id: commentsView
                 width: parent.width
                 height: contentHeight
@@ -113,7 +124,9 @@ Page {
         }
 
         Component.onCompleted: {
-
+            var result = imageUrls.count === undefined
+            console.log("imageUrls.count = " + imageUrls.count
+                        + " imageUrls == undefined =" + result)
             fetchCommentsHandler.fetchComments(mapPointId)
         }
     }

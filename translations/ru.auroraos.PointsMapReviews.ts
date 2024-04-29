@@ -63,7 +63,7 @@
 <context>
     <name>MapPage</name>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="153"/>
+        <location filename="../qml/pages/MapPage.qml" line="154"/>
         <source>Добавить точку</source>
         <translation type="unfinished"></translation>
     </message>
@@ -71,12 +71,12 @@
 <context>
     <name>MapPointPage</name>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="53"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="55"/>
         <source>description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="64"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="66"/>
         <source>comments</source>
         <translation type="unfinished"></translation>
     </message>

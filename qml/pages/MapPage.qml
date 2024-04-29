@@ -125,7 +125,8 @@ Page {
                                                "pageTitle": title,
                                                "description": description,
                                                "imageUrls": imageUrls,
-                                               "mapPointId": id
+                                               "mapPointId": id,
+                                               "isConfirmed": isConfirmed
                                            })
                         }
                     }
