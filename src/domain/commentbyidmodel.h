@@ -2,14 +2,19 @@
 #define COMMENTBYIDMODEL_H
 
 #include <QObject>
+#include "comments.h"
 
-class CommentByIdModel : public QObject
+class CommentsByIdModel : public QObject
 {
     Q_OBJECT
 public:
-    explicit CommentByIdModel(QObject *parent = nullptr);
+    explicit CommentsByIdModel(QObject *parent = nullptr);
+
+public slots:
+    void updateComments(Comments *comments);
 
 signals:
+    void commentsUpdated(Comments *comments);
 
 };
 

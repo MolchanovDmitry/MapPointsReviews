@@ -30,10 +30,12 @@ MapViewModel *DependenciesProvider::provideMapViewModel()
     auto fetchAllMapPointsUseCase = new FetchAllMapPointsUseCase(repository);
     auto addCommentUseCase = new AddCommentUseCase(repository);
     auto fetchCommentsUseCase = new FetchCommentByMapIdUseCase(repository);
+    auto getCommentsByIdUseCase = new GetCommentsByIdUseCase(repository);
     return new MapViewModel(fetchAllMapPointsUseCase,
                             getMapPointModelUseCase,
                             addMapPointUseCase,
                             addCommentUseCase,
-                            fetchCommentsUseCase);
+                            fetchCommentsUseCase,
+                            getCommentsByIdUseCase);
 }
 

@@ -11,77 +11,106 @@ Page {
     property string description: "asdasd"
     property int mapPointId
 
-    PageHeader {
-        id: header
-        title: pageTitle
-    }
-
-    Column {
+    SilicaFlickable {
         anchors.fill: parent
-        spacing: Theme.paddingLarge
-        anchors.topMargin: Theme.paddingLarge * 4
+        contentHeight: column.height
+        anchors.topMargin: Theme.paddingLarge
         anchors.leftMargin: Theme.horizontalPageMargin
 
-        ListView {
-            id: listView
+        Column {
+            id: column
             width: parent.width
-            height: imageUrls.count === 0 ? 0 : Theme.dp(400)
-            orientation: ListView.Horizontal
             spacing: Theme.paddingSmall
 
-            model: imageUrls
+            anchors.topMargin: Theme.paddingLarge
 
-            delegate: Image {
-                id: mainImage
-                height: parent.height
-                source: modelData
-                width: parent.height * sourceSize.width / sourceSize.height
-                fillMode: Image.PreserveAspectFit
+            PageHeader {
+                id: header
+                title: pageTitle
+            }
+
+            ListView {
+                id: listView
+                width: parent.width
+                height: imageUrls.count === 0 ? 0 : Theme.dp(400)
+                orientation: ListView.Horizontal
+                spacing: Theme.paddingSmall
+                anchors.topMargin: Theme.paddingMedium
+
+                model: imageUrls
+
+                delegate: Image {
+                    id: mainImage
+                    height: parent.height
+                    source: modelData
+                    width: parent.height * sourceSize.width / sourceSize.height
+                    fillMode: Image.PreserveAspectFit
+                }
+            }
+
+            Text {
+                text: qsTr("description")
+                color: Theme.primaryColor
+                font.pixelSize: Theme.fontSizeMedium
+            }
+
+            Text {
+                id: descriptionText
+                text: description
+                color: Theme.primaryColor
+                font.pixelSize: Theme.fontSizeMedium
+            }
+
+            Text {
+                text: qsTr("comments")
+                color: Theme.primaryColor
+                font.pixelSize: Theme.fontSizeMedium
+            }
+
+            TextField {
+                id: commentField
+                height: contentHeight
+                placeholderText: "Место для комментария"
+                validator: RegExpValidator {
+                    regExp: /^[A-Za-zА-Яа-я0-9\s\-_,\.;:()]+$/
+                }
+                onErrorHighlightChanged: {
+                    canAccept = !errorHighlight
+                }
+
+                Component.onCompleted: {
+                    text = "мой комментарий"
+                }
+            }
+
+            Button {
+                id: addComment
+                text: "Добавить комментарий"
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: {
+                    console.log("addComment " + mapPointId + " " + commentField.text)
+                    addCommentHandler.addComment(mapPointId, commentField.text)
+                }
+            }
+
+            ListView {
+                id: commentsView
+                width: parent.width
+                height: contentHeight
+                spacing: Theme.paddingSmall
+                orientation: ListView.Vertical
+                model: commentsModel
+                interactive: false
+
+                delegate: Text {
+                    text: model.comment
+                }
             }
         }
 
-        Text {
-            text: qsTr("description")
-            color: Theme.primaryColor
-            font.pixelSize: Theme.fontSizeMedium
-        }
+        Component.onCompleted: {
 
-        Text {
-            id: descriptionText
-            text: description
-            color: Theme.primaryColor
-            font.pixelSize: Theme.fontSizeMedium
-        }
-
-        Text {
-            text: qsTr("comments")
-            color: Theme.primaryColor
-            font.pixelSize: Theme.fontSizeMedium
-        }
-
-        TextField {
-            id: commentField
-            placeholderText: "Место для комментария"
-            validator: RegExpValidator {
-                regExp: /^[A-Za-zА-Яа-я0-9\s\-_,\.;:()]+$/
-            }
-            onErrorHighlightChanged: {
-                canAccept = !errorHighlight
-            }
-
-            Component.onCompleted: {
-                text = "мой комментарий"
-            }
-        }
-
-        Button {
-            id: addComment
-            text: "Добавить комментарий"
-            anchors.horizontalCenter: parent.horizontalCenter
-            onClicked: {
-                console.log("addComment " + mapPointId + " " + commentField.text)
-                addCommentHandler.addComment(mapPointId, commentField.text)
-            }
+            fetchCommentsHandler.fetchComments(mapPointId)
         }
     }
 }

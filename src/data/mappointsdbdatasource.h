@@ -15,7 +15,7 @@ class MapPointsDbDataSource : public QObject
 public:
     explicit MapPointsDbDataSource(QSqlDatabase db, QObject *parent = nullptr);
 
-    MapPointSqlModel *mapPointSqlModel = new MapPointSqlModel(this); //TODO
+    MapPointTableModel *mapPointSqlModel = new MapPointTableModel(this); //TODO
 
     void createTables();
 

@@ -20,12 +20,10 @@ Repository::Repository(
         addMockMapPoints(mapPointsDataSource);
     }
 
-    connect(mapPointsDataSource->mapPointSqlModel, &MapPointSqlModel::mapPointsFromDataUpdated,
+    connect(mapPointsDataSource->mapPointSqlModel, &MapPointTableModel::mapPointsFromDataUpdated,
             mapPointModel, &MapPointModel::updateMapPoints);
-    connect(commentsDataSource->getTableModel(), &QSqlTableModel::modelReset,
-            []{
-            qDebug()<<"model reset";
-    });
+    connect(commentsDataSource->getTableModel(), &CommentsTableModel::commentsFetched,
+            commentsByIdModel, &CommentsByIdModel::updateComments);
 }
 
 void Repository::fetchAllMapPoints()
@@ -49,6 +47,10 @@ void Repository::fetchCommentsBy(int mapPointId){
 MapPointModel *Repository::getMapPointModel()
 {
     return mapPointModel;
+}
+
+CommentsByIdModel *Repository::getCommentsByIdModel(){
+    return commentsByIdModel;
 }
 
 

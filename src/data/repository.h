@@ -6,6 +6,7 @@
 #include "mappointsdbdatasource.h"
 #include "commentsdatasource.h"
 #include "../domain/mappointmodel.h"
+#include "../domain/commentbyidmodel.h"
 
 
 class Repository : public QObject
@@ -28,6 +29,8 @@ public:
 
     MapPointModel *getMapPointModel();
 
+    CommentsByIdModel *getCommentsByIdModel();
+
 private:
 
     CommentsDataSource *commentsDataSource;
@@ -35,6 +38,8 @@ private:
     MapPointsDbDataSource *mapPointsDataSource;
 
     MapPointModel *mapPointModel = new MapPointModel();
+
+    CommentsByIdModel *commentsByIdModel = new CommentsByIdModel();
 
     void addFakeData();
 

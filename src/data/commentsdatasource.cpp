@@ -63,9 +63,12 @@ void CommentsDataSource::addComment(int mapPointId, QString comment)
     if (!tableModel->submitAll()) {
         qCritical() << "Не удалось отправить изменения в базу данных: " << tableModel->lastError().text();
         return;
+    } else{
+        qDebug()<<"Комментарий отправлен в tableModel";
     }
+    tableModel->select();
 }
 
-QSqlTableModel *CommentsDataSource::getTableModel(){
+CommentsTableModel *CommentsDataSource::getTableModel(){
     return tableModel;
 }

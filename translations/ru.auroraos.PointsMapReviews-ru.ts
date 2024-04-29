@@ -71,12 +71,12 @@
 <context>
     <name>MapPointPage</name>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="44"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="51"/>
         <source>description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="57"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="64"/>
         <source>comments</source>
         <translation type="unfinished"></translation>
     </message>

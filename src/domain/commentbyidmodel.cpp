@@ -1,6 +1,10 @@
 #include "commentbyidmodel.h"
 
-CommentByIdModel::CommentByIdModel(QObject *parent) : QObject(parent)
+CommentsByIdModel::CommentsByIdModel(QObject *parent) : QObject(parent)
 {
 
+}
+
+void CommentsByIdModel::updateComments(Comments *comments){
+    emit commentsUpdated(comments);
 }

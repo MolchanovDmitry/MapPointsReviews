@@ -8,6 +8,8 @@
 #include "../domain/addmappointusecase.h"
 #include "../domain/addcommentusecase.h"
 #include "../domain/fetchcommentbymapidusecase.h"
+#include "../domain/getcommentsbyidusecase.h"
+#include "commentsuimodel.h"
 
 class MapViewModel : public QObject
 {
@@ -20,16 +22,21 @@ public:
             AddMapPointUseCase *addMapPointUseCase,
             AddCommentUseCase *addCommentUseCase,
             FetchCommentByMapIdUseCase *fetchCommentsUseCase,
+            GetCommentsByIdUseCase *getCommentsByIdUseCase,
             QObject *parent = nullptr
             );
 
     MapPointsUiModel* getMapPointsUiModel();
+
+    CommentsUiModel* getCommentsUiModel();
 
 public slots:
 
     void onMapPointPretentderFetched(MapPoint mapPoint);
 
     void addComment(int mapPointId, QString comments);
+
+    void fetchComment(int mapPointId);
 
 private:
 
@@ -39,7 +46,11 @@ private:
 
     FetchCommentByMapIdUseCase *fetchCommentsUseCase;
 
-    MapPointsUiModel *mapPointsUiModel = new MapPointsUiModel();
+    GetCommentsByIdUseCase *getCommentsByIdUseCase;
+
+    MapPointsUiModel *mapPointsUiModel = new MapPointsUiModel(this);
+
+    CommentsUiModel *commentsUiModel = new CommentsUiModel(this);
 
     void mapMapPointAndUpdate(QList<MapPoint*> mapPoints);
 };

@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QSqlDatabase>
 #include <QSqlTableModel>
+#include "commentstablemodel.h"
 
 class CommentsDataSource : public QObject
 {
@@ -17,11 +18,11 @@ public:
 
     void addComment(int mapPointId, QString comment);
 
-    QSqlTableModel* getTableModel();
+    CommentsTableModel* getTableModel();
 
 private:
     QSqlDatabase db;
-    QSqlTableModel *tableModel = new QSqlTableModel();
+    CommentsTableModel *tableModel = new CommentsTableModel();
 };
 
 #endif // COMMENTSDATASOURCE_H

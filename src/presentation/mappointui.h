@@ -3,7 +3,6 @@
 
 #include <QObject>
 
-// TODO убрать сет
 class MapPointUi : public QObject
 {
     Q_OBJECT
