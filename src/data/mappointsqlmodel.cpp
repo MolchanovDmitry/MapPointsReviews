@@ -1,7 +1,6 @@
 #include "mappointsqlmodel.h"
 
 MapPointTableModel::MapPointTableModel(QObject *parent): QSqlTableModel(parent) {
-    //connect(this, &QSqlQueryModel::dataChanged, this, &MapPointSqlModel::onDataChanged); //dataChanged не вызывается
     connect(this, &QAbstractItemModel::modelReset, this, &MapPointTableModel::onDataChanged);
 }
 

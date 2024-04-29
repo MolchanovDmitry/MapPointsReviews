@@ -5,7 +5,7 @@ Page {
     objectName: "mapPointPage"
     allowedOrientations: Orientation.All
 
-    property variant imageUrls: []
+    property variant imageUrls
     property string pageTitle
     property string description
     property int mapPointId
@@ -34,7 +34,7 @@ Page {
                 id: listView
                 width: parent.width
                 height: Theme.dp(400)
-                visible: imageUrls.count > 0 || imageUrls.count !== undefined
+                visible: imageUrls.length !== 0 && imageUrls[0] !== ""
                 orientation: ListView.Horizontal
                 spacing: Theme.paddingSmall
                 anchors.topMargin: Theme.paddingMedium
@@ -53,7 +53,7 @@ Page {
             Text {
                 text: qsTr("no_photos")
                 color: Theme.primaryColor
-                visible: imageUrls.count === 0 || imageUrls.count === undefined
+                visible: imageUrls.length === 0 || imageUrls[0] === ""
                 font.pixelSize: Theme.fontSizeMedium
             }
             SectionHeader {
@@ -123,9 +123,6 @@ Page {
         }
 
         Component.onCompleted: {
-            var result = imageUrls.count === undefined
-            console.log("imageUrls.count = " + imageUrls.count
-                        + " imageUrls == undefined =" + result)
             fetchCommentsHandler.fetchComments(mapPointId)
         }
     }
