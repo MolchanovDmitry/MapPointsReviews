@@ -37,6 +37,7 @@ void CommentsDataSource::createTable()
 
 void CommentsDataSource::fetchCommentsBy(int mapPointId)
 {
+    qDebug()<<"mapPointId: "<<mapPointId;
     tableModel->setTable("Comments");
     tableModel->setFilter(QString("mapPointId == %1").arg(mapPointId));
     tableModel->select();
@@ -46,26 +47,23 @@ void CommentsDataSource::fetchCommentsBy(int mapPointId)
     }
 }
 
-void CommentsDataSource::addComment(int mapPointId, QString comment)
-{
-    qDebug()<<"CommentsDataSource::addComment mapPointId = "<<mapPointId<<" comment = "<<comment;
+void CommentsDataSource::addComment(int mapPointId, QString comment) {
+    qDebug() << "Добавляем в базу mapPointId = " << mapPointId << " с комментарием " << comment;
 
-    tableModel->setTable("Comments");
-    tableModel->select();
+    QSqlQuery query;
 
-    QSqlRecord record = tableModel->record();
-    record.setValue("mapPointId", mapPointId);
-    record.setValue("comment", comment);
-    if (!tableModel->insertRecord(-1, record)) {
-        qCritical() << "Ошибка при добавлении комментария: " << tableModel->lastError().text();
+    query.prepare("INSERT INTO Comments (mapPointId, comment)"
+                  "VALUES (:mapPointId, :comment)");
+    query.bindValue(":mapPointId", mapPointId);
+    query.bindValue(":comment", comment);
+
+    if (!query.exec()) {
+        qCritical() << "Ошибка при добавлении комментария: " << query.lastError().text();
         return;
     }
-    if (!tableModel->submitAll()) {
-        qCritical() << "Не удалось отправить изменения в базу данных: " << tableModel->lastError().text();
-        return;
-    } else{
-        qDebug()<<"Комментарий отправлен в tableModel";
-    }
+
+    qDebug() << "Комментарий отправлен в tableModel";
+
     tableModel->select();
 }
 

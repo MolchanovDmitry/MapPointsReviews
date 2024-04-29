@@ -8,7 +8,6 @@ CommentsTableModel::CommentsTableModel(QObject *parent) : QSqlTableModel(parent)
 
 void CommentsTableModel::onDataChanged()
 {
-    qDebug()<<"CommentsTableModel::onDataChanged "<<rowCount();
     auto comments = new Comments();
     auto commentList = new QList<QString>();
     int mapPointId = -1;
@@ -21,7 +20,7 @@ void CommentsTableModel::onDataChanged()
         }
         QString comment = record.value("comment").toString();
         commentList->append(comment);
-        qDebug()<<"CommentsTableModel::onDataChanged mapPointId = "<<mapPointId<<" comment = "<<comment;
+        qDebug()<<"mapPointId = "<<mapPointId<<" comment = "<<comment;
     }
     comments->mapPointId = mapPointId;
     comments->comments = commentList;

@@ -25,7 +25,6 @@ MapViewModel::MapViewModel(
 
 void MapViewModel::mapMapPointAndUpdate(QList<MapPoint*> mapPoints)
 {
-    qDebug()<<"MapViewModel::mapMapPointAndUpdate count"<<mapPoints.count();
     QList<MapPointUi*> uiMapPoints = QList<MapPointUi*>();
     foreach(MapPoint *mapPoint, mapPoints){
         uiMapPoints << new MapPointUi(mapPoint->id,
@@ -55,11 +54,12 @@ void MapViewModel::onMapPointPretentderFetched(MapPoint mapPoint){
 
 void MapViewModel::addComment(int mapPointId, QString comments)
 {
-    qDebug()<<"MapViewModel::addComment mapPointId = "<<mapPointId<<" comments = "<<comments;
+    qDebug()<<"mapPointId = "<<mapPointId<<" comments = "<<comments;
     addCommentUseCase->run(mapPointId, comments);
 }
 
 void MapViewModel::fetchComment(int mapPointId)
 {
+    commentsUiModel->clear();
     fetchCommentsUseCase->run(mapPointId);
 }

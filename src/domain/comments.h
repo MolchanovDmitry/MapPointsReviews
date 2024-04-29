@@ -13,4 +13,13 @@ struct Comments
     QList<QString> *comments = new QList<QString>();
 };
 
+
+static void print(QString tag, Comments comments){
+    qDebug()<<tag
+           <<" Comments print. mapPointId: "
+           <<comments.mapPointId
+           <<" comments: "
+           <<comments.comments->join(",");
+}
+
 #endif // COMMENTS_H

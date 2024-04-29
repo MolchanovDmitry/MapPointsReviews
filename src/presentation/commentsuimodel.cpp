@@ -38,20 +38,25 @@ QHash<int, QByteArray> CommentsUiModel::roleNames() const {
 void CommentsUiModel::updateComments(Comments *comments)
 {
     auto commentList = comments->comments;
-    qDebug() << "CommentsUiModel::updateComments count: " << commentList->count();
+    auto last = commentList->count() > 0 ? commentList->count() - 1 : 0;
 
-    if(commentList->count()>0){
-        beginRemoveRows(QModelIndex(), 0, commentList->count() - 1);
-        this->comments->mapPointId = -1;
-        this->comments->comments->clear();
-        endRemoveRows();
-    }
+    qDebug() << "count: " << commentList->count() << " last: "<<last;
 
-    if(commentList->count()>0){
-        beginInsertRows(QModelIndex(), 0, commentList->count() - 1);
+    clear();
+
+    if(commentList->count() > 0){
+        beginInsertRows(QModelIndex(), 0, last);
         this->comments->mapPointId = comments->mapPointId;
         this->comments->comments->append(*comments->comments);
         endInsertRows();
     }
-    qDebug() << "CommentsUiModel::updateComments finish";
+}
+
+void CommentsUiModel::clear() {
+    auto commentList = comments->comments;
+    auto last = commentList->count() > 0 ? commentList->count() - 1 : 0;
+    beginRemoveRows(QModelIndex(), 0, last);
+    this->comments->mapPointId = -1;
+    this->comments->comments->clear();
+    endRemoveRows();
 }

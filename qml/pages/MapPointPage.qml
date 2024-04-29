@@ -116,7 +116,7 @@ Page {
                 interactive: false
 
                 delegate: Text {
-                    text: model.comment
+                    text: model.comment + " " + model.mapPointId
                     color: Theme.primaryColor
                 }
             }

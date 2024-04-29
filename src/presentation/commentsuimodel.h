@@ -23,6 +23,8 @@ public:
 
     QHash<int, QByteArray> roleNames() const override;
 
+    void clear();
+
 public slots:
     void updateComments(Comments *comments);
 
