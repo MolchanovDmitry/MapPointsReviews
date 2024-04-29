@@ -10,7 +10,7 @@
 struct Comments
 {
     qlonglong mapPointId;
-    QList<QString*> *comments = new QList<QString*>();
+    QList<QString> *comments = new QList<QString>();
 };
 
 #endif // COMMENTS_H

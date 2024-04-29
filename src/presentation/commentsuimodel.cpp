@@ -16,14 +16,13 @@ QVariant CommentsUiModel::data(const QModelIndex &index, int role) const {
     if (!index.isValid())
         return QVariant();
 
-    QList<QString*> *commentList = comments->comments;
-    QString *comment = commentList->at(index.row());
+    QList<QString> *commentList = comments->comments;
+    QString comment = commentList->at(index.row());
     switch (role) {
     case MapPointId:
         return QVariant(comments->mapPointId);
     case Comment:
-        //return QVariant(*comment);
-        return QVariant("asdasdasd");
+        return QVariant(comment);
     default:
         return QVariant();
     }

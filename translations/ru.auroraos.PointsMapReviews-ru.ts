@@ -76,7 +76,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="66"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="64"/>
         <source>comments</source>
         <translation type="unfinished"></translation>
     </message>
