@@ -16,16 +16,11 @@ Page {
     property real latitude: positionSource.position.coordinate.latitude
     property real longitude: positionSource.position.coordinate.longitude
 
-    // Для позиционирования либо использовать nmea,
-    // либо задать координаты через "Инструменты -> AuroraOs -> Управление эмуляцией -> Местоположение"
     PositionSource {
         id: positionSource
         onPositionChanged: {
             console.log("Position change latitude = " + latitude + " longitude = " + longitude)
         }
-
-        //active: true
-        //nmeaSource: "../../nmea/path.nmea"
     }
 
     ListModel {
@@ -64,8 +59,14 @@ Page {
 
                 onClicked: {
                     drawer.hide()
-                    pageStack.push(Qt.resolvedUrl("%1.qml".arg(model.page)),
-                                   model.properties)
+                    //console.log("kokoke " + model.page)
+                    if (model.page !== undefined) {
+                        pageStack.push(Qt.resolvedUrl("%1.qml".arg(
+                                                          model.page)),
+                                       model.properties)
+                    } else {
+                        console.log("kokoke")
+                    }
                 }
 
                 Label {
@@ -151,7 +152,7 @@ Page {
 
                     drawerModel.clear()
                     drawerModel.append([{
-                                            "label": qsTr("Добавить точку"),
+                                            "label": qsTr("add_poin"),
                                             "page": "AddMapPointPage",
                                             "properties": {
                                                 "latitude": coord.latitude,
@@ -221,20 +222,14 @@ Page {
                 onClicked: {
                     if (drawer.opened) {
                         drawer.hide()
-                    } else {
-                        drawer.show()
                     }
+                    drawerModel.clear()
+                    drawerModel.append([{
+                                            "label": qsTr("change_language")
+                                        }])
+                    drawer.show()
                 }
             }
         }
     }
-
-    //    PullDownMenu {
-    //        MenuItem {
-    //            text: qsTr("Add_note")
-    //            onClicked: {
-    //                console.log("kokoke")
-    //            }
-    //        }
-    //    }
 }

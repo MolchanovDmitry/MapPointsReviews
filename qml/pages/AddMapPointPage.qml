@@ -19,8 +19,8 @@ Dialog {
         anchors.fill: parent
         spacing: Theme.paddingLarge
         DialogHeader {
-            acceptText: qsTr("Save")
-            cancelText: qsTr("Cancel")
+            acceptText: qsTr("save")
+            cancelText: qsTr("cancel")
         }
 
         ListModel {
@@ -69,7 +69,7 @@ Dialog {
 
         Button {
             id: addPhotoButton
-            text: "Выберите фото"
+            text: qsTr("select_photos")
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: {
                 console.log("add button clicked")
@@ -79,7 +79,7 @@ Dialog {
 
         TextField {
             id: titleText
-            placeholderText: "Введите наименование заведения"
+            placeholderText: qsTr("add_place_name")
             validator: RegExpValidator {
                 regExp: /^[A-Za-zА-Яа-я0-9\s\-_,\.;:()]+$/
             }
@@ -90,10 +90,7 @@ Dialog {
 
         TextArea {
             id: descriptionText
-            placeholderText: "Введите описание заведения"
-            Component.onCompleted: {
-                text = "Received number latitude: " + latitude + " longitude: " + longitude
-            }
+            placeholderText: qsTr("add_place_description")
         }
     }
 
