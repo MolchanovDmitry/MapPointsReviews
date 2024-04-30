@@ -227,6 +227,9 @@ Page {
                     drawerModel.append([{
                                             "label": qsTr("check_positioning"),
                                             "page": "PositioningPage"
+                                        }, {
+                                            "label": qsTr("About"),
+                                            "page": "AboutPage"
                                         }])
                     drawer.show()
                 }

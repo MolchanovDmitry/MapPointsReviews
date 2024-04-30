@@ -8,6 +8,9 @@ Page {
     SilicaFlickable {
         objectName: "flickable"
         anchors.fill: parent
+        anchors.leftMargin: Theme.horizontalPageMargin
+        anchors.rightMargin: Theme.horizontalPageMargin
+        anchors.topMargin: Theme.paddingLarge * 2
         contentHeight: layout.height + Theme.paddingLarge
 
         Column {
@@ -20,29 +23,16 @@ Page {
                 title: qsTr("About Application")
             }
 
-            Label {
-                objectName: "descriptionText"
-                anchors { left: parent.left; right: parent.right; margins: Theme.horizontalPageMargin }
-                color: palette.highlightColor
-                font.pixelSize: Theme.fontSizeSmall
+            Text {
+                text: "\t" + qsTr("#about").arg(
+                          "<a href='https://github.com/MolchanovDmitry/MapPointsReviews' style='color: #008000;'>" + qsTr(
+                              "#repositoryLinkText") + "</a>")
+                color: Theme.primaryColor
+                wrapMode: Text.Wrap
+                width: parent.width
                 textFormat: Text.RichText
-                wrapMode: Text.WordWrap
-                text: qsTr("#descriptionText")
-            }
-
-            SectionHeader {
-                objectName: "licenseHeader"
-                text: qsTr("3-Clause BSD License")
-            }
-
-            Label {
-                objectName: "licenseText"
-                anchors { left: parent.left; right: parent.right; margins: Theme.horizontalPageMargin }
-                color: palette.highlightColor
-                font.pixelSize: Theme.fontSizeSmall
-                textFormat: Text.RichText
-                wrapMode: Text.WordWrap
-                text: qsTr("#licenseText")
+                font.pixelSize: Theme.fontSizeLarge
+                onLinkActivated: Qt.openUrlExternally(link)
             }
         }
     }
