@@ -9,6 +9,7 @@
 #include "notificationsender.h"
 #include "../domain/mappointmodel.h"
 #include "../domain/commentbyidmodel.h"
+#include "../stringprovider.h"
 
 
 class Repository : public QObject
@@ -18,7 +19,8 @@ public:
     explicit Repository(
             MapPointsDbDataSource *mapPointsDbDataSource,
             CommentsDataSource *commentsDataSource,
-            QString mapPointAddedNotification,
+            NotificationSender *notificationSender,
+            StringProvider *stringProvider,
             QObject *parent = nullptr
             );
 
@@ -40,15 +42,16 @@ private:
 
     MapPointsDbDataSource *mapPointsDataSource;
 
-    QString mapPointAddedNotification;
+    NotificationSender *notificationSender;
+
+    StringProvider *stringProvider;
 
     MapPointModel *mapPointModel = new MapPointModel();
 
-    CommentsByIdModel *commentsByIdModel = new CommentsByIdModel();
-
-    NotificationSender *notificationSender = new NotificationSender();
+    CommentsByIdModel *commentsByIdModel = new CommentsByIdModel();   
 
     QMutex commentsDataSourceMutex;
+
     QMutex mapPointsDataSourceMutex;
 
     void addFakeData();

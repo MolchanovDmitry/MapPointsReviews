@@ -4,6 +4,8 @@
 #include <QtGui/QGuiApplication>
 #include <QDebug>
 #include <QObject>
+#include "stringprovider.h"
+#include "data/notificationsender.h"
 
 DependenciesProvider::DependenciesProvider(QObject *parent) : QObject(parent)
 {
@@ -25,16 +27,25 @@ QSqlDatabase getDatabase(){
 MapViewModel *DependenciesProvider::provideMapViewModel(QGuiApplication *app)
 {
     auto db = getDatabase();
-    auto commentDataSource = new CommentsDataSource(db);
-    auto mapPointsDbDataSource = new MapPointsDbDataSource(db);
-    auto mapPointAddedNotification = app->translate("Application", "map_point_added");
-    auto repository = new Repository(mapPointsDbDataSource, commentDataSource, mapPointAddedNotification);
+    auto stringProvidet = new StringProvider(app);
+    auto commentDataSource = new CommentsDataSource(db, app);
+    auto mapPointsDbDataSource = new MapPointsDbDataSource(db, app);
+    auto notificationSender = new NotificationSender(stringProvidet, app);
+
+    auto repository = new Repository(mapPointsDbDataSource,
+                                     commentDataSource,
+                                     notificationSender,
+                                     stringProvidet,
+                                     app);
+
     auto addMapPointUseCase = new AddMapPointUseCase(repository);
     auto getMapPointModelUseCase = new GetMapPointModelUseCase(repository);
     auto fetchAllMapPointsUseCase = new FetchAllMapPointsUseCase(repository);
+
     auto addCommentUseCase = new AddCommentUseCase(repository);
-    auto fetchCommentsUseCase = new FetchCommentByMapIdUseCase(repository);
     auto getCommentsByIdUseCase = new GetCommentsByIdUseCase(repository);
+    auto fetchCommentsUseCase = new FetchCommentByMapIdUseCase(repository);
+
     return new MapViewModel(fetchAllMapPointsUseCase,
                             getMapPointModelUseCase,
                             addMapPointUseCase,

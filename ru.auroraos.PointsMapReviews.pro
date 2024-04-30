@@ -37,7 +37,8 @@ HEADERS += \
     src/presentation/fetchcommentshandler.h \
     src/presentation/mappointsuimodel.h \
     src/presentation/mappointui.h \
-    src/presentation/mapviewmodel.h
+    src/presentation/mapviewmodel.h \
+    src/stringprovider.h
 
 SOURCES += \
     src/data/commentsdatasource.cpp \
@@ -63,7 +64,8 @@ SOURCES += \
     src/presentation/mappointsuimodel.cpp \
     src/presentation/mappointui.cpp \
     src/presentation/mapviewmodel.cpp \
-    src/main.cpp
+    src/main.cpp \
+    src/stringprovider.cpp
 
 DISTFILES += \
     qml/pages/MapPointPage.qml \

@@ -62,9 +62,14 @@
 <context>
     <name>Application</name>
     <message>
-        <location filename="../src/dependencyprovider.cpp" line="30"/>
+        <location filename="../src/stringprovider.cpp" line="13"/>
         <source>map_point_added</source>
         <translation>Map point %1 sent for verification</translation>
+    </message>
+    <message>
+        <location filename="../src/stringprovider.cpp" line="14"/>
+        <source>app_name</source>
+        <translation>Points map reviews</translation>
     </message>
 </context>
 <context>

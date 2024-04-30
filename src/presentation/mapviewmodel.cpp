@@ -1,6 +1,5 @@
 #include "mapviewmodel.h"
 
-
 MapViewModel::MapViewModel(
         FetchAllMapPointsUseCase *fetchAppMapPointsUseCase,
         GetMapPointModelUseCase *getMapPointModelUseCase,

@@ -8,12 +8,14 @@
 Repository::Repository(
         MapPointsDbDataSource *mapPointsDataSource,
         CommentsDataSource *commentsDataSource,
-        QString mapPointAddedNotification,
+        NotificationSender *notificationSender,
+        StringProvider *stringProvider,
         QObject *parent)
     : QObject(parent),
      commentsDataSource(commentsDataSource),
      mapPointsDataSource(mapPointsDataSource),
-     mapPointAddedNotification(mapPointAddedNotification)
+     notificationSender(notificationSender),
+     stringProvider(stringProvider)
 {
     QMutexLocker locker(&mapPointsDataSourceMutex);
     QMutexLocker locker2(&commentsDataSourceMutex);
@@ -44,9 +46,10 @@ void Repository::addMapPoint(MapPoint mapPoint)
     QMutexLocker locker(&mapPointsDataSourceMutex);
     auto isPointAdded = mapPointsDataSource->addRow(mapPoint);
     if(isPointAdded) {
-        notificationSender->notify(mapPointAddedNotification.arg(mapPoint.title));
+        auto notificationBody = stringProvider->provide(AppString::PointSentNotification)
+                .arg(mapPoint.title);
+        notificationSender->notify(notificationBody);
     }
-
 }
 
 void Repository::addComment(int mapPointId, QString comment){
@@ -61,7 +64,6 @@ void Repository::fetchCommentsBy(int mapPointId){
 
 MapPointModel *Repository::getMapPointModel()
 {
-
     return mapPointModel;
 }
 

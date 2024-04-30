@@ -7,35 +7,36 @@
 #include <QDebug>
 #include <QDBusMessage>
 
-
-NotificationSender::NotificationSender(QObject *parent) : QObject(parent)
+NotificationSender::NotificationSender(StringProvider *stringProvider, QObject *parent)
+    : QObject(parent),
+      stringProvider(stringProvider)
 {
 
 }
 
 void NotificationSender::notify(const QString text)
 {
-        QDBusInterface interface("org.freedesktop.Notifications",
-                                 "/org/freedesktop/Notifications",
-                                 "org.freedesktop.Notifications",
-                                 QDBusConnection::sessionBus());
+    QDBusInterface interface("org.freedesktop.Notifications",
+                             "/org/freedesktop/Notifications",
+                             "org.freedesktop.Notifications",
+                             QDBusConnection::sessionBus());
 
-        if (!interface.isValid()) {
-            return;
-        }
+    if (!interface.isValid()) {
+        return;
+    }
 
-        QDBusMessage reply = interface.call("Notify",
-                                            QString(),
-                                            uint(0),
-                                            QString(),
-                                            QString(),
-                                            text,
-                                            QStringList(),
-                                            QVariantMap(),
-                                            int(-1));
-        if (reply.type() == QDBusMessage::ErrorMessage) {
-            qDebug() << "Error:" << reply.errorMessage();
-        } else {
-            qDebug() << "Notification sent successfully";
-        }
+    QDBusMessage reply = interface.call("Notify",
+                                        stringProvider->provide(AppString::AppName),
+                                        uint(0),
+                                        QString(),
+                                        QString(" "),
+                                        text,
+                                        QStringList(),
+                                        QVariantMap(),
+                                        int(-1));
+    if (reply.type() == QDBusMessage::ErrorMessage) {
+        qDebug() << "Error:" << reply.errorMessage();
+    } else {
+        qDebug() << "Notification sent successfully";
+    }
 }
