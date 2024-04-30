@@ -5,11 +5,15 @@
 #include <QQmlListProperty>
 #include "../domain/comments.h"
 
+/**
+ * UI модуль комментариев, на который подписывается объект из QML
+ */
 class CommentsUiModel : public QAbstractListModel {
     Q_OBJECT
 
   public:
 
+    /** Доступные роли полей в модели */
     enum Roles {
         MapPointId,
         Comment

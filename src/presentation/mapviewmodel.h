@@ -11,6 +11,12 @@
 #include "../domain/getcommentsbyidusecase.h"
 #include "commentsuimodel.h"
 
+/**
+ * Класс MapViewModel представляет собой ViewModel в архитектуре MVVM (Model-View-ViewModel),
+ * которая управляет взаимодействием между UI и бизнес-логикой приложения.
+ * Он получает ввод данных от пользователя, передает его в подходящие
+ * UseCase (сценарии использования).
+ */
 class MapViewModel : public QObject {
     Q_OBJECT
   public:
@@ -25,17 +31,22 @@ class MapViewModel : public QObject {
         QObject *parent = nullptr
     );
 
+    /** Возвращает UI модель точек на карте */
     MapPointsUiModel* getMapPointsUiModel();
 
+    /** Возвращает UI модель комментариев к точке */
     CommentsUiModel* getCommentsUiModel();
 
   public slots:
 
+    /** Получен претендент на новую точку. (Добавлена точка на карте) */
     void onMapPointPretentderFetched(MapPoint mapPoint);
 
+    /** Добавить новый комментарий к точке */
     void addComment(int mapPointId, QString comments);
 
-    void fetchComment(int mapPointId);
+    /** Получить комментарии к точке. */
+    void fetchComments(int mapPointId);
 
   private:
 

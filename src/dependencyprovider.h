@@ -7,6 +7,9 @@
 #include "data/commentsdatasource.h"
 #include "data/repositoryimpl.h"
 
+/**
+ * Провайдер зависимостей для скрытия деталей инициализации
+ */
 class DependenciesProvider : public QObject {
     Q_OBJECT
   public:

@@ -3,6 +3,9 @@
 
 #include <QObject>
 
+/**
+ * Обработчик намерения добавить комментарий к точке
+ */
 class AddCommentHandler : public QObject {
     Q_OBJECT
   public:

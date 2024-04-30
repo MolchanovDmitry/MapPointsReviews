@@ -6,10 +6,14 @@
 #include <QQmlListProperty>
 #include "mappointui.h"
 
+/**
+ * UI модуль на который подписывается объект из QML
+ */
 class MapPointsUiModel : public QAbstractListModel {
     Q_OBJECT
   public:
 
+    /** Роли данной модели */
     enum Roles {
         IdRole,
         TitleRole = Qt::UserRole + 1,

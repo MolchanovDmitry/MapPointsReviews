@@ -23,6 +23,9 @@ QSqlDatabase getDatabase() {
     return db;
 }
 
+/**
+ *  Собирает все необходимые зависимости для `MapViewModel`
+ */
 MapViewModel *DependenciesProvider::provideMapViewModel(QGuiApplication *app) {
     auto db = getDatabase();
     auto stringProvidet = new StringProvider(app);

@@ -50,12 +50,12 @@
 <context>
     <name>Application</name>
     <message>
-        <location filename="../src/stringprovider.cpp" line="13"/>
+        <location filename="../src/stringprovider.cpp" line="12"/>
         <source>map_point_added</source>
         <translation>Map point %1 sent for verification</translation>
     </message>
     <message>
-        <location filename="../src/stringprovider.cpp" line="14"/>
+        <location filename="../src/stringprovider.cpp" line="13"/>
         <source>app_name</source>
         <translation>Points map reviews</translation>
     </message>

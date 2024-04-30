@@ -3,6 +3,9 @@
 
 #include <QObject>
 
+/**
+ * UI элемент модели точки на карте для отрисовки
+ */
 class MapPointUi : public QObject {
     Q_OBJECT
     Q_PROPERTY(qlonglong getId READ getId)
@@ -24,12 +27,25 @@ class MapPointUi : public QObject {
                QList<QString> imageUrls,
                QObject *parent = nullptr);
 
+    /** ID точки на карте. */
     qlonglong getId() const;
+
+    /** Название точки на карте. */
     QString getTitle() const;
+
+    /** Описание точки на карте. */
     QString getDescription() const;
+
+    /** Географическая широта точки на карте. */
     double getLatitude() const;
+
+    /** Географическая долгота точки на карте. */
     double getLongitude() const;
+
+    /** Подтверждена ли точка на беке (Мокнутый сценарий). Для непотвержденных точек нельзя написать комментарий. */
     bool getIsConfirmed() const;
+
+    /** Список ссылок изображений точки на карте. */
     QList<QString> getImageUrsl() const;
 
   private:

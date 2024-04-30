@@ -53,7 +53,7 @@ void MapViewModel::addComment(int mapPointId, QString comments) {
     addCommentUseCase->run(mapPointId, comments);
 }
 
-void MapViewModel::fetchComment(int mapPointId) {
+void MapViewModel::fetchComments(int mapPointId) {
     commentsUiModel->clear();
     fetchCommentsUseCase->run(mapPointId);
 }
