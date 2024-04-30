@@ -55,9 +55,9 @@ class RepositoryImpl : public Repository {
 
     StringProvider *stringProvider;
 
-    MapPointModel *mapPointModel = new MapPointModel();
+    MapPointModel *mapPointModel = new MapPointModel(this);
 
-    CommentsByIdModel *commentsByIdModel = new CommentsByIdModel();
+    CommentsByIdModel *commentsByIdModel = new CommentsByIdModel(this);
 
     QMutex commentsDataSourceMutex;
 

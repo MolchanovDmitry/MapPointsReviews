@@ -17,27 +17,29 @@ class MapPointsDbDataSource : public QObject {
   public:
     explicit MapPointsDbDataSource(QSqlDatabase db, QObject *parent = nullptr);
 
-    MapPointTableModel *mapPointSqlModel = new MapPointTableModel(this); //TODO
-
     /** Создать таблицы для хранения точек (при необходимости) */
-    void createTables();
+    void createTable();
 
     /** Добавить точку */
-    bool addRow(MapPoint mapPoint);
+    bool addMapPoin(MapPoint mapPoint);
 
     /** Добавить точки */
-    bool addRows(QList<MapPoint*> *mapPoints);
+    bool addMapPoints(QList<MapPoint*> *mapPoints);
 
     /** Получить количество строк */
-    int getRowCount();
+    int getPointsCount();
 
     /** Получить все точки */
-    void getAll();
+    void fetchAllMapPoints();
 
-
+    /** Получить модель точек на карте. */
+    MapPointTableModel* getMapPointTableModel();
 
   private:
+
     QSqlDatabase db;
+
+    MapPointTableModel *mapPointSqlModel = new MapPointTableModel(this);
 
     void createMapPointTable();
 

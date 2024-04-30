@@ -5,6 +5,7 @@
 #include "../domain/mappoint.h"
 #include "mappointsdbdatasource.h"
 
+/** Вернет случайно 1 или -1 */
 int getRandomSign() {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -13,6 +14,16 @@ int getRandomSign() {
     return (distribution(gen) == 0) ? -1 : 1;
 }
 
+/**
+ *  Получить мокнутые данные точек на карте
+ *
+ *  @param placeName - имя места. Имя будет записано к сгенерированным наименованиям точек.
+ *  @param generateCount - сколько точе нагенерировать.
+ *  @param placeLatitude - географическая широта места.
+ *  @param placeLongitude - географическая долгота места.
+ *  @param thresholdLatitude - разброс генерации точек по широте.
+ *  @param thresholdLongitude - разброс генерации точек по долготе.
+ */
 QList<MapPoint*>* getMockData(QString placeName, int generateCount, double placeLatitude, double placeLongitude, double thresholdLatitude, double thresholdLongitude) {
     qDebug()<<"Добавляем "<<generateCount<<" мокнутых точек для "<<placeName;
 
@@ -34,9 +45,12 @@ QList<MapPoint*>* getMockData(QString placeName, int generateCount, double place
     return result;
 }
 
+/**
+ * Добавить мокнутые данные в источники данных.
+ */
 void addMockMapPoints(MapPointsDbDataSource* dataSource) {
     auto tverMapPoints = getMockData("Тверь", 20, 56.8486, 35.8507, 0.00006, 0.00013);
     auto moscowMapPoints = getMockData("Москва", 100, 55.751244, 37.618423, 0.00012, 0.0002);
-    dataSource->addRows(tverMapPoints);
-    dataSource->addRows(moscowMapPoints);
+    dataSource->addMapPoints(tverMapPoints);
+    dataSource->addMapPoints(moscowMapPoints);
 }

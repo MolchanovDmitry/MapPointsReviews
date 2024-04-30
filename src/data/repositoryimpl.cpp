@@ -19,17 +19,17 @@ RepositoryImpl::RepositoryImpl(
 
     QMutexLocker locker(&mapPointsDataSourceMutex);
     QMutexLocker locker2(&commentsDataSourceMutex);
-    mapPointsDataSource->createTables();
+    mapPointsDataSource->createTable();
     commentsDataSource->createTable();
 
-    bool isMockDataAddedAlready = mapPointsDataSource->getRowCount() != 0;
+    bool isMockDataAddedAlready = mapPointsDataSource->getPointsCount() != 0;
     if(!isMockDataAddedAlready) {
         addMockMapPoints(mapPointsDataSource);
     }
     locker.unlock();
     locker2.unlock();
 
-    connect(mapPointsDataSource->mapPointSqlModel, &MapPointTableModel::mapPointsFromDataUpdated,
+    connect(mapPointsDataSource->getMapPointTableModel(), &MapPointTableModel::mapPointsFromDataUpdated,
             mapPointModel, &MapPointModel::updateMapPoints);
     connect(commentsDataSource->getTableModel(), &CommentsTableModel::commentsFetched,
             commentsByIdModel, &CommentsByIdModel::updateComments);
@@ -37,12 +37,12 @@ RepositoryImpl::RepositoryImpl(
 
 void RepositoryImpl::fetchAllMapPoints() {
     QMutexLocker locker(&mapPointsDataSourceMutex);
-    mapPointsDataSource->getAll();
+    mapPointsDataSource->fetchAllMapPoints();
 }
 
 void RepositoryImpl::addMapPoint(MapPoint mapPoint) {
     QMutexLocker locker(&mapPointsDataSourceMutex);
-    auto isPointAdded = mapPointsDataSource->addRow(mapPoint);
+    auto isPointAdded = mapPointsDataSource->addMapPoin(mapPoint);
     if(isPointAdded) {
         auto notificationBody = stringProvider->provide(AppString::PointSentNotification)
                                 .arg(mapPoint.title);

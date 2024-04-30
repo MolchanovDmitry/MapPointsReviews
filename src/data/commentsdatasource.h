@@ -28,7 +28,7 @@ class CommentsDataSource : public QObject {
 
   private:
     QSqlDatabase db;
-    CommentsTableModel *tableModel = new CommentsTableModel();
+    CommentsTableModel *tableModel = new CommentsTableModel(this);
 };
 
 #endif // COMMENTSDATASOURCE_H

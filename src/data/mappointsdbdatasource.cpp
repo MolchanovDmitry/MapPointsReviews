@@ -11,7 +11,7 @@ MapPointsDbDataSource::MapPointsDbDataSource(QSqlDatabase db, QObject *parent) :
 
 }
 
-void MapPointsDbDataSource::createTables() {
+void MapPointsDbDataSource::createTable() {
     if(!db.open()) {
         qCritical() << "Ошибка при открытии базы данных: " << db.lastError().text();
         return;
@@ -46,13 +46,13 @@ void MapPointsDbDataSource::createMapPointTable() {
     }
 }
 
-bool MapPointsDbDataSource::addRow(MapPoint mapPoint) {
+bool MapPointsDbDataSource::addMapPoin(MapPoint mapPoint) {
     auto list = new QList<MapPoint*>();
     list->append(&mapPoint);
-    return addRows(list);
+    return addMapPoints(list);
 }
 
-bool MapPointsDbDataSource::addRows(QList<MapPoint*> *mapPoints) {
+bool MapPointsDbDataSource::addMapPoints(QList<MapPoint*> *mapPoints) {
     bool result = false;
     mapPointSqlModel->setTable("MapPoints");
     for (MapPoint* mapPoint : *mapPoints) {
@@ -79,7 +79,7 @@ bool MapPointsDbDataSource::addRows(QList<MapPoint*> *mapPoints) {
     return result;
 }
 
-int MapPointsDbDataSource::getRowCount() {
+int MapPointsDbDataSource::getPointsCount() {
     QSqlTableModel model;
     model.setTable("MapPoints");
     model.select();
@@ -95,8 +95,7 @@ int MapPointsDbDataSource::getRowCount() {
     return rowCount;
 }
 
-// TODO
-void MapPointsDbDataSource::getAll() {
+void MapPointsDbDataSource::fetchAllMapPoints() {
     mapPointSqlModel->setTable("MapPoints");
     mapPointSqlModel->select();
 
@@ -106,5 +105,9 @@ void MapPointsDbDataSource::getAll() {
         int rowCount = mapPointSqlModel->rowCount();
         qDebug() << "Успешный запрос на получение всех точек. Количество точек: " << rowCount;
     }
+}
+
+MapPointTableModel *MapPointsDbDataSource::getMapPointTableModel() {
+    return mapPointSqlModel;
 }
 
