@@ -9,6 +9,9 @@
 #include "mappointsqlmodel.h"
 #include "../domain/mappoint.h"
 
+/**
+ * Источник данных точек на карте
+ */
 class MapPointsDbDataSource : public QObject {
     Q_OBJECT
   public:
@@ -16,14 +19,19 @@ class MapPointsDbDataSource : public QObject {
 
     MapPointTableModel *mapPointSqlModel = new MapPointTableModel(this); //TODO
 
+    /** Создать таблицы для хранения точек (при необходимости) */
     void createTables();
 
+    /** Добавить точку */
     bool addRow(MapPoint mapPoint);
 
+    /** Добавить точки */
     bool addRows(QList<MapPoint*> *mapPoints);
 
+    /** Получить количество строк */
     int getRowCount();
 
+    /** Получить все точки */
     void getAll();
 
 
