@@ -8,6 +8,10 @@ import QtPositioning 5.3
 import Sailfish.Silica 1.0
 import "../assets"
 
+
+/*
+    Главный экран карты.
+*/
 Page {
     property int markerSize: 75
 

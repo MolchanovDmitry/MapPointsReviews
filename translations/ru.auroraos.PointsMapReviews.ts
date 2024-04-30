@@ -4,17 +4,17 @@
 <context>
     <name>AboutPage</name>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="23"/>
+        <location filename="../qml/pages/AboutPage.qml" line="27"/>
         <source>About Application</source>
         <translation>About Application</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="27"/>
+        <location filename="../qml/pages/AboutPage.qml" line="31"/>
         <source>#about</source>
         <translation>Final course project &quot;Application software development using QT and Aurora OS&quot;. %L1.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="28"/>
+        <location filename="../qml/pages/AboutPage.qml" line="32"/>
         <source>#repositoryLinkText</source>
         <translation>Repository link</translation>
     </message>
@@ -22,27 +22,27 @@
 <context>
     <name>AddMapPointPage</name>
     <message>
-        <location filename="../qml/pages/AddMapPointPage.qml" line="22"/>
+        <location filename="../qml/pages/AddMapPointPage.qml" line="24"/>
         <source>save</source>
         <translation>Save</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AddMapPointPage.qml" line="23"/>
+        <location filename="../qml/pages/AddMapPointPage.qml" line="25"/>
         <source>cancel</source>
         <translation>Cancel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AddMapPointPage.qml" line="72"/>
+        <location filename="../qml/pages/AddMapPointPage.qml" line="74"/>
         <source>select_photos</source>
         <translation>Select photos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AddMapPointPage.qml" line="82"/>
+        <location filename="../qml/pages/AddMapPointPage.qml" line="84"/>
         <source>add_place_name</source>
         <translation>Add place title</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AddMapPointPage.qml" line="93"/>
+        <location filename="../qml/pages/AddMapPointPage.qml" line="95"/>
         <source>add_place_description</source>
         <translation>Add place description</translation>
     </message>
@@ -71,17 +71,17 @@
 <context>
     <name>MapPage</name>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="155"/>
+        <location filename="../qml/pages/MapPage.qml" line="159"/>
         <source>add_poin</source>
         <translation>Add point</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="228"/>
+        <location filename="../qml/pages/MapPage.qml" line="232"/>
         <source>check_positioning</source>
         <translation>Positioning check</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="231"/>
+        <location filename="../qml/pages/MapPage.qml" line="235"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
@@ -89,17 +89,17 @@
 <context>
     <name>MapPointPage</name>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="54"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="58"/>
         <source>no_photos</source>
         <translation>No photos :c</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="60"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="64"/>
         <source>description</source>
         <translation>Description:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="71"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="75"/>
         <source>comments</source>
         <translation>Comments:</translation>
     </message>
@@ -107,37 +107,37 @@
 <context>
     <name>PositioningPage</name>
     <message>
-        <location filename="../qml/pages/PositioningPage.qml" line="24"/>
+        <location filename="../qml/pages/PositioningPage.qml" line="27"/>
         <source>Timestamp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PositioningPage.qml" line="30"/>
+        <location filename="../qml/pages/PositioningPage.qml" line="33"/>
         <source>Coordinate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PositioningPage.qml" line="36"/>
+        <location filename="../qml/pages/PositioningPage.qml" line="39"/>
         <source>Latitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PositioningPage.qml" line="42"/>
+        <location filename="../qml/pages/PositioningPage.qml" line="45"/>
         <source>Longitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PositioningPage.qml" line="48"/>
+        <location filename="../qml/pages/PositioningPage.qml" line="51"/>
         <source>Altitude</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PositioningPage.qml" line="54"/>
+        <location filename="../qml/pages/PositioningPage.qml" line="57"/>
         <source>Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/PositioningPage.qml" line="55"/>
+        <location filename="../qml/pages/PositioningPage.qml" line="58"/>
         <source>%1 meters / second</source>
         <translation type="unfinished"></translation>
     </message>

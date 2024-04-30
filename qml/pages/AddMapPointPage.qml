@@ -4,8 +4,10 @@ import QtQuick.Layouts 1.0
 import Sailfish.Pickers 1.0
 import "../assets"
 
-// TODO добавить координаты
-// TODO добавить валидацию полей
+
+/*
+    Диалог создания новой точки
+*/
 Dialog {
     id: addMapPointPage
     objectName: "aboutPage"

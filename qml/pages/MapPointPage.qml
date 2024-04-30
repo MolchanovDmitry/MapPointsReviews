@@ -1,6 +1,10 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+
+/*
+    Экран информации о точке.
+*/
 Page {
     objectName: "mapPointPage"
     allowedOrientations: Orientation.All

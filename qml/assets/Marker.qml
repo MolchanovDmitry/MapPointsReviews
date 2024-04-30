@@ -1,6 +1,10 @@
 import QtQuick 2.6
 import QtLocation 5.0
 
+
+/*
+  Кликабельный маркер на карте.
+*/
 MapQuickItem {
 
     property alias marker: marker

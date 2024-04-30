@@ -1,9 +1,12 @@
 import QtQuick 2.6
 import Sailfish.Silica 1.0
+import QtPositioning 5.3
 import "../assets"
 
-import QtPositioning 5.3
 
+/*
+    Экран проверки показетелей позиционирования.
+*/
 Page {
 
     PositionSource {
