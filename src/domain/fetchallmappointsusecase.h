@@ -2,7 +2,7 @@
 #define FETCHALLMAPPOINTSUSECASE_H
 
 #include <QObject>
-#include "../data/repository.h"
+#include "repository.h"
 
 class FetchAllMapPointsUseCase : public QObject
 {

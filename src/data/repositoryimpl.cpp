@@ -1,17 +1,17 @@
-#include "repository.h"
+#include "repositoryimpl.h"
 
 #include <QDebug>
 #include <QMutexLocker>
 #include <QSqlDatabase>
 #include "repext.cpp"
 
-Repository::Repository(
+RepositoryImpl::RepositoryImpl(
         MapPointsDbDataSource *mapPointsDataSource,
         CommentsDataSource *commentsDataSource,
         NotificationSender *notificationSender,
         StringProvider *stringProvider,
         QObject *parent)
-    : QObject(parent),
+    : Repository(parent),
      commentsDataSource(commentsDataSource),
      mapPointsDataSource(mapPointsDataSource),
      notificationSender(notificationSender),
@@ -35,14 +35,12 @@ Repository::Repository(
             commentsByIdModel, &CommentsByIdModel::updateComments);
 }
 
-void Repository::fetchAllMapPoints()
-{
+void RepositoryImpl::fetchAllMapPoints() {
     QMutexLocker locker(&mapPointsDataSourceMutex);
     mapPointsDataSource->getAll();
 }
 
-void Repository::addMapPoint(MapPoint mapPoint)
-{
+void RepositoryImpl::addMapPoint(MapPoint mapPoint) {
     QMutexLocker locker(&mapPointsDataSourceMutex);
     auto isPointAdded = mapPointsDataSource->addRow(mapPoint);
     if(isPointAdded) {
@@ -52,22 +50,21 @@ void Repository::addMapPoint(MapPoint mapPoint)
     }
 }
 
-void Repository::addComment(int mapPointId, QString comment){
+void RepositoryImpl::addComment(int mapPointId, QString comment) {
     QMutexLocker locker(&commentsDataSourceMutex);
     commentsDataSource->addComment(mapPointId, comment);
 }
 
-void Repository::fetchCommentsBy(int mapPointId){
+void RepositoryImpl::fetchCommentsBy(int mapPointId) {
     QMutexLocker locker(&commentsDataSourceMutex);
     commentsDataSource->fetchCommentsBy(mapPointId);
 }
 
-MapPointModel *Repository::getMapPointModel()
-{
+MapPointModel *RepositoryImpl::getMapPointModel() {
     return mapPointModel;
 }
 
-CommentsByIdModel *Repository::getCommentsByIdModel(){
+CommentsByIdModel *RepositoryImpl::getCommentsByIdModel(){
     return commentsByIdModel;
 }
 

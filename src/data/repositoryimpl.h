@@ -1,5 +1,5 @@
-#ifndef REPOSITORY_H
-#define REPOSITORY_H
+#ifndef REPOSITORYIMPL_H
+#define REPOSITORYIMPL_H
 
 #include <QObject>
 #include <QMutex>
@@ -7,16 +7,15 @@
 #include "mappointsdbdatasource.h"
 #include "commentsdatasource.h"
 #include "notificationsender.h"
-#include "../domain/mappointmodel.h"
-#include "../domain/commentbyidmodel.h"
+#include "../domain/repository.h"
 #include "../stringprovider.h"
 
 
-class Repository : public QObject
+class RepositoryImpl : public Repository
 {
     Q_OBJECT
 public:
-    explicit Repository(
+    explicit RepositoryImpl(
             MapPointsDbDataSource *mapPointsDbDataSource,
             CommentsDataSource *commentsDataSource,
             NotificationSender *notificationSender,
@@ -24,17 +23,17 @@ public:
             QObject *parent = nullptr
             );
 
-    void fetchAllMapPoints();
+    void fetchAllMapPoints() override;
 
-    void addMapPoint(MapPoint mapPoint);
+    void addMapPoint(MapPoint mapPoint) override;
 
-    void addComment(int mapPointId, QString comment);
+    void addComment(int mapPointId, QString comment) override;
 
-    void fetchCommentsBy(int mapPointId);
+    void fetchCommentsBy(int mapPointId) override;
 
-    MapPointModel *getMapPointModel();
+    MapPointModel *getMapPointModel() override;
 
-    CommentsByIdModel *getCommentsByIdModel();
+    CommentsByIdModel *getCommentsByIdModel() override;
 
 private:
 
@@ -58,4 +57,4 @@ private:
 
 };
 
-#endif // REPOSITORY_H
+#endif // REPOSITORYIMPL_H

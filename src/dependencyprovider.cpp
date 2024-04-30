@@ -32,7 +32,7 @@ MapViewModel *DependenciesProvider::provideMapViewModel(QGuiApplication *app)
     auto mapPointsDbDataSource = new MapPointsDbDataSource(db, app);
     auto notificationSender = new NotificationSender(stringProvidet, app);
 
-    auto repository = new Repository(mapPointsDbDataSource,
+    auto repository = new RepositoryImpl(mapPointsDbDataSource,
                                      commentDataSource,
                                      notificationSender,
                                      stringProvidet,

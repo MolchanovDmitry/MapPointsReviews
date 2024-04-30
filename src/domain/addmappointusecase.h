@@ -2,7 +2,7 @@
 #define ADDMAPPOINTUSECASE_H
 
 #include <QObject>
-#include "../data/repository.h"
+#include "repository.h"
 
 class AddMapPointUseCase : public QObject
 {

@@ -2,7 +2,7 @@
 #define GETCOMMENTSBYIDUSECASE_H
 
 #include <QObject>
-#include "../data/repository.h"
+#include "repository.h"
 #include "commentbyidmodel.h"
 
 class GetCommentsByIdUseCase : public QObject

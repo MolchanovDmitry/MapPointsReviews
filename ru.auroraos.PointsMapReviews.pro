@@ -19,7 +19,7 @@ HEADERS += \
     src/data/mappointsdbdatasource.h \
     src/data/mappointsqlmodel.h \
     src/data/notificationsender.h \
-    src/data/repository.h \
+    src/data/repositoryimpl.h \
     src/dependencyprovider.h \
     src/domain/addcommentusecase.h \
     src/domain/commentbyidmodel.h \
@@ -31,6 +31,7 @@ HEADERS += \
     src/domain/fetchallmappointsusecase.h \
     src/domain/getmappointmodelusecase.h \
     src/domain/mappointmodel.h \
+    src/domain/repository.h \
     src/presentation/addcommenthandler.h \
     src/presentation/addmappointhandler.h \
     src/presentation/commentsuimodel.h \
@@ -47,7 +48,7 @@ SOURCES += \
     src/data/mappointsqlmodel.cpp \
     src/data/notificationsender.cpp \
     src/data/repext.cpp \
-    src/data/repository.cpp \
+    src/data/repositoryimpl.cpp \
     src/dependencyprovider.cpp \
     src/domain/addcommentusecase.cpp \
     src/domain/addmappointusecase.cpp \

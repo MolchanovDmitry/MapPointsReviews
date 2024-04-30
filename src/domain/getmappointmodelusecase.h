@@ -2,7 +2,7 @@
 #define GETMAPPOINTMODELUSECASE_H
 
 #include <QObject>
-#include "../data/repository.h"
+#include "repository.h"
 
 class GetMapPointModelUseCase : public QObject
 {

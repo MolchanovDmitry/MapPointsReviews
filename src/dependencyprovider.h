@@ -5,7 +5,7 @@
 #include <QtGui/QGuiApplication>
 #include "presentation/mapviewmodel.h"
 #include "data/commentsdatasource.h"
-#include "data/repository.h"
+#include "data/repositoryimpl.h"
 
 class DependenciesProvider : public QObject
 {

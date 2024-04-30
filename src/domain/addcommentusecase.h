@@ -2,7 +2,7 @@
 #define ADDCOMMENTUSECASE_H
 
 #include <QObject>
-#include "../data/repository.h"
+#include "repository.h"
 
 class AddCommentUseCase : public QObject
 {
