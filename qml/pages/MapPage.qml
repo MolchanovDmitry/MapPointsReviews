@@ -225,7 +225,8 @@ Page {
                     }
                     drawerModel.clear()
                     drawerModel.append([{
-                                            "label": qsTr("change_language")
+                                            "label": qsTr("check_positioning"),
+                                            "page": "PositioningPage"
                                         }])
                     drawer.show()
                 }

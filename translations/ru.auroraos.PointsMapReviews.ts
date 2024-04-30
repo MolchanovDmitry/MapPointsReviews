@@ -97,8 +97,8 @@
     </message>
     <message>
         <location filename="../qml/pages/MapPage.qml" line="228"/>
-        <source>change_language</source>
-        <translation>Change language</translation>
+        <source>check_positioning</source>
+        <translation>Positioning check</translation>
     </message>
 </context>
 <context>
@@ -117,6 +117,44 @@
         <location filename="../qml/pages/MapPointPage.qml" line="71"/>
         <source>comments</source>
         <translation>Comments:</translation>
+    </message>
+</context>
+<context>
+    <name>PositioningPage</name>
+    <message>
+        <location filename="../qml/pages/PositioningPage.qml" line="24"/>
+        <source>Timestamp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PositioningPage.qml" line="30"/>
+        <source>Coordinate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PositioningPage.qml" line="36"/>
+        <source>Latitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PositioningPage.qml" line="42"/>
+        <source>Longitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PositioningPage.qml" line="48"/>
+        <source>Altitude</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PositioningPage.qml" line="54"/>
+        <source>Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/PositioningPage.qml" line="55"/>
+        <source>%1 meters / second</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
