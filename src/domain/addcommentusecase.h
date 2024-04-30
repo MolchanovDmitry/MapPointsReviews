@@ -4,15 +4,14 @@
 #include <QObject>
 #include "repository.h"
 
-class AddCommentUseCase : public QObject
-{
+class AddCommentUseCase : public QObject {
     Q_OBJECT
-public:
+  public:
     explicit AddCommentUseCase(Repository *rep, QObject *parent = nullptr);
 
     void run(int mapPointId, QString comment);
 
-private:
+  private:
     Repository *rep;
 
 };

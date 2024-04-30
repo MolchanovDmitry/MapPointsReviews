@@ -4,15 +4,14 @@
 #include <QObject>
 #include "repository.h"
 
-class GetMapPointModelUseCase : public QObject
-{
+class GetMapPointModelUseCase : public QObject {
     Q_OBJECT
-public:
+  public:
     explicit GetMapPointModelUseCase(Repository *repository, QObject *parent = nullptr);
 
     MapPointModel *run();
 
-private:
+  private:
 
     Repository *repository;
 

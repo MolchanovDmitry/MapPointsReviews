@@ -6,10 +6,9 @@
 #include <QSqlTableModel>
 #include "commentstablemodel.h"
 
-class CommentsDataSource : public QObject
-{
+class CommentsDataSource : public QObject {
     Q_OBJECT
-public:
+  public:
     explicit CommentsDataSource(QSqlDatabase db, QObject *parent = nullptr);
 
     void createTable();
@@ -20,7 +19,7 @@ public:
 
     CommentsTableModel* getTableModel();
 
-private:
+  private:
     QSqlDatabase db;
     CommentsTableModel *tableModel = new CommentsTableModel();
 };

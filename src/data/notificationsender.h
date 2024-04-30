@@ -4,15 +4,14 @@
 #include <QObject>
 #include "../stringprovider.h"
 
-class NotificationSender : public QObject
-{
+class NotificationSender : public QObject {
     Q_OBJECT
-public:
+  public:
     explicit NotificationSender(StringProvider *stringProvider, QObject *parent = nullptr);
 
     void notify(const QString text);
 
-private:
+  private:
     StringProvider *stringProvider;
 };
 

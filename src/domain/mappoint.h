@@ -7,8 +7,7 @@
 /**
  * Бизнесовая структура точки на карте
  */
-struct MapPoint
-{
+struct MapPoint {
     qlonglong id;
     QString title;
     QString description;
@@ -18,7 +17,7 @@ struct MapPoint
     QList<QString> imageUrls;
 };
 
-static void printMapPoint(MapPoint *mapPoint, QString tag = ""){
+static void printMapPoint(MapPoint *mapPoint, QString tag = "") {
     qDebug()<<tag<<mapPoint->title<<" "<<mapPoint->description<<" "<<mapPoint->latitude<<" "<<mapPoint->longitude<<" "<<mapPoint->isConfirmed;
 }
 

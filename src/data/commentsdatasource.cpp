@@ -7,13 +7,10 @@
 
 CommentsDataSource::CommentsDataSource(QSqlDatabase db, QObject *parent)
     : QObject(parent),
-      db(db)
-{
-
+      db(db) {
 }
 
-void CommentsDataSource::createTable()
-{
+void CommentsDataSource::createTable() {
     if (!db.transaction()) {
         qCritical() << "Ошибка при начале транзакции: " << db.lastError().text();
         return;
@@ -21,10 +18,10 @@ void CommentsDataSource::createTable()
 
     QSqlQuery query;
     QString createTable = "CREATE TABLE IF NOT EXISTS "
-                            "Comments("
-                            "mapPointId INTEGER, "
-                            "comment TEXT"
-                            ");";
+                          "Comments("
+                          "mapPointId INTEGER, "
+                          "comment TEXT"
+                          ");";
 
     if(!query.exec(createTable)) {
         qCritical() << "Ошибка при создании таблицы Comments: " << query.lastError().text();
@@ -35,8 +32,7 @@ void CommentsDataSource::createTable()
     }
 }
 
-void CommentsDataSource::fetchCommentsBy(int mapPointId)
-{
+void CommentsDataSource::fetchCommentsBy(int mapPointId) {
     qDebug()<<"mapPointId: "<<mapPointId;
     tableModel->setTable("Comments");
     tableModel->setFilter(QString("mapPointId == %1").arg(mapPointId));
@@ -67,6 +63,6 @@ void CommentsDataSource::addComment(int mapPointId, QString comment) {
     tableModel->select();
 }
 
-CommentsTableModel *CommentsDataSource::getTableModel(){
+CommentsTableModel *CommentsDataSource::getTableModel() {
     return tableModel;
 }

@@ -3,13 +3,12 @@
 
 #include <QObject>
 
-class FetchCommentsHandler : public QObject
-{
+class FetchCommentsHandler : public QObject {
     Q_OBJECT
-public:
+  public:
     explicit FetchCommentsHandler(QObject *parent = nullptr);
 
-signals:
+  signals:
     void fetchComments(int pointId);
 
 };

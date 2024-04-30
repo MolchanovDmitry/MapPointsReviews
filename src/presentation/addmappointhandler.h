@@ -5,21 +5,20 @@
 #include <QDebug>
 #include "../domain/mappoint.h"
 
-class AddMapPointHandler : public QObject
-{
+class AddMapPointHandler : public QObject {
     Q_OBJECT
-public:
+  public:
     explicit AddMapPointHandler(QObject *parent = nullptr);
 
-public slots:
+  public slots:
     void onMapPointAddRequest(
-            const QString title,
-            const QString description,
-            const QVariant imageUrls,
-            const double latitude,
-            const double longitude);
+        const QString title,
+        const QString description,
+        const QVariant imageUrls,
+        const double latitude,
+        const double longitude);
 
-signals:
+  signals:
     void onMapPointPretentderFetched(MapPoint mapPoint);
 };
 

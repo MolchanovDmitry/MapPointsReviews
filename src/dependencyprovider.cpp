@@ -7,25 +7,23 @@
 #include "stringprovider.h"
 #include "data/notificationsender.h"
 
-DependenciesProvider::DependenciesProvider(QObject *parent) : QObject(parent)
-{
+DependenciesProvider::DependenciesProvider(QObject *parent) : QObject(parent) {
 
 }
 
-QSqlDatabase getDatabase(){
+QSqlDatabase getDatabase() {
     QString path = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     qDebug()<<"Путь до базы данных: "<<path;
     QDir dir(path);
-    if (!dir.exists()) {
+    if(!dir.exists()) {
         dir.mkpath(".");
     }
     db.setDatabaseName(path + "/PointsMapReviews.db");
     return db;
 }
 
-MapViewModel *DependenciesProvider::provideMapViewModel(QGuiApplication *app)
-{
+MapViewModel *DependenciesProvider::provideMapViewModel(QGuiApplication *app) {
     auto db = getDatabase();
     auto stringProvidet = new StringProvider(app);
     auto commentDataSource = new CommentsDataSource(db, app);
@@ -33,10 +31,10 @@ MapViewModel *DependenciesProvider::provideMapViewModel(QGuiApplication *app)
     auto notificationSender = new NotificationSender(stringProvidet, app);
 
     auto repository = new RepositoryImpl(mapPointsDbDataSource,
-                                     commentDataSource,
-                                     notificationSender,
-                                     stringProvidet,
-                                     app);
+                                         commentDataSource,
+                                         notificationSender,
+                                         stringProvidet,
+                                         app);
 
     auto addMapPointUseCase = new AddMapPointUseCase(repository);
     auto getMapPointModelUseCase = new GetMapPointModelUseCase(repository);

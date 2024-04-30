@@ -2,12 +2,11 @@
 
 GetCommentsByIdUseCase::GetCommentsByIdUseCase(Repository *repository, QObject *parent)
     : QObject(parent),
-      repository(repository)
-{
+      repository(repository) {
 
 }
 
-CommentsByIdModel *GetCommentsByIdUseCase::run(){
+CommentsByIdModel *GetCommentsByIdUseCase::run() {
     return repository->getCommentsByIdModel();
 }
 

@@ -8,12 +8,11 @@
  * @param app указатель на контекст приложения для получения строк
  */
 StringProvider::StringProvider(QGuiApplication *app, QObject *parent)
-    : QObject(parent)
-{
+    : QObject(parent) {
     strHash.insert(PointSentNotification, app->translate("Application", "map_point_added"));
-    strHash.insert(AppName, app->translate("Application","app_name"));
+    strHash.insert(AppName, app->translate("Application", "app_name"));
 }
 
-QString StringProvider::provide(AppString str){
+QString StringProvider::provide(AppString str) {
     return strHash.value(str);
 }

@@ -3,13 +3,12 @@
 
 #include <QObject>
 
-class AddCommentHandler : public QObject
-{
+class AddCommentHandler : public QObject {
     Q_OBJECT
-public:
+  public:
     explicit AddCommentHandler(QObject *parent = nullptr);
 
-signals:
+  signals:
     void addComment(int mapPointId, QString comment);
 
 };

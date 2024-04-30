@@ -1,12 +1,11 @@
 #include "commentsuimodel.h"
 
 CommentsUiModel::CommentsUiModel(QObject *parent)
-    : QAbstractListModel(parent)
-{
+    : QAbstractListModel(parent) {
 }
 
 int CommentsUiModel::rowCount(const QModelIndex &parent) const {
-    if (parent.isValid()){
+    if (parent.isValid()) {
         return 0;
     }
     return comments->comments->count();
@@ -35,8 +34,7 @@ QHash<int, QByteArray> CommentsUiModel::roleNames() const {
     return roles;
 }
 
-void CommentsUiModel::updateComments(Comments *comments)
-{
+void CommentsUiModel::updateComments(Comments *comments) {
     auto commentList = comments->comments;
     auto last = commentList->count() > 0 ? commentList->count() - 1 : 0;
 
@@ -44,7 +42,7 @@ void CommentsUiModel::updateComments(Comments *comments)
 
     clear();
 
-    if(commentList->count() > 0){
+    if(commentList->count() > 0) {
         beginInsertRows(QModelIndex(), 0, last);
         this->comments->mapPointId = comments->mapPointId;
         this->comments->comments->append(*comments->comments);

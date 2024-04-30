@@ -3,13 +3,11 @@
 
 AddMapPointUseCase::AddMapPointUseCase(Repository *repository, QObject *parent)
     : QObject(parent),
-      repository(repository)
-{
+      repository(repository) {
 
 }
 
-void AddMapPointUseCase::run(MapPoint mapPoint)
-{
+void AddMapPointUseCase::run(MapPoint mapPoint) {
     QtConcurrent::run([=]() {
         repository->addMapPoint(mapPoint);
     });

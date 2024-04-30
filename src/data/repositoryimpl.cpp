@@ -6,24 +6,24 @@
 #include "repext.cpp"
 
 RepositoryImpl::RepositoryImpl(
-        MapPointsDbDataSource *mapPointsDataSource,
-        CommentsDataSource *commentsDataSource,
-        NotificationSender *notificationSender,
-        StringProvider *stringProvider,
-        QObject *parent)
+    MapPointsDbDataSource *mapPointsDataSource,
+    CommentsDataSource *commentsDataSource,
+    NotificationSender *notificationSender,
+    StringProvider *stringProvider,
+    QObject *parent)
     : Repository(parent),
-     commentsDataSource(commentsDataSource),
-     mapPointsDataSource(mapPointsDataSource),
-     notificationSender(notificationSender),
-     stringProvider(stringProvider)
-{
+      commentsDataSource(commentsDataSource),
+      mapPointsDataSource(mapPointsDataSource),
+      notificationSender(notificationSender),
+      stringProvider(stringProvider) {
+
     QMutexLocker locker(&mapPointsDataSourceMutex);
     QMutexLocker locker2(&commentsDataSourceMutex);
     mapPointsDataSource->createTables();
     commentsDataSource->createTable();
 
     bool isMockDataAddedAlready = mapPointsDataSource->getRowCount() != 0;
-    if(!isMockDataAddedAlready){
+    if(!isMockDataAddedAlready) {
         addMockMapPoints(mapPointsDataSource);
     }
     locker.unlock();
@@ -45,7 +45,7 @@ void RepositoryImpl::addMapPoint(MapPoint mapPoint) {
     auto isPointAdded = mapPointsDataSource->addRow(mapPoint);
     if(isPointAdded) {
         auto notificationBody = stringProvider->provide(AppString::PointSentNotification)
-                .arg(mapPoint.title);
+                                .arg(mapPoint.title);
         notificationSender->notify(notificationBody);
     }
 }
@@ -64,7 +64,7 @@ MapPointModel *RepositoryImpl::getMapPointModel() {
     return mapPointModel;
 }
 
-CommentsByIdModel *RepositoryImpl::getCommentsByIdModel(){
+CommentsByIdModel *RepositoryImpl::getCommentsByIdModel() {
     return commentsByIdModel;
 }
 

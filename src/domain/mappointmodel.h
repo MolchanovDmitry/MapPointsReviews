@@ -5,21 +5,20 @@
 #include <QDebug>
 #include "mappoint.h"
 
-class MapPointModel : public QObject
-{
+class MapPointModel : public QObject {
     Q_OBJECT
-public:
+  public:
     explicit MapPointModel(QObject *parent = nullptr);
 
     QList<MapPoint*> getMapPoints();
 
-public slots:
+  public slots:
     void updateMapPoints(QList<MapPoint*> mapPoints);
 
-signals:
+  signals:
     void mapPointsUpdated(QList<MapPoint*> mapPoints);
 
-private:
+  private:
     QList<MapPoint*> mapPoints = QList<MapPoint*>();
 
 };

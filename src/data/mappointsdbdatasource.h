@@ -9,10 +9,9 @@
 #include "mappointsqlmodel.h"
 #include "../domain/mappoint.h"
 
-class MapPointsDbDataSource : public QObject
-{
+class MapPointsDbDataSource : public QObject {
     Q_OBJECT
-public:
+  public:
     explicit MapPointsDbDataSource(QSqlDatabase db, QObject *parent = nullptr);
 
     MapPointTableModel *mapPointSqlModel = new MapPointTableModel(this); //TODO
@@ -29,7 +28,7 @@ public:
 
 
 
-private:
+  private:
     QSqlDatabase db;
 
     void createMapPointTable();

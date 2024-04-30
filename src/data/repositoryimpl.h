@@ -11,17 +11,16 @@
 #include "../stringprovider.h"
 
 
-class RepositoryImpl : public Repository
-{
+class RepositoryImpl : public Repository {
     Q_OBJECT
-public:
+  public:
     explicit RepositoryImpl(
-            MapPointsDbDataSource *mapPointsDbDataSource,
-            CommentsDataSource *commentsDataSource,
-            NotificationSender *notificationSender,
-            StringProvider *stringProvider,
-            QObject *parent = nullptr
-            );
+        MapPointsDbDataSource *mapPointsDbDataSource,
+        CommentsDataSource *commentsDataSource,
+        NotificationSender *notificationSender,
+        StringProvider *stringProvider,
+        QObject *parent = nullptr
+    );
 
     void fetchAllMapPoints() override;
 
@@ -35,7 +34,7 @@ public:
 
     CommentsByIdModel *getCommentsByIdModel() override;
 
-private:
+  private:
 
     CommentsDataSource *commentsDataSource;
 
@@ -47,7 +46,7 @@ private:
 
     MapPointModel *mapPointModel = new MapPointModel();
 
-    CommentsByIdModel *commentsByIdModel = new CommentsByIdModel();   
+    CommentsByIdModel *commentsByIdModel = new CommentsByIdModel();
 
     QMutex commentsDataSourceMutex;
 

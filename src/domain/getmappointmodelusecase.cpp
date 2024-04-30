@@ -2,12 +2,10 @@
 
 GetMapPointModelUseCase::GetMapPointModelUseCase(Repository *repository, QObject *parent)
     : QObject(parent),
-      repository(repository)
-{
+      repository(repository) {
 
 }
 
-MapPointModel *GetMapPointModelUseCase::run()
-{
+MapPointModel *GetMapPointModelUseCase::run() {
     return repository->getMapPointModel();
 }

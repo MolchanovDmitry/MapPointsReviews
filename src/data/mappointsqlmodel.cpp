@@ -9,7 +9,7 @@ void MapPointTableModel::onDataChanged() {
     qDebug()<<"MapPointSqlModel onDataChanged rowCount = "<<rowCount();
     QList<MapPoint*> mapPoints = QList<MapPoint*>();
 
-    for(int i = 0; i < rowCount(); i++){
+    for(int i = 0; i < rowCount(); i++) {
         QSqlRecord record = this->record(i);
 
         MapPoint* mapPoint = new MapPoint();

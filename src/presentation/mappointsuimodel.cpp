@@ -47,8 +47,7 @@ QHash<int, QByteArray> MapPointsUiModel::roleNames() const {
     return roles;
 }
 
-void MapPointsUiModel::updateMapPoints(QList<MapPointUi *> uiMapPoints)
-{
+void MapPointsUiModel::updateMapPoints(QList<MapPointUi *> uiMapPoints) {
     qDebug() << "MapPointsUiModel::updateMapPoints count: " << uiMapPoints.count();
 
     if (!mapPoints.isEmpty()) {

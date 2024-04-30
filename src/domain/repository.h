@@ -6,10 +6,9 @@
 #include "mappointmodel.h"
 #include "commentbyidmodel.h"
 
-class Repository : public QObject
-{
+class Repository : public QObject {
     Q_OBJECT
-public:
+  public:
     Repository(QObject *parent = nullptr) : QObject(parent) {};
 
     virtual void fetchAllMapPoints() = 0;

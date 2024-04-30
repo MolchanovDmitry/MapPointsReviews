@@ -7,17 +7,16 @@
 #include <QSqlTableModel>
 #include "../domain/mappoint.h"
 
-class MapPointTableModel : public QSqlTableModel
-{
+class MapPointTableModel : public QSqlTableModel {
     Q_OBJECT
 
-public:
+  public:
     explicit MapPointTableModel(QObject *parent = nullptr);
 
-public slots:
+  public slots:
     void onDataChanged();
 
-signals:
+  signals:
     void mapPointsFromDataUpdated(QList<MapPoint*> mapPoints);
 };
 

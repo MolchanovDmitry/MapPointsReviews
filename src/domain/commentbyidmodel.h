@@ -4,16 +4,15 @@
 #include <QObject>
 #include "comments.h"
 
-class CommentsByIdModel : public QObject
-{
+class CommentsByIdModel : public QObject {
     Q_OBJECT
-public:
+  public:
     explicit CommentsByIdModel(QObject *parent = nullptr);
 
-public slots:
+  public slots:
     void updateComments(Comments *comments);
 
-signals:
+  signals:
     void commentsUpdated(Comments *comments);
 
 };

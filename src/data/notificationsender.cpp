@@ -9,17 +9,15 @@
 
 NotificationSender::NotificationSender(StringProvider *stringProvider, QObject *parent)
     : QObject(parent),
-      stringProvider(stringProvider)
-{
+      stringProvider(stringProvider) {
 
 }
 
-void NotificationSender::notify(const QString text)
-{
+void NotificationSender::notify(const QString text) {
     QDBusInterface interface("org.freedesktop.Notifications",
-                             "/org/freedesktop/Notifications",
-                             "org.freedesktop.Notifications",
-                             QDBusConnection::sessionBus());
+                                 "/org/freedesktop/Notifications",
+                                 "org.freedesktop.Notifications",
+                                 QDBusConnection::sessionBus());
 
     if (!interface.isValid()) {
         return;

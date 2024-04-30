@@ -9,15 +9,14 @@ enum AppString {
     AppName,
 };
 
-class StringProvider : public QObject
-{
+class StringProvider : public QObject {
     Q_OBJECT
-public:
+  public:
     explicit StringProvider(QGuiApplication *app, QObject *parent = nullptr);
 
     QString provide(AppString str);
 
-private:
+  private:
     QHash<AppString, QString> strHash;
 };
 

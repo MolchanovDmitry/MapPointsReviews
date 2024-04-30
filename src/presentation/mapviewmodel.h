@@ -11,26 +11,25 @@
 #include "../domain/getcommentsbyidusecase.h"
 #include "commentsuimodel.h"
 
-class MapViewModel : public QObject
-{
+class MapViewModel : public QObject {
     Q_OBJECT
-public:
+  public:
 
     explicit MapViewModel(
-            FetchAllMapPointsUseCase *fetchAppMapPointsUseCase,
-            GetMapPointModelUseCase *getMapPointModelUseCase,
-            AddMapPointUseCase *addMapPointUseCase,
-            AddCommentUseCase *addCommentUseCase,
-            FetchCommentByMapIdUseCase *fetchCommentsUseCase,
-            GetCommentsByIdUseCase *getCommentsByIdUseCase,
-            QObject *parent = nullptr
-            );
+        FetchAllMapPointsUseCase *fetchAppMapPointsUseCase,
+        GetMapPointModelUseCase *getMapPointModelUseCase,
+        AddMapPointUseCase *addMapPointUseCase,
+        AddCommentUseCase *addCommentUseCase,
+        FetchCommentByMapIdUseCase *fetchCommentsUseCase,
+        GetCommentsByIdUseCase *getCommentsByIdUseCase,
+        QObject *parent = nullptr
+    );
 
     MapPointsUiModel* getMapPointsUiModel();
 
     CommentsUiModel* getCommentsUiModel();
 
-public slots:
+  public slots:
 
     void onMapPointPretentderFetched(MapPoint mapPoint);
 
@@ -38,7 +37,7 @@ public slots:
 
     void fetchComment(int mapPointId);
 
-private:
+  private:
 
     AddMapPointUseCase *addMapPointUseCase;
 

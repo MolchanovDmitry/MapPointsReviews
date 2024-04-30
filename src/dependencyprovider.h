@@ -7,15 +7,14 @@
 #include "data/commentsdatasource.h"
 #include "data/repositoryimpl.h"
 
-class DependenciesProvider : public QObject
-{
+class DependenciesProvider : public QObject {
     Q_OBJECT
-public:
+  public:
     explicit DependenciesProvider(QObject *parent = nullptr);
 
     MapViewModel *provideMapViewModel(QGuiApplication *app);
 
-signals:
+  signals:
 
 };
 

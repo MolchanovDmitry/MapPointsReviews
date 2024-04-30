@@ -2,11 +2,10 @@
 
 FetchCommentByMapIdUseCase::FetchCommentByMapIdUseCase(Repository *rep, QObject *parent)
     : QObject(parent),
-      rep(rep)
-{
+      rep(rep) {
 
 }
 
-void FetchCommentByMapIdUseCase::run(int mapPointId){
+void FetchCommentByMapIdUseCase::run(int mapPointId) {
     rep->fetchCommentsBy(mapPointId);
 }

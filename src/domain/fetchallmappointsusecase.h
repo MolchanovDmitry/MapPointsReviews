@@ -4,15 +4,14 @@
 #include <QObject>
 #include "repository.h"
 
-class FetchAllMapPointsUseCase : public QObject
-{
+class FetchAllMapPointsUseCase : public QObject {
     Q_OBJECT
-public:
+  public:
     explicit FetchAllMapPointsUseCase(Repository *repository, QObject *parent = nullptr);
 
     void run();
 
-private:
+  private:
     Repository *repository;
 
 };

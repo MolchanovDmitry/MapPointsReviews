@@ -3,12 +3,11 @@
 
 AddCommentUseCase::AddCommentUseCase(Repository *rep, QObject *parent)
     : QObject(parent),
-      rep(rep)
-{
+      rep(rep) {
 
 }
 
-void AddCommentUseCase::run(int mapPointId, QString comment){
+void AddCommentUseCase::run(int mapPointId, QString comment) {
     QtConcurrent::run([=]() {
         rep->addComment(mapPointId,comment);
     });

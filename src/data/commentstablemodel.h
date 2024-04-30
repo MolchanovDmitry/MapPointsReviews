@@ -5,16 +5,15 @@
 #include <QSqlTableModel>
 #include "../domain/comments.h"
 
-class CommentsTableModel : public QSqlTableModel
-{
+class CommentsTableModel : public QSqlTableModel {
     Q_OBJECT
-public:
+  public:
     explicit CommentsTableModel(QObject *parent = nullptr);
 
-public slots:
+  public slots:
     void onDataChanged();
 
-signals:
+  signals:
     void commentsFetched(Comments *comments);
 
 };

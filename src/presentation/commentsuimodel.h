@@ -5,11 +5,10 @@
 #include <QQmlListProperty>
 #include "../domain/comments.h"
 
-class CommentsUiModel : public QAbstractListModel
-{
+class CommentsUiModel : public QAbstractListModel {
     Q_OBJECT
 
-public:
+  public:
 
     enum Roles {
         MapPointId,
@@ -25,10 +24,10 @@ public:
 
     void clear();
 
-public slots:
+  public slots:
     void updateComments(Comments *comments);
 
-private:
+  private:
     Comments *comments = new Comments();
 };
 

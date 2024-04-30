@@ -5,15 +5,14 @@
 #include "repository.h"
 #include "commentbyidmodel.h"
 
-class GetCommentsByIdUseCase : public QObject
-{
+class GetCommentsByIdUseCase : public QObject {
     Q_OBJECT
-public:
+  public:
     explicit GetCommentsByIdUseCase(Repository *repository, QObject *parent = nullptr);
 
     CommentsByIdModel* run();
 
-private:
+  private:
     Repository *repository;
 
 };

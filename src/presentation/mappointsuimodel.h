@@ -6,10 +6,9 @@
 #include <QQmlListProperty>
 #include "mappointui.h"
 
-class MapPointsUiModel : public QAbstractListModel
-{
+class MapPointsUiModel : public QAbstractListModel {
     Q_OBJECT
-public:
+  public:
 
     enum Roles {
         IdRole,
@@ -29,10 +28,10 @@ public:
 
     QHash<int, QByteArray> roleNames() const override;
 
-public slots:
+  public slots:
     void updateMapPoints(QList<MapPointUi*> uiMapPoints);
 
-private:
+  private:
     QList<MapPointUi*> mapPoints = QList<MapPointUi*>();
 
 };

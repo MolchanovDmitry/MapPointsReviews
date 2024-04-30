@@ -4,15 +4,14 @@
 #include <QObject>
 #include "repository.h"
 
-class FetchCommentByMapIdUseCase : public QObject
-{
+class FetchCommentByMapIdUseCase : public QObject {
     Q_OBJECT
-public:
+  public:
     explicit FetchCommentByMapIdUseCase(Repository *rep, QObject *parent = nullptr);
 
     void run(int mapPointId);
 
-private:
+  private:
     Repository *rep;
 };
 

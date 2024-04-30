@@ -1,19 +1,18 @@
 #include "mapviewmodel.h"
 
 MapViewModel::MapViewModel(
-        FetchAllMapPointsUseCase *fetchAppMapPointsUseCase,
-        GetMapPointModelUseCase *getMapPointModelUseCase,
-        AddMapPointUseCase *addMapPointUseCase,
-        AddCommentUseCase *addCommentUseCase,
-        FetchCommentByMapIdUseCase *fetchCommentsUseCase,
-        GetCommentsByIdUseCase *getCommentsByIdUseCase,
-        QObject *parent)
+    FetchAllMapPointsUseCase *fetchAppMapPointsUseCase,
+    GetMapPointModelUseCase *getMapPointModelUseCase,
+    AddMapPointUseCase *addMapPointUseCase,
+    AddCommentUseCase *addCommentUseCase,
+    FetchCommentByMapIdUseCase *fetchCommentsUseCase,
+    GetCommentsByIdUseCase *getCommentsByIdUseCase,
+    QObject *parent)
     : QObject(parent)
     , addMapPointUseCase(addMapPointUseCase)
     , addCommentUseCase(addCommentUseCase)
     , fetchCommentsUseCase(fetchCommentsUseCase)
-    , getCommentsByIdUseCase(getCommentsByIdUseCase)
-{
+    , getCommentsByIdUseCase(getCommentsByIdUseCase) {
     connect(getMapPointModelUseCase->run(), &MapPointModel::mapPointsUpdated,
             this, &MapViewModel::mapMapPointAndUpdate);
     connect(getCommentsByIdUseCase->run(), &CommentsByIdModel::commentsUpdated,
@@ -22,10 +21,9 @@ MapViewModel::MapViewModel(
     fetchAppMapPointsUseCase->run();
 }
 
-void MapViewModel::mapMapPointAndUpdate(QList<MapPoint*> mapPoints)
-{
+void MapViewModel::mapMapPointAndUpdate(QList<MapPoint*> mapPoints) {
     QList<MapPointUi*> uiMapPoints = QList<MapPointUi*>();
-    foreach(MapPoint *mapPoint, mapPoints){
+    foreach(MapPoint *mapPoint, mapPoints) {
         uiMapPoints << new MapPointUi(mapPoint->id,
                                       mapPoint->title,
                                       mapPoint->description,
@@ -37,28 +35,25 @@ void MapViewModel::mapMapPointAndUpdate(QList<MapPoint*> mapPoints)
     mapPointsUiModel->updateMapPoints(uiMapPoints);
 }
 
-MapPointsUiModel* MapViewModel::getMapPointsUiModel()
-{
+MapPointsUiModel* MapViewModel::getMapPointsUiModel() {
     return mapPointsUiModel;
 }
 
-CommentsUiModel *MapViewModel::getCommentsUiModel(){
+CommentsUiModel *MapViewModel::getCommentsUiModel() {
     return commentsUiModel;
 }
 
-void MapViewModel::onMapPointPretentderFetched(MapPoint mapPoint){
+void MapViewModel::onMapPointPretentderFetched(MapPoint mapPoint) {
     printMapPoint(&mapPoint, "onMapPointPretentderFetched");
     addMapPointUseCase->run(mapPoint);
 }
 
-void MapViewModel::addComment(int mapPointId, QString comments)
-{
+void MapViewModel::addComment(int mapPointId, QString comments) {
     qDebug()<<"mapPointId = "<<mapPointId<<" comments = "<<comments;
     addCommentUseCase->run(mapPointId, comments);
 }
 
-void MapViewModel::fetchComment(int mapPointId)
-{
+void MapViewModel::fetchComment(int mapPointId) {
     commentsUiModel->clear();
     fetchCommentsUseCase->run(mapPointId);
 }

@@ -13,8 +13,7 @@
 #include "presentation/mapviewmodel.h"
 #include "dependencyprovider.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QScopedPointer<QGuiApplication> application(Aurora::Application::application(argc, argv));
     application->setOrganizationName(QStringLiteral("ru.auroraos"));
     application->setApplicationName(QStringLiteral("PointsMapReviews"));

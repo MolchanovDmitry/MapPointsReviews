@@ -5,8 +5,7 @@
 #include "../domain/mappoint.h"
 #include "mappointsdbdatasource.h"
 
-int getRandomSign()
-{
+int getRandomSign() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distribution(0, 1);
@@ -14,7 +13,7 @@ int getRandomSign()
     return (distribution(gen) == 0) ? -1 : 1;
 }
 
-QList<MapPoint*>* getMockData(QString placeName, int generateCount, double placeLatitude, double placeLongitude, double thresholdLatitude, double thresholdLongitude){
+QList<MapPoint*>* getMockData(QString placeName, int generateCount, double placeLatitude, double placeLongitude, double thresholdLatitude, double thresholdLongitude) {
     qDebug()<<"Добавляем "<<generateCount<<" мокнутых точек для "<<placeName;
 
     auto urls = QList<QString>();
@@ -35,7 +34,7 @@ QList<MapPoint*>* getMockData(QString placeName, int generateCount, double place
     return result;
 }
 
-void addMockMapPoints(MapPointsDbDataSource* dataSource){
+void addMockMapPoints(MapPointsDbDataSource* dataSource) {
     auto tverMapPoints = getMockData("Тверь", 20, 56.8486, 35.8507, 0.00006, 0.00013);
     auto moscowMapPoints = getMockData("Москва", 100, 55.751244, 37.618423, 0.00012, 0.0002);
     dataSource->addRows(tverMapPoints);
