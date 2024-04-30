@@ -18,8 +18,9 @@ int main(int argc, char *argv[]) {
     application->setOrganizationName(QStringLiteral("ru.auroraos"));
     application->setApplicationName(QStringLiteral("PointsMapReviews"));
 
-    // Инициализация провайдера зависимостей, который будет предоставлять основные сервисы для приложения.
+    // Инициализация провайдера зависимостей
     auto depProvider = new DependenciesProvider();
+    // Используем провайдер зависимостей для получения объектов ViewModel.
     auto mapViewModel = depProvider->provideMapViewModel(application.data());
     auto mapPointsUiModel = mapViewModel->getMapPointsUiModel();
     auto commentsModel = mapViewModel->getCommentsUiModel();

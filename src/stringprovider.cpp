@@ -13,6 +13,7 @@ StringProvider::StringProvider(QGuiApplication *app, QObject *parent)
     strHash.insert(AppName, app->translate("Application", "app_name"));
 }
 
+/** Предоставить строку по ее ключу. */
 QString StringProvider::provide(AppString str) {
     return strHash.value(str);
 }
