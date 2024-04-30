@@ -4,6 +4,9 @@
 #include <QObject>
 #include "repository.h"
 
+/**
+ * Сценарий намерения получить комментарии к точке.
+ */
 class FetchCommentByMapIdUseCase : public QObject {
     Q_OBJECT
   public:

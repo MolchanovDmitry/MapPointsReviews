@@ -4,6 +4,9 @@
 #include <QObject>
 #include "repository.h"
 
+/**
+ * Сценарий намерения получить все точки на карте.
+ */
 class FetchAllMapPointsUseCase : public QObject {
     Q_OBJECT
   public:

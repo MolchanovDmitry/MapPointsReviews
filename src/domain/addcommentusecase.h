@@ -4,6 +4,9 @@
 #include <QObject>
 #include "repository.h"
 
+/**
+ * Сценарий добавления комментария к точке.
+ */
 class AddCommentUseCase : public QObject {
     Q_OBJECT
   public:

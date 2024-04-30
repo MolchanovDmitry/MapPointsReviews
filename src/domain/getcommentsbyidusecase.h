@@ -5,6 +5,9 @@
 #include "repository.h"
 #include "commentbyidmodel.h"
 
+/**
+ * Сценарий получения модели комментариев к точке.
+ */
 class GetCommentsByIdUseCase : public QObject {
     Q_OBJECT
   public:

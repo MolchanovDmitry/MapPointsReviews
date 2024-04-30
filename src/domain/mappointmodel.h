@@ -5,6 +5,10 @@
 #include <QDebug>
 #include "mappoint.h"
 
+/**
+ * Бизнес модель точек на карте.
+ * В текущей реализации - прокся между слоем источника данных и слоем представления.
+ */
 class MapPointModel : public QObject {
     Q_OBJECT
   public:

@@ -4,6 +4,10 @@
 #include <QObject>
 #include "comments.h"
 
+/**
+ * Бизнесовая модель комментариев.
+ * В текущей реализации - прокся между слоем источника данных и слоем представления.
+ */
 class CommentsByIdModel : public QObject {
     Q_OBJECT
   public:
