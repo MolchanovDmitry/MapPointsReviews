@@ -1,6 +1,9 @@
 #include "dependencyprovider.h"
 #include <QStandardPaths>
 #include <QDir>
+#include <QtGui/QGuiApplication>
+#include <QDebug>
+#include <QObject>
 
 DependenciesProvider::DependenciesProvider(QObject *parent) : QObject(parent)
 {
@@ -19,12 +22,13 @@ QSqlDatabase getDatabase(){
     return db;
 }
 
-MapViewModel *DependenciesProvider::provideMapViewModel()
+MapViewModel *DependenciesProvider::provideMapViewModel(QGuiApplication *app)
 {
     auto db = getDatabase();
     auto commentDataSource = new CommentsDataSource(db);
     auto mapPointsDbDataSource = new MapPointsDbDataSource(db);
-    auto repository = new Repository(mapPointsDbDataSource, commentDataSource);
+    auto mapPointAddedNotification = app->translate("Application", "map_point_added");
+    auto repository = new Repository(mapPointsDbDataSource, commentDataSource, mapPointAddedNotification);
     auto addMapPointUseCase = new AddMapPointUseCase(repository);
     auto getMapPointModelUseCase = new GetMapPointModelUseCase(repository);
     auto fetchAllMapPointsUseCase = new FetchAllMapPointsUseCase(repository);

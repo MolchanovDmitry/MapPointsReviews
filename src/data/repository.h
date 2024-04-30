@@ -6,6 +6,7 @@
 
 #include "mappointsdbdatasource.h"
 #include "commentsdatasource.h"
+#include "notificationsender.h"
 #include "../domain/mappointmodel.h"
 #include "../domain/commentbyidmodel.h"
 
@@ -17,6 +18,7 @@ public:
     explicit Repository(
             MapPointsDbDataSource *mapPointsDbDataSource,
             CommentsDataSource *commentsDataSource,
+            QString mapPointAddedNotification,
             QObject *parent = nullptr
             );
 
@@ -38,9 +40,13 @@ private:
 
     MapPointsDbDataSource *mapPointsDataSource;
 
+    QString mapPointAddedNotification;
+
     MapPointModel *mapPointModel = new MapPointModel();
 
     CommentsByIdModel *commentsByIdModel = new CommentsByIdModel();
+
+    NotificationSender *notificationSender = new NotificationSender();
 
     QMutex commentsDataSourceMutex;
     QMutex mapPointsDataSourceMutex;

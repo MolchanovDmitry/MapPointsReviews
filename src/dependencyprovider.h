@@ -2,6 +2,7 @@
 #define DEPENDENCYPROVIDER_H
 
 #include <QObject>
+#include <QtGui/QGuiApplication>
 #include "presentation/mapviewmodel.h"
 #include "data/commentsdatasource.h"
 #include "data/repository.h"
@@ -12,7 +13,7 @@ class DependenciesProvider : public QObject
 public:
     explicit DependenciesProvider(QObject *parent = nullptr);
 
-    MapViewModel *provideMapViewModel();
+    MapViewModel *provideMapViewModel(QGuiApplication *app);
 
 signals:
 

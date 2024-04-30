@@ -4,7 +4,8 @@ QT += network \
     sensors \
     positioning \
     location \
-    sql
+    sql \
+    dbus
 
 CONFIG += \
     auroraapp \
@@ -17,6 +18,7 @@ HEADERS += \
     src/data/commentstablemodel.h \
     src/data/mappointsdbdatasource.h \
     src/data/mappointsqlmodel.h \
+    src/data/notificationsender.h \
     src/data/repository.h \
     src/dependencyprovider.h \
     src/domain/addcommentusecase.h \
@@ -35,13 +37,14 @@ HEADERS += \
     src/presentation/fetchcommentshandler.h \
     src/presentation/mappointsuimodel.h \
     src/presentation/mappointui.h \
-    src/presentation/mapviewmodel.h \
+    src/presentation/mapviewmodel.h
 
 SOURCES += \
     src/data/commentsdatasource.cpp \
     src/data/commentstablemodel.cpp \
     src/data/mappointsdbdatasource.cpp \
     src/data/mappointsqlmodel.cpp \
+    src/data/notificationsender.cpp \
     src/data/repext.cpp \
     src/data/repository.cpp \
     src/dependencyprovider.cpp \
@@ -60,7 +63,7 @@ SOURCES += \
     src/presentation/mappointsuimodel.cpp \
     src/presentation/mappointui.cpp \
     src/presentation/mapviewmodel.cpp \
-    src/main.cpp \
+    src/main.cpp
 
 DISTFILES += \
     qml/pages/MapPointPage.qml \

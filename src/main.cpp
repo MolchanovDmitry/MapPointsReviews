@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     application->setApplicationName(QStringLiteral("PointsMapReviews"));
 
     auto depProvider = new DependenciesProvider();
-    auto mapViewModel = depProvider->provideMapViewModel();
+    auto mapViewModel = depProvider->provideMapViewModel(application.data());
     auto mapPointsUiModel = mapViewModel->getMapPointsUiModel();
     auto commentsModel = mapViewModel->getCommentsUiModel();
 

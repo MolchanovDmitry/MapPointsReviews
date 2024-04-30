@@ -49,15 +49,16 @@ void MapPointsDbDataSource::createMapPointTable()
     }
 }
 
-void MapPointsDbDataSource::addRow(MapPoint mapPoint)
+bool MapPointsDbDataSource::addRow(MapPoint mapPoint)
 {
     auto list = new QList<MapPoint*>();
     list->append(&mapPoint);
-    addRows(list);
+    return addRows(list);
 }
 
-void MapPointsDbDataSource::addRows(QList<MapPoint*> *mapPoints)
+bool MapPointsDbDataSource::addRows(QList<MapPoint*> *mapPoints)
 {
+    bool result = false;
     mapPointSqlModel->setTable("MapPoints");
     for (MapPoint* mapPoint : *mapPoints) {
         QSqlRecord newRecord = mapPointSqlModel->record();
@@ -76,9 +77,11 @@ void MapPointsDbDataSource::addRows(QList<MapPoint*> *mapPoints)
     if (!mapPointSqlModel->submitAll()) {
         qCritical() << "Ошибка при обновлении данных в базе: " << mapPointSqlModel->lastError().text();
     } else {
+        result = true;
         qDebug() << "Успешное добавление новых записей. Новое количество строк в модели: " << mapPointSqlModel->rowCount();
     }
     mapPointSqlModel->select();
+    return result;
 }
 
 int MapPointsDbDataSource::getRowCount()

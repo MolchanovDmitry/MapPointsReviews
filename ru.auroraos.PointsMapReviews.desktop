@@ -7,7 +7,8 @@ Name=PointsMapReviews
 Name[ru]=Отзывы на карте
 
 [X-Application]
-Permissions=Internet;Location;Pictures
+Permissions=Internet;Location;Pictures;PushNotifications
 OrganizationName=ru.auroraos
 ApplicationName=PointsMapReviews
 ExecDBus=/usr/bin/ru.auroraos.PointsMapReviews
+

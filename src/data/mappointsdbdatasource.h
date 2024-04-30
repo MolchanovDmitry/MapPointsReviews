@@ -19,9 +19,9 @@ public:
 
     void createTables();
 
-    void addRow(MapPoint mapPoint);
+    bool addRow(MapPoint mapPoint);
 
-    void addRows(QList<MapPoint*> *mapPoints);
+    bool addRows(QList<MapPoint*> *mapPoints);
 
     int getRowCount();
 

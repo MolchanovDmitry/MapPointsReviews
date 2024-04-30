@@ -60,6 +60,14 @@
     </message>
 </context>
 <context>
+    <name>Application</name>
+    <message>
+        <location filename="../src/dependencyprovider.cpp" line="30"/>
+        <source>map_point_added</source>
+        <translation>Точка %1 отправлена на верификацию</translation>
+    </message>
+</context>
+<context>
     <name>DefaultCoverPage</name>
     <message>
         <location filename="../qml/cover/DefaultCoverPage.qml" line="10"/>
@@ -78,12 +86,12 @@
 <context>
     <name>MapPage</name>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="154"/>
+        <location filename="../qml/pages/MapPage.qml" line="155"/>
         <source>add_poin</source>
         <translation>Добавьте точку</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="227"/>
+        <location filename="../qml/pages/MapPage.qml" line="228"/>
         <source>change_language</source>
         <translation>Изменить язык</translation>
     </message>
