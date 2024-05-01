@@ -17,6 +17,7 @@ class ReviewsUiModel : public QAbstractListModel {
     enum Roles {
         MapPointId,
         StarCount,
+        Date,
         Comment
     };
 

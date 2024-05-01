@@ -2,6 +2,7 @@
 #define ADDCOMMENTHANDLER_H
 
 #include <QObject>
+#include <QDateTime>
 #include "../domain/reviews.h"
 
 /**
@@ -18,6 +19,7 @@ class AddReviewHandler : public QObject {
         Review review;
         review.comment = comment;
         review.starCount = starCount;
+        review.date = QDateTime::currentMSecsSinceEpoch();
 
         emit onAddReviewRequest(mapPointId, review);
     }

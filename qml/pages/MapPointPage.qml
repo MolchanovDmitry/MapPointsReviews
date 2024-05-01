@@ -84,7 +84,6 @@ Page {
                     id: commentRating
                     isClickAvailable: true
                     starSize: Theme.dp(50)
-                    anchors.top: name.bottom
                     anchors.left: parent.left
                 }
 
@@ -169,13 +168,21 @@ Page {
                     }
 
                     Text {
+                        text: getFormattedDate(model.date)
+                        anchors.right: parent.right
+                        anchors.top: icon.top
+                        color: Theme.primaryColor
+                        anchors.bottom: rating.bottom
+                    }
+
+                    Text {
                         id: comment
                         text: model.comment
                         width: parent.width
                         color: Theme.primaryColor
                         anchors.top: rating.bottom
                         wrapMode: Text.WordWrap
-                        font.pixelSize: Theme.fontSizeMedium
+                        font.pixelSize: Theme.fontSizeLarge
                     }
                 }
             }
@@ -184,5 +191,12 @@ Page {
         Component.onCompleted: {
             fetchCommentsHandler.fetchComments(mapPointId)
         }
+    }
+
+    function getFormattedDate(timeMs) {
+        var currentDateTime = new Date(timeMs)
+        var formattedDate = Qt.formatDateTime(currentDateTime,
+                                              "dd MMMM yyyy HH:mm")
+        return formattedDate
     }
 }

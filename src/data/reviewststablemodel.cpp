@@ -20,6 +20,7 @@ void ReviewsTableModel::onDataChanged() {
         Review review;
         review.comment = record.value("comment").toString();
         review.starCount = record.value("starCount").toInt();
+        review.date = record.value("date").toLongLong();
         reviewList->append(review);
 
         qDebug()<<"mapPointId = "<<mapPointId<<" comment = "<<review.comment << " rating: "<<review.starCount;

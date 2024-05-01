@@ -104,12 +104,12 @@
         <translation>Оставьте отзыв</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="113"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="125"/>
         <source>comments</source>
         <translation>Отзывы</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="143"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="155"/>
         <source>anonymous</source>
         <translation>Аноним</translation>
     </message>

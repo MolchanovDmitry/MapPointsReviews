@@ -24,6 +24,8 @@ QVariant ReviewsUiModel::data(const QModelIndex &index, int role) const {
         return QVariant(review.starCount);
     case Comment:
         return QVariant(review.comment);
+    case Date:
+        return QVariant(review.date);
     default:
         return QVariant();
     }
@@ -34,6 +36,7 @@ QHash<int, QByteArray> ReviewsUiModel::roleNames() const {
     roles[MapPointId] = "mapPointId";
     roles[StarCount] = "starCount";
     roles[Comment] = "comment";
+    roles[Date] = "date";
     return roles;
 }
 

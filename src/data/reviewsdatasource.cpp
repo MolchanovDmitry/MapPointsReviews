@@ -21,6 +21,7 @@ void ReviewsDataSource::createTable() {
                           "Comments("
                           "mapPointId INTEGER, "
                           "starCount INTEGER, "
+                          "date INTEGER, "
                           "comment TEXT"
                           ");";
 
@@ -49,9 +50,10 @@ void ReviewsDataSource::addReview(int mapPointId, Review review) {
 
     QSqlQuery query;
 
-    query.prepare("INSERT INTO Comments (mapPointId, starCount, comment)"
-                  "VALUES (:mapPointId, :starCount, :comment)");
+    query.prepare("INSERT INTO Comments (mapPointId, starCount, date, comment)"
+                  "VALUES (:mapPointId, :starCount, :date, :comment)");
     query.bindValue(":mapPointId", mapPointId);
+    query.bindValue(":date", review.date);
     query.bindValue(":starCount", review.starCount);
     query.bindValue(":comment", review.comment);
 
