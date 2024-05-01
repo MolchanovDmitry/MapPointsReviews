@@ -119,7 +119,7 @@ Page {
                                                 mapPointId,
                                                 commentRating.rating,
                                                 commentField.text)
-                                    commentField
+                                    commentField.text = ""
                                 }
                             }
                         }

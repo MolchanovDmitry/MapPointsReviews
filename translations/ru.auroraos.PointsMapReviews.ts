@@ -71,17 +71,17 @@
 <context>
     <name>MapPage</name>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="159"/>
+        <location filename="../qml/pages/MapPage.qml" line="156"/>
         <source>add_poin</source>
         <translation>Add point</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="232"/>
+        <location filename="../qml/pages/MapPage.qml" line="233"/>
         <source>check_positioning</source>
         <translation>Positioning check</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="235"/>
+        <location filename="../qml/pages/MapPage.qml" line="236"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
@@ -101,17 +101,17 @@
     <message>
         <location filename="../qml/pages/MapPointPage.qml" line="79"/>
         <source>add_comments</source>
-        <translation type="unfinished"></translation>
+        <translation>Add comments</translation>
     </message>
     <message>
         <location filename="../qml/pages/MapPointPage.qml" line="131"/>
         <source>comments</source>
-        <translation>Comments:</translation>
+        <translation>Comments</translation>
     </message>
     <message>
         <location filename="../qml/pages/MapPointPage.qml" line="161"/>
         <source>anonymous</source>
-        <translation type="unfinished"></translation>
+        <translation>Anonymous</translation>
     </message>
 </context>
 <context>

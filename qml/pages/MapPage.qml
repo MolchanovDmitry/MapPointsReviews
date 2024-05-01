@@ -168,9 +168,12 @@ Page {
             }
 
             Component.onCompleted: {
-                console.log("112233 latitude = " + latitude + " longitude = " + longitude)
-                //center = QtPositioning.coordinate(latitude, longitude)
-                center = QtPositioning.coordinate(56.85836, 35.90057)
+                console.log("start position: " + latitude + ":" + longitude)
+                if (latitude == 0 && longitude == 0) {
+                    center = QtPositioning.coordinate(55.7520233, 37.6174994)
+                } else {
+                    center = QtPositioning.coordinate(latitude, longitude)
+                }
             }
         }
 
@@ -211,9 +214,10 @@ Page {
                 objectName: "centerButton"
                 sourceIcon: "image://theme/icon-l-whereami?%1"
                 onClicked: {
-                    console.log("112233 latitude = " + latitude + " longitude = " + longitude)
-                    map.center = QtPositioning.coordinate(latitude, longitude)
-                    //map.center = gpsInfoProvider.coordinate.center
+                    if (latitude != 0 && longitude != null) {
+                        map.center = QtPositioning.coordinate(latitude,
+                                                              longitude)
+                    }
                 }
             }
 
@@ -223,16 +227,17 @@ Page {
                 onClicked: {
                     if (drawer.opened) {
                         drawer.hide()
+                    } else {
+                        drawerModel.clear()
+                        drawerModel.append([{
+                                                "label": qsTr("check_positioning"),
+                                                "page": "PositioningPage"
+                                            }, {
+                                                "label": qsTr("About"),
+                                                "page": "AboutPage"
+                                            }])
+                        drawer.show()
                     }
-                    drawerModel.clear()
-                    drawerModel.append([{
-                                            "label": qsTr("check_positioning"),
-                                            "page": "PositioningPage"
-                                        }, {
-                                            "label": qsTr("About"),
-                                            "page": "AboutPage"
-                                        }])
-                    drawer.show()
                 }
             }
         }

@@ -36,7 +36,10 @@ Page {
                 width: parent.width
                 textFormat: Text.RichText
                 font.pixelSize: Theme.fontSizeLarge
-                onLinkActivated: Qt.openUrlExternally(link)
+                onLinkActivated: {
+                    pageStack.push(Qt.resolvedUrl("WebViewPage.qml"))
+                    //Qt.openUrlExternally(link)
+                }
             }
         }
     }

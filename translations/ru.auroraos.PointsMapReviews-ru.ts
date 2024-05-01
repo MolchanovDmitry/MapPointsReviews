@@ -71,17 +71,17 @@
 <context>
     <name>MapPage</name>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="159"/>
+        <location filename="../qml/pages/MapPage.qml" line="156"/>
         <source>add_poin</source>
         <translation>Добавьте точку</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="232"/>
+        <location filename="../qml/pages/MapPage.qml" line="233"/>
         <source>check_positioning</source>
         <translation>Проверить позиционирование</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="235"/>
+        <location filename="../qml/pages/MapPage.qml" line="236"/>
         <source>About</source>
         <translation>О приложении</translation>
     </message>
