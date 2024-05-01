@@ -15,14 +15,7 @@ class AddReviewHandler : public QObject {
 
   public slots:
 
-    void addReview(int mapPointId, int starCount, QString comment) {
-        Review review;
-        review.comment = comment;
-        review.starCount = starCount;
-        review.date = QDateTime::currentMSecsSinceEpoch();
-
-        emit onAddReviewRequest(mapPointId, review);
-    }
+    void addReview(int mapPointId, int starCount, QString comment);
 
 
   signals:

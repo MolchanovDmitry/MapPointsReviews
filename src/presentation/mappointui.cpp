@@ -11,7 +11,7 @@ MapPointUi::MapPointUi(QObject* parent)
     , imageUrls(QList<QString>()) {
 }
 
-MapPointUi::MapPointUi(qlonglong id,
+MapPointUi::MapPointUi(qint64 id,
                        QString title,
                        QString description,
                        double latitude,
@@ -29,7 +29,7 @@ MapPointUi::MapPointUi(qlonglong id,
     , imageUrls(imageUrls) {
 }
 
-qlonglong MapPointUi::getId() const {
+qint64 MapPointUi::getId() const {
     return id;
 }
 

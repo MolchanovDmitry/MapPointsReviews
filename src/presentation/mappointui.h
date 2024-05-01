@@ -8,7 +8,7 @@
  */
 class MapPointUi : public QObject {
     Q_OBJECT
-    Q_PROPERTY(qlonglong getId READ getId)
+    Q_PROPERTY(qint64 getId READ getId)
     Q_PROPERTY(QString getTitle READ getTitle)
     Q_PROPERTY(QString getDescription READ getDescription)
     Q_PROPERTY(double getLatitude READ getLatitude)
@@ -18,7 +18,7 @@ class MapPointUi : public QObject {
 
   public:
     explicit MapPointUi(QObject* parent = nullptr);
-    MapPointUi(qlonglong id,
+    MapPointUi(qint64 id,
                QString title,
                QString description,
                double latitude,
@@ -28,7 +28,7 @@ class MapPointUi : public QObject {
                QObject *parent = nullptr);
 
     /** ID точки на карте. */
-    qlonglong getId() const;
+    qint64 getId() const;
 
     /** Название точки на карте. */
     QString getTitle() const;
@@ -49,7 +49,7 @@ class MapPointUi : public QObject {
     QList<QString> getImageUrsl() const;
 
   private:
-    qlonglong id;
+    qint64 id;
     QString title;
     QString description;
     double latitude;

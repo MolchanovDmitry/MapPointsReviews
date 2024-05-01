@@ -25,7 +25,7 @@ struct Review {
 struct Reviews {
 
     /** Идентификатор точки на карте. */
-    qlonglong mapPointId;
+    qint64 mapPointId;
 
     /** Комментарии к точке */
     QList<Review> *reviews = new QList<Review>();

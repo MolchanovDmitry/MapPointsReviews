@@ -99,8 +99,8 @@ Page {
                         validator: RegExpValidator {
                             regExp: /^[A-Za-zА-Яа-я0-9\s\-_,\.;:()]+$/
                         }
-                        Component.onCompleted: {
-                            text = "мой комментарий"
+                        onErrorHighlightChanged: {
+                            canAccept = !errorHighlight
                         }
                     }
 
@@ -111,10 +111,15 @@ Page {
                             id: mouseArea
                             anchors.fill: parent
                             onClicked: {
-                                console.log("addComment " + mapPointId + " " + commentField.text)
-                                addCommentHandler.addReview(
-                                            mapPointId, commentRating.rating,
-                                            commentField.text)
+                                if (!commentField.errorHighlight
+                                        && commentField.text !== "") {
+                                    console.log("addComment " + mapPointId + " "
+                                                + commentField.text)
+                                    addCommentHandler.addReview(
+                                                mapPointId,
+                                                commentRating.rating,
+                                                commentField.text)
+                                }
                             }
                         }
                     }

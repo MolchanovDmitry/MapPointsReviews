@@ -9,7 +9,7 @@
  */
 struct MapPoint {
     /** ID точки на карте. */
-    qlonglong id;
+    qint64 id;
 
     /** Название точки на карте. */
     QString title;
