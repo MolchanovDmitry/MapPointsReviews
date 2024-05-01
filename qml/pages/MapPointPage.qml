@@ -77,33 +77,46 @@ Page {
                 visible: isConfirmed
             }
 
-            Row {
+            Column {
                 width: parent.width
-                visible: isConfirmed
-                height: commentField.height
 
-                TextField {
-                    id: commentField
-                    width: parent.width - sendIcon.width
-                    placeholderText: "Место для комментария"
-                    validator: RegExpValidator {
-                        regExp: /^[A-Za-zА-Яа-я0-9\s\-_,\.;:()]+$/
-                    }
-                    Component.onCompleted: {
-                        text = "мой комментарий"
-                    }
+                RatingStarsRow {
+                    id: commentRating
+                    isClickAvailable: true
+                    starSize: Theme.dp(50)
+                    anchors.top: name.bottom
+                    anchors.left: parent.left
                 }
 
-                Image {
-                    id: sendIcon
-                    source: "image://theme/icon-m-send"
-                    MouseArea {
-                        id: mouseArea
-                        anchors.fill: parent
-                        onClicked: {
-                            console.log("addComment " + mapPointId + " " + commentField.text)
-                            addCommentHandler.addReview(mapPointId, 5,
-                                                        commentField.text)
+                Row {
+                    width: parent.width
+                    visible: isConfirmed
+                    height: commentField.height
+
+                    TextField {
+                        id: commentField
+                        width: parent.width - sendIcon.width
+                        placeholderText: "Место для комментария"
+                        validator: RegExpValidator {
+                            regExp: /^[A-Za-zА-Яа-я0-9\s\-_,\.;:()]+$/
+                        }
+                        Component.onCompleted: {
+                            text = "мой комментарий"
+                        }
+                    }
+
+                    Image {
+                        id: sendIcon
+                        source: "image://theme/icon-m-send"
+                        MouseArea {
+                            id: mouseArea
+                            anchors.fill: parent
+                            onClicked: {
+                                console.log("addComment " + mapPointId + " " + commentField.text)
+                                addCommentHandler.addReview(
+                                            mapPointId, commentRating.rating,
+                                            commentField.text)
+                            }
                         }
                     }
                 }

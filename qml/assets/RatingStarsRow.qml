@@ -7,6 +7,7 @@ Row {
     property int starCount: 5
     property int rating: 3
     property int starSize: 50
+    property bool isClickAvailable
 
     Repeater {
         model: stars.starCount
@@ -28,7 +29,9 @@ Row {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        stars.rating = index + 1
+                        if (isClickAvailable) {
+                            stars.rating = index + 1
+                        }
                     }
                 }
             }
