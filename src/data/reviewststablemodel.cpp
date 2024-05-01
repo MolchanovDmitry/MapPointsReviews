@@ -16,14 +16,13 @@ void ReviewsTableModel::onDataChanged() {
         if(mapPointId == -1) {
             mapPointId = record.value("mapPointId").toLongLong();
         }
-        QString comment =record.value("comment").toString();
 
         Review review;
-        review.comment = comment;
+        review.comment = record.value("comment").toString();
         review.starCount = record.value("starCount").toInt();
         reviewList->append(review);
 
-        qDebug()<<"mapPointId = "<<mapPointId<<" comment = "<<comment;
+        qDebug()<<"mapPointId = "<<mapPointId<<" comment = "<<review.comment << " rating: "<<review.starCount;
     }
     reviews->mapPointId = mapPointId;
     reviews->reviews = reviewList;

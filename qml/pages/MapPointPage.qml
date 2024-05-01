@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "../assets"
 
 
 /*
@@ -83,7 +84,7 @@ Page {
 
                 TextField {
                     id: commentField
-                    width: parent.width - icon.width
+                    width: parent.width - sendIcon.width
                     placeholderText: "Место для комментария"
                     validator: RegExpValidator {
                         regExp: /^[A-Za-zА-Яа-я0-9\s\-_,\.;:()]+$/
@@ -94,7 +95,7 @@ Page {
                 }
 
                 Image {
-                    id: icon
+                    id: sendIcon
                     source: "image://theme/icon-m-send"
                     MouseArea {
                         id: mouseArea
@@ -119,9 +120,44 @@ Page {
                 anchors.leftMargin: Theme.paddingLarge
                 interactive: false
 
-                delegate: Text {
-                    text: model.comment + " " + model.mapPointId
-                    color: Theme.primaryColor
+                delegate: Item {
+                    width: listView.width
+                    height: icon.height + rating.height + comment.height
+
+                    Image {
+                        id: icon
+                        height: 50
+                        width: height
+                        source: "image://theme/icon-cover-people"
+                        anchors.left: parent.left
+                        anchors.top: parent.top
+                    }
+
+                    Label {
+                        id: name
+                        text: qsTr("anonymous")
+                        anchors.verticalCenter: icon.verticalCenter
+                        anchors.left: icon.right
+                        anchors.leftMargin: 10
+                        font.pixelSize: 20
+                    }
+
+                    RatingStarsRow {
+                        id: rating
+                        rating: model.starsCount
+                        anchors.top: name.bottom
+                        anchors.left: parent.left
+                    }
+
+                    Text {
+                        id: comment
+                        text: model.comment
+                        width: parent.width
+                        color: Theme.primaryColor
+                        anchors.top: rating.bottom
+                        wrapMode: Text.WordWrap
+                        font.pixelSize: Theme.fontSizeMedium
+                    }
                 }
             }
         }

@@ -89,18 +89,23 @@
 <context>
     <name>MapPointPage</name>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="58"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="59"/>
         <source>no_photos</source>
         <translation>Нет фотографий :с</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="64"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="65"/>
         <source>description</source>
         <translation>Описание:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="75"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="76"/>
         <source>comments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MapPointPage.qml" line="138"/>
+        <source>anonymous</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

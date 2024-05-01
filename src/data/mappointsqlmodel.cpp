@@ -6,7 +6,7 @@ MapPointTableModel::MapPointTableModel(QObject *parent): QSqlTableModel(parent) 
 
 void MapPointTableModel::onDataChanged() {
 
-    qDebug()<<"MapPointSqlModel onDataChanged rowCount = "<<rowCount();
+    qDebug()<<"rowCount = "<<rowCount();
     QList<MapPoint*> mapPoints = QList<MapPoint*>();
 
     for(int i = 0; i < rowCount(); i++) {
