@@ -94,22 +94,22 @@
         <translation>No photos :c</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="65"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="67"/>
         <source>description</source>
         <translation>Description:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="76"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="79"/>
         <source>add_comments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="125"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="131"/>
         <source>comments</source>
         <translation>Comments:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="155"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="161"/>
         <source>anonymous</source>
         <translation type="unfinished"></translation>
     </message>

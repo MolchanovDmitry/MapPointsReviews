@@ -42,18 +42,25 @@ QHash<int, QByteArray> ReviewsUiModel::roleNames() const {
 
 void ReviewsUiModel::updateReviews(Reviews *reviews) {
     auto reviewList = reviews->reviews;
-    auto last = reviewList->count() > 0 ? reviewList->count() - 1 : 0;
+    auto count = reviewList->count();
+    auto last = count > 0 ? count - 1 : 0;
 
-    qDebug() << "count: " << reviewList->count() << " last: "<<last;
+    qDebug() << "count: " << count << " last: "<<last;
 
     clear();
 
-    if(reviewList->count() > 0) {
+    if(count > 0) {
         beginInsertRows(QModelIndex(), 0, last);
         this->reviews->mapPointId = reviews->mapPointId;
         this->reviews->reviews->append(*reviews->reviews);
         endInsertRows();
     }
+
+    double total = 0;
+    foreach(Review review, *reviews->reviews) {
+        total += review.starCount;
+    }
+    emit avgStarCountChanged(total/count);
 }
 
 void ReviewsUiModel::clear() {

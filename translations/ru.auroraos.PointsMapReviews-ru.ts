@@ -91,25 +91,25 @@
     <message>
         <location filename="../qml/pages/MapPointPage.qml" line="59"/>
         <source>no_photos</source>
-        <translation>Нет фотографий :с</translation>
+        <translation>Нет фотографий</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="65"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="67"/>
         <source>description</source>
-        <translation>Описание:</translation>
+        <translation>Описание</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="76"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="79"/>
         <source>add_comments</source>
-        <translation>Оставьте отзыв</translation>
+        <translation>Напишите отзыв</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="125"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="131"/>
         <source>comments</source>
         <translation>Отзывы</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="155"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="161"/>
         <source>anonymous</source>
         <translation>Аноним</translation>
     </message>

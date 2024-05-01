@@ -61,13 +61,16 @@ Page {
                 visible: imageUrls.length === 0 || imageUrls[0] === ""
                 font.pixelSize: Theme.fontSizeMedium
             }
+
             SectionHeader {
+                visible: description !== ""
                 text: qsTr("description")
             }
 
             Text {
                 id: descriptionText
                 text: description
+                visible: description !== ""
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeMedium
             }
@@ -78,6 +81,7 @@ Page {
             }
 
             Column {
+                visible: isConfirmed
                 width: parent.width
 
                 RatingStarsRow {
@@ -89,7 +93,6 @@ Page {
 
                 Row {
                     width: parent.width
-                    visible: isConfirmed
                     height: commentField.height
 
                     TextField {
@@ -98,9 +101,6 @@ Page {
                         placeholderText: "Место для комментария"
                         validator: RegExpValidator {
                             regExp: /^[A-Za-zА-Яа-я0-9\s\-_,\.;:()]+$/
-                        }
-                        onErrorHighlightChanged: {
-                            canAccept = !errorHighlight
                         }
                     }
 
@@ -119,6 +119,7 @@ Page {
                                                 mapPointId,
                                                 commentRating.rating,
                                                 commentField.text)
+                                    commentField
                                 }
                             }
                         }
@@ -148,7 +149,7 @@ Page {
 
                     Image {
                         id: icon
-                        height: 50
+                        height: Theme.dp(50)
                         width: height
                         source: "image://theme/icon-cover-people"
                         anchors.left: parent.left
@@ -160,13 +161,13 @@ Page {
                         text: qsTr("anonymous")
                         anchors.verticalCenter: icon.verticalCenter
                         anchors.left: icon.right
-                        anchors.leftMargin: 10
+                        anchors.leftMargin: Theme.dp(10)
                         font.pixelSize: Theme.fontSizeMedium
                     }
 
                     RatingStarsRow {
                         id: rating
-                        starSize: Theme.dp(50)
+                        starSize: Theme.dp(40)
                         rating: model.starCount
                         anchors.top: name.bottom
                         anchors.left: parent.left
@@ -193,8 +194,18 @@ Page {
             }
         }
 
-        Component.onCompleted: {
-            fetchCommentsHandler.fetchComments(mapPointId)
+        Connections {
+            target: commentsModel
+            onAvgStarCountChanged: updateRating(avgStarCount)
+        }
+
+        Component.onCompleted: fetchCommentsHandler.fetchComments(mapPointId)
+    }
+
+    function updateRating(avgStarCount) {
+        console.log("Средний рейтинг " + avgStarCount)
+        if (isFinite(avgStarCount)) {
+            header.title = pageTitle + " (★" + avgStarCount.toFixed(1) + ")"
         }
     }
 

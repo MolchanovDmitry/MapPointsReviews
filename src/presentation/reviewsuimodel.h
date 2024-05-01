@@ -33,6 +33,9 @@ class ReviewsUiModel : public QAbstractListModel {
   public slots:
     void updateReviews(Reviews *reviews);
 
+  signals:
+    void avgStarCountChanged(double avgStarCount);
+
   private:
     Reviews *reviews = new Reviews();
 };
