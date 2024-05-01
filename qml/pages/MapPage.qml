@@ -63,13 +63,10 @@ Page {
 
                 onClicked: {
                     drawer.hide()
-                    //console.log("kokoke " + model.page)
                     if (model.page !== undefined) {
                         pageStack.push(Qt.resolvedUrl("%1.qml".arg(
                                                           model.page)),
                                        model.properties)
-                    } else {
-                        console.log("kokoke")
                     }
                 }
 
