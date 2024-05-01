@@ -100,11 +100,16 @@
     </message>
     <message>
         <location filename="../qml/pages/MapPointPage.qml" line="76"/>
+        <source>add_comments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MapPointPage.qml" line="113"/>
         <source>comments</source>
         <translation>Comments:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="138"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="143"/>
         <source>anonymous</source>
         <translation type="unfinished"></translation>
     </message>

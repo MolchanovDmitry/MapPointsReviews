@@ -73,7 +73,7 @@ Page {
             }
 
             SectionHeader {
-                text: qsTr("comments")
+                text: qsTr("add_comments")
                 visible: isConfirmed
             }
 
@@ -109,12 +109,17 @@ Page {
                 }
             }
 
+            SectionHeader {
+                text: qsTr("comments")
+                visible: isConfirmed
+            }
+
             ListView {
                 visible: isConfirmed
                 id: commentsView
                 width: parent.width
                 height: contentHeight
-                spacing: Theme.paddingSmall
+                spacing: Theme.paddingLarge
                 orientation: ListView.Vertical
                 model: commentsModel
                 anchors.leftMargin: Theme.paddingLarge
@@ -122,7 +127,7 @@ Page {
 
                 delegate: Item {
                     width: listView.width
-                    height: icon.height + rating.height + comment.height
+                    implicitHeight: icon.height + rating.height + comment.height
 
                     Image {
                         id: icon
@@ -139,12 +144,13 @@ Page {
                         anchors.verticalCenter: icon.verticalCenter
                         anchors.left: icon.right
                         anchors.leftMargin: 10
-                        font.pixelSize: 20
+                        font.pixelSize: Theme.fontSizeMedium
                     }
 
                     RatingStarsRow {
                         id: rating
-                        rating: model.starsCount
+                        starSize: Theme.dp(50)
+                        rating: model.starCount
                         anchors.top: name.bottom
                         anchors.left: parent.left
                     }

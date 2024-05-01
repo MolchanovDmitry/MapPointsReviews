@@ -100,13 +100,18 @@
     </message>
     <message>
         <location filename="../qml/pages/MapPointPage.qml" line="76"/>
-        <source>comments</source>
-        <translation type="unfinished"></translation>
+        <source>add_comments</source>
+        <translation>Оставьте отзыв</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="138"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="113"/>
+        <source>comments</source>
+        <translation>Отзывы</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MapPointPage.qml" line="143"/>
         <source>anonymous</source>
-        <translation type="unfinished"></translation>
+        <translation>Аноним</translation>
     </message>
 </context>
 <context>
