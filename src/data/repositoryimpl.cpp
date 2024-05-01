@@ -7,20 +7,20 @@
 
 RepositoryImpl::RepositoryImpl(
     MapPointsDbDataSource *mapPointsDataSource,
-    CommentsDataSource *commentsDataSource,
+    ReviewsDataSource *reviewsDataSource,
     NotificationSender *notificationSender,
     StringProvider *stringProvider,
     QObject *parent)
     : Repository(parent),
-      commentsDataSource(commentsDataSource),
+      reviewsDataSource(reviewsDataSource),
       mapPointsDataSource(mapPointsDataSource),
       notificationSender(notificationSender),
       stringProvider(stringProvider) {
 
     QMutexLocker locker(&mapPointsDataSourceMutex);
-    QMutexLocker locker2(&commentsDataSourceMutex);
+    QMutexLocker locker2(&reviewsDataSourceMutex);
     mapPointsDataSource->createTable();
-    commentsDataSource->createTable();
+    reviewsDataSource->createTable();
 
     bool isMockDataAddedAlready = mapPointsDataSource->getPointsCount() != 0;
     if(!isMockDataAddedAlready) {
@@ -31,8 +31,8 @@ RepositoryImpl::RepositoryImpl(
 
     connect(mapPointsDataSource->getMapPointTableModel(), &MapPointTableModel::mapPointsFromDataUpdated,
             mapPointModel, &MapPointModel::updateMapPoints);
-    connect(commentsDataSource->getTableModel(), &CommentsTableModel::commentsFetched,
-            commentsByIdModel, &CommentsByIdModel::updateComments);
+    connect(reviewsDataSource->getTableModel(), &ReviewsTableModel::reviewsFetched,
+            reviewsByIdModel, &ReviewsByIdModel::updateReviews);
 }
 
 void RepositoryImpl::fetchAllMapPoints() {
@@ -50,22 +50,22 @@ void RepositoryImpl::addMapPoint(MapPoint mapPoint) {
     }
 }
 
-void RepositoryImpl::addComment(int mapPointId, QString comment) {
-    QMutexLocker locker(&commentsDataSourceMutex);
-    commentsDataSource->addComment(mapPointId, comment);
+void RepositoryImpl::addReview(int mapPointId, Review review) {
+    QMutexLocker locker(&reviewsDataSourceMutex);
+    reviewsDataSource->addReview(mapPointId, review);
 }
 
-void RepositoryImpl::fetchCommentsBy(int mapPointId) {
-    QMutexLocker locker(&commentsDataSourceMutex);
-    commentsDataSource->fetchCommentsBy(mapPointId);
+void RepositoryImpl::fetchReviewsBy(int mapPointId) {
+    QMutexLocker locker(&reviewsDataSourceMutex);
+    reviewsDataSource->fetchReviewsBy(mapPointId);
 }
 
 MapPointModel *RepositoryImpl::getMapPointModel() {
     return mapPointModel;
 }
 
-CommentsByIdModel *RepositoryImpl::getCommentsByIdModel() {
-    return commentsByIdModel;
+ReviewsByIdModel *RepositoryImpl::getReviewsByIdModel() {
+    return reviewsByIdModel;
 }
 
 

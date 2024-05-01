@@ -1,16 +1,16 @@
-#include "commentsdatasource.h"
+#include "reviewsdatasource.h"
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
 #include <QException>
 #include <QSqlRecord>
 
-CommentsDataSource::CommentsDataSource(QSqlDatabase db, QObject *parent)
+ReviewsDataSource::ReviewsDataSource(QSqlDatabase db, QObject *parent)
     : QObject(parent),
       db(db) {
 }
 
-void CommentsDataSource::createTable() {
+void ReviewsDataSource::createTable() {
     if (!db.transaction()) {
         qCritical() << "Ошибка при начале транзакции: " << db.lastError().text();
         return;
@@ -20,6 +20,7 @@ void CommentsDataSource::createTable() {
     QString createTable = "CREATE TABLE IF NOT EXISTS "
                           "Comments("
                           "mapPointId INTEGER, "
+                          "starCount INTEGER, "
                           "comment TEXT"
                           ");";
 
@@ -32,7 +33,7 @@ void CommentsDataSource::createTable() {
     }
 }
 
-void CommentsDataSource::fetchCommentsBy(int mapPointId) {
+void ReviewsDataSource::fetchReviewsBy(int mapPointId) {
     qDebug()<<"mapPointId: "<<mapPointId;
     tableModel->setTable("Comments");
     tableModel->setFilter(QString("mapPointId == %1").arg(mapPointId));
@@ -43,15 +44,16 @@ void CommentsDataSource::fetchCommentsBy(int mapPointId) {
     }
 }
 
-void CommentsDataSource::addComment(int mapPointId, QString comment) {
-    qDebug() << "Добавляем в базу mapPointId = " << mapPointId << " с комментарием " << comment;
+void ReviewsDataSource::addReview(int mapPointId, Review review) {
+    qDebug() << "Добавляем в базу mapPointId = " << mapPointId << " с комментарием " << review.comment;
 
     QSqlQuery query;
 
-    query.prepare("INSERT INTO Comments (mapPointId, comment)"
-                  "VALUES (:mapPointId, :comment)");
+    query.prepare("INSERT INTO Comments (mapPointId, starCount, comment)"
+                  "VALUES (:mapPointId, :starCount, :comment)");
     query.bindValue(":mapPointId", mapPointId);
-    query.bindValue(":comment", comment);
+    query.bindValue(":starCount", review.starCount);
+    query.bindValue(":comment", review.comment);
 
     if (!query.exec()) {
         qCritical() << "Ошибка при добавлении комментария: " << query.lastError().text();
@@ -63,6 +65,6 @@ void CommentsDataSource::addComment(int mapPointId, QString comment) {
     tableModel->select();
 }
 
-CommentsTableModel *CommentsDataSource::getTableModel() {
+ReviewsTableModel *ReviewsDataSource::getTableModel() {
     return tableModel;
 }

@@ -4,7 +4,7 @@
 #include <QObject>
 
 /**
- * Обработчик намерения получить комментарии по конкретному pointId
+ * Обработчик намерения получить отзыв по конкретному pointId
  */
 class FetchCommentsHandler : public QObject {
     Q_OBJECT

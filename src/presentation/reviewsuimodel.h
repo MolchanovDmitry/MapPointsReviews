@@ -1,14 +1,14 @@
-#ifndef COMMENTSUIMODEL_H
-#define COMMENTSUIMODEL_H
+#ifndef REVIEWSUIMODEL_H
+#define REVIEWSUIMODEL_H
 
 #include <QAbstractItemModel>
 #include <QQmlListProperty>
-#include "../domain/comments.h"
+#include "../domain/reviews.h"
 
 /**
- * UI модуль комментариев, на который подписывается объект из QML
+ * Модель отзывов, на который подписывается UI
  */
-class CommentsUiModel : public QAbstractListModel {
+class ReviewsUiModel : public QAbstractListModel {
     Q_OBJECT
 
   public:
@@ -16,10 +16,11 @@ class CommentsUiModel : public QAbstractListModel {
     /** Доступные роли полей в модели */
     enum Roles {
         MapPointId,
+        StarCount,
         Comment
     };
 
-    explicit CommentsUiModel(QObject *parent = nullptr);
+    explicit ReviewsUiModel(QObject *parent = nullptr);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
@@ -29,10 +30,10 @@ class CommentsUiModel : public QAbstractListModel {
     void clear();
 
   public slots:
-    void updateComments(Comments *comments);
+    void updateReviews(Reviews *reviews);
 
   private:
-    Comments *comments = new Comments();
+    Reviews *reviews = new Reviews();
 };
 
-#endif // COMMENTSUIMODEL_H
+#endif // REVIEWSUIMODEL_H

@@ -101,8 +101,8 @@ Page {
                         anchors.fill: parent
                         onClicked: {
                             console.log("addComment " + mapPointId + " " + commentField.text)
-                            addCommentHandler.addComment(mapPointId,
-                                                         commentField.text)
+                            addCommentHandler.addReview(mapPointId, 5,
+                                                        commentField.text)
                         }
                     }
                 }

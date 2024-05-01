@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QtGui/QGuiApplication>
 #include "presentation/mapviewmodel.h"
-#include "data/commentsdatasource.h"
+#include "data/reviewsdatasource.h"
 #include "data/repositoryimpl.h"
 
 /**

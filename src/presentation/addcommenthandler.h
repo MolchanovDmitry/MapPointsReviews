@@ -2,17 +2,29 @@
 #define ADDCOMMENTHANDLER_H
 
 #include <QObject>
+#include "../domain/reviews.h"
 
 /**
- * Обработчик намерения добавить комментарий к точке
+ * Обработчик намерения добавить отзыв к точке
  */
-class AddCommentHandler : public QObject {
+class AddReviewHandler : public QObject {
     Q_OBJECT
   public:
-    explicit AddCommentHandler(QObject *parent = nullptr);
+    explicit AddReviewHandler(QObject *parent = nullptr);
+
+  public slots:
+
+    void addReview(int mapPointId, int starCount, QString comment) {
+        Review review;
+        review.comment = comment;
+        review.starCount = starCount;
+
+        emit onAddReviewRequest(mapPointId, review);
+    }
+
 
   signals:
-    void addComment(int mapPointId, QString comment);
+    void onAddReviewRequest(int mapPointId, Review review);
 
 };
 

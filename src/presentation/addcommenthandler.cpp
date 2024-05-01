@@ -1,5 +1,5 @@
 #include "addcommenthandler.h"
 
-AddCommentHandler::AddCommentHandler(QObject *parent) : QObject(parent) {
+AddReviewHandler::AddReviewHandler(QObject *parent) : QObject(parent) {
 
 }

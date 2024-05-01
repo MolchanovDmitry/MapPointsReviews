@@ -5,7 +5,7 @@
 #include <QMutex>
 
 #include "mappointsdbdatasource.h"
-#include "commentsdatasource.h"
+#include "reviewsdatasource.h"
 #include "notificationsender.h"
 #include "../domain/repository.h"
 #include "../stringprovider.h"
@@ -18,7 +18,7 @@ class RepositoryImpl : public Repository {
   public:
     explicit RepositoryImpl(
         MapPointsDbDataSource *mapPointsDbDataSource,
-        CommentsDataSource *commentsDataSource,
+        ReviewsDataSource *reviewsDataSource,
         NotificationSender *notificationSender,
         StringProvider *stringProvider,
         QObject *parent = nullptr
@@ -33,21 +33,21 @@ class RepositoryImpl : public Repository {
     /** Добавить точку на карте. */
     void addMapPoint(MapPoint mapPoint) override;
 
-    /** Добавить комментарий к точке. */
-    void addComment(int mapPointId, QString comment) override;
+    /** Добавить отзыв к точке. */
+    void addReview(int mapPointId, Review review) override;
 
-    /** Получить комментарии к точке. */
-    void fetchCommentsBy(int mapPointId) override;
+    /** Получить отзывы к точке. */
+    void fetchReviewsBy(int mapPointId) override;
 
     /** Возвращает бизнес модель точек на карте. */
     MapPointModel *getMapPointModel() override;
 
     /** Возвращает бизнес модель комментариев к точке на карте. */
-    CommentsByIdModel *getCommentsByIdModel() override;
+    ReviewsByIdModel *getReviewsByIdModel() override;
 
   private:
 
-    CommentsDataSource *commentsDataSource;
+    ReviewsDataSource *reviewsDataSource;
 
     MapPointsDbDataSource *mapPointsDataSource;
 
@@ -57,9 +57,9 @@ class RepositoryImpl : public Repository {
 
     MapPointModel *mapPointModel = new MapPointModel(this);
 
-    CommentsByIdModel *commentsByIdModel = new CommentsByIdModel(this);
+    ReviewsByIdModel *reviewsByIdModel = new ReviewsByIdModel(this);
 
-    QMutex commentsDataSourceMutex;
+    QMutex reviewsDataSourceMutex;
 
     QMutex mapPointsDataSourceMutex;
 

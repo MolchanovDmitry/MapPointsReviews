@@ -4,19 +4,19 @@ MapViewModel::MapViewModel(
     FetchAllMapPointsUseCase *fetchAppMapPointsUseCase,
     GetMapPointModelUseCase *getMapPointModelUseCase,
     AddMapPointUseCase *addMapPointUseCase,
-    AddCommentUseCase *addCommentUseCase,
-    FetchCommentByMapIdUseCase *fetchCommentsUseCase,
-    GetCommentsByIdUseCase *getCommentsByIdUseCase,
+    AddReviewUseCase *addCommentUseCase,
+    FetchReviewsByMapIdUseCase *fetchCommentsUseCase,
+    GetReviewsByIdUseCase *getCommentsByIdUseCase,
     QObject *parent)
     : QObject(parent)
     , addMapPointUseCase(addMapPointUseCase)
-    , addCommentUseCase(addCommentUseCase)
-    , fetchCommentsUseCase(fetchCommentsUseCase)
-    , getCommentsByIdUseCase(getCommentsByIdUseCase) {
+    , addReviewUseCase(addCommentUseCase)
+    , fetchReviewsUseCase(fetchCommentsUseCase)
+    , getReviewsByIdUseCase(getCommentsByIdUseCase) {
     connect(getMapPointModelUseCase->run(), &MapPointModel::mapPointsUpdated,
             this, &MapViewModel::mapMapPointAndUpdate);
-    connect(getCommentsByIdUseCase->run(), &CommentsByIdModel::commentsUpdated,
-            commentsUiModel, &CommentsUiModel::updateComments);
+    connect(getCommentsByIdUseCase->run(), &ReviewsByIdModel::reviewsUpdated,
+            reviewsUiModel, &ReviewsUiModel::updateReviews);
 
     fetchAppMapPointsUseCase->run();
 }
@@ -39,8 +39,8 @@ MapPointsUiModel* MapViewModel::getMapPointsUiModel() {
     return mapPointsUiModel;
 }
 
-CommentsUiModel *MapViewModel::getCommentsUiModel() {
-    return commentsUiModel;
+ReviewsUiModel *MapViewModel::getReviewsUiModel() {
+    return reviewsUiModel;
 }
 
 void MapViewModel::onMapPointPretentderFetched(MapPoint mapPoint) {
@@ -48,12 +48,12 @@ void MapViewModel::onMapPointPretentderFetched(MapPoint mapPoint) {
     addMapPointUseCase->run(mapPoint);
 }
 
-void MapViewModel::addComment(int mapPointId, QString comments) {
-    qDebug()<<"mapPointId = "<<mapPointId<<" comments = "<<comments;
-    addCommentUseCase->run(mapPointId, comments);
+void MapViewModel::addReview(int mapPointId, Review review) {
+    qDebug()<<"mapPointId = "<<mapPointId<<" comments = "<<review.comment;
+    addReviewUseCase->run(mapPointId, review);
 }
 
-void MapViewModel::fetchComments(int mapPointId) {
-    commentsUiModel->clear();
-    fetchCommentsUseCase->run(mapPointId);
+void MapViewModel::fetchReviews(int mapPointId) {
+    reviewsUiModel->clear();
+    fetchReviewsUseCase->run(mapPointId);
 }

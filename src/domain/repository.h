@@ -4,7 +4,7 @@
 #include <QObject>
 #include "mappoint.h"
 #include "mappointmodel.h"
-#include "commentbyidmodel.h"
+#include "reviewsbyidmodel.h"
 
 /**
  * Контракт репозитория, который служит ориентиром для реализации для слоя источника данных
@@ -23,17 +23,17 @@ class Repository : public QObject {
     /** Намерение добавить точку на карте. */
     virtual void addMapPoint(MapPoint mapPoint) = 0;
 
-    /** Намерение добавить комментарий к точке. */
-    virtual void addComment(int mapPointId, QString comment) = 0;
+    /** Намерение добавить отзыв к точке. */
+    virtual void addReview(int mapPointId, Review review) = 0;
 
-    /** Намерение получить комментарии к точке. */
-    virtual void fetchCommentsBy(int mapPointId) = 0;
+    /** Намерение получить отзыв к точке. */
+    virtual void fetchReviewsBy(int mapPointId) = 0;
 
     /** Возвращает бизнес модель точек на карте. */
     virtual MapPointModel *getMapPointModel() = 0;
 
-    /** Возвращает бизнес модель комментариев к точке на карте. */
-    virtual CommentsByIdModel *getCommentsByIdModel() = 0;
+    /** Возвращает бизнес модель отзывов к точке на карте. */
+    virtual ReviewsByIdModel *getReviewsByIdModel() = 0;
 
 };
 

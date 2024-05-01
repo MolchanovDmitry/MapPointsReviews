@@ -23,10 +23,10 @@ int main(int argc, char *argv[]) {
     // Используем провайдер зависимостей для получения объектов ViewModel.
     auto mapViewModel = depProvider->provideMapViewModel(application.data());
     auto mapPointsUiModel = mapViewModel->getMapPointsUiModel();
-    auto commentsModel = mapViewModel->getCommentsUiModel();
+    auto commentsModel = mapViewModel->getReviewsUiModel();
 
     // Создаем обработчики, которые будут реагировать на действия пользователя в интерфейсе
-    auto addCommentHandler = new AddCommentHandler();
+    auto addCommentHandler = new AddReviewHandler();
     auto addMapPointHandler = new AddMapPointHandler();
     auto fetchCommentsHandler = new FetchCommentsHandler();
 
@@ -34,10 +34,10 @@ int main(int argc, char *argv[]) {
     // Это позволяет ViewModel отреагировать на действия пользователя, которые были зафиксированы обработчиками.
     QObject::connect(addMapPointHandler, &AddMapPointHandler::onMapPointPretentderFetched,
                      mapViewModel, &MapViewModel::onMapPointPretentderFetched);
-    QObject::connect(addCommentHandler, &AddCommentHandler::addComment,
-                     mapViewModel, &MapViewModel::addComment);
+    QObject::connect(addCommentHandler, &AddReviewHandler::onAddReviewRequest,
+                     mapViewModel, &MapViewModel::addReview);
     QObject::connect(fetchCommentsHandler, &FetchCommentsHandler::fetchComments,
-                     mapViewModel, &MapViewModel::fetchComments);
+                     mapViewModel, &MapViewModel::fetchReviews);
 
     QScopedPointer<QQuickView> view(Aurora::Application::createView());
 

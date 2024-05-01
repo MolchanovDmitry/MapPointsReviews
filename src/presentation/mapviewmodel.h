@@ -6,10 +6,10 @@
 #include "../domain/fetchallmappointsusecase.h"
 #include "../domain/getmappointmodelusecase.h"
 #include "../domain/addmappointusecase.h"
-#include "../domain/addcommentusecase.h"
-#include "../domain/fetchcommentbymapidusecase.h"
-#include "../domain/getcommentsbyidusecase.h"
-#include "commentsuimodel.h"
+#include "../domain/addreviewusecase.h"
+#include "../domain/fetchreviewsbymapidusecase.h"
+#include "../domain/getreviewsbyidusecase.h"
+#include "reviewsuimodel.h"
 
 /**
  * Класс MapViewModel представляет собой ViewModel в архитектуре MVVM (Model-View-ViewModel),
@@ -25,42 +25,42 @@ class MapViewModel : public QObject {
         FetchAllMapPointsUseCase *fetchAppMapPointsUseCase,
         GetMapPointModelUseCase *getMapPointModelUseCase,
         AddMapPointUseCase *addMapPointUseCase,
-        AddCommentUseCase *addCommentUseCase,
-        FetchCommentByMapIdUseCase *fetchCommentsUseCase,
-        GetCommentsByIdUseCase *getCommentsByIdUseCase,
+        AddReviewUseCase *addReviewUseCase,
+        FetchReviewsByMapIdUseCase *fetchReviewsUseCase,
+        GetReviewsByIdUseCase *getReviewsByIdUseCase,
         QObject *parent = nullptr
     );
 
     /** Возвращает UI модель точек на карте */
     MapPointsUiModel* getMapPointsUiModel();
 
-    /** Возвращает UI модель комментариев к точке */
-    CommentsUiModel* getCommentsUiModel();
+    /** Возвращает UI модель отзывов к точке */
+    ReviewsUiModel* getReviewsUiModel();
 
   public slots:
 
     /** Получен претендент на новую точку. (Добавлена точка на карте) */
     void onMapPointPretentderFetched(MapPoint mapPoint);
 
-    /** Добавить новый комментарий к точке */
-    void addComment(int mapPointId, QString comments);
+    /** Добавить новый отзыв к точке */
+    void addReview(int mapPointId, Review review);
 
     /** Получить комментарии к точке. */
-    void fetchComments(int mapPointId);
+    void fetchReviews(int mapPointId);
 
   private:
 
     AddMapPointUseCase *addMapPointUseCase;
 
-    AddCommentUseCase *addCommentUseCase;
+    AddReviewUseCase *addReviewUseCase;
 
-    FetchCommentByMapIdUseCase *fetchCommentsUseCase;
+    FetchReviewsByMapIdUseCase *fetchReviewsUseCase;
 
-    GetCommentsByIdUseCase *getCommentsByIdUseCase;
+    GetReviewsByIdUseCase *getReviewsByIdUseCase;
 
     MapPointsUiModel *mapPointsUiModel = new MapPointsUiModel(this);
 
-    CommentsUiModel *commentsUiModel = new CommentsUiModel(this);
+    ReviewsUiModel *reviewsUiModel = new ReviewsUiModel(this);
 
     void mapMapPointAndUpdate(QList<MapPoint*> mapPoints);
 };

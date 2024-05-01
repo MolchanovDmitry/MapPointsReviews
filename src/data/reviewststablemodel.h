@@ -1,30 +1,30 @@
-#ifndef COMMENTSTABLEMODEL_H
-#define COMMENTSTABLEMODEL_H
+#ifndef REVIEWSTSTABLEMODEL_H
+#define REVIEWSTSTABLEMODEL_H
 
 #include <QObject>
 #include <QSqlTableModel>
-#include "../domain/comments.h"
+#include "../domain/reviews.h"
 
 /**
- * Sql модель комментариев
+ * Sql модель отзывов
  */
-class CommentsTableModel : public QSqlTableModel {
+class ReviewsTableModel : public QSqlTableModel {
     Q_OBJECT
   public:
-    explicit CommentsTableModel(QObject *parent = nullptr);
+    explicit ReviewsTableModel(QObject *parent = nullptr);
 
   public slots:
     /**
      *  При изменении произойдет мапинг данных в бизнес модель
-     *  с последующим вызовом [commentsFetched]
+     *  с последующим вызовом [reviewsFetched]
      */
     void onDataChanged();
 
   signals:
 
     /** Уведомляем подпищиков об изменении модели в формате бизнес модели */
-    void commentsFetched(Comments *comments);
+    void reviewsFetched(Reviews *reviews);
 
 };
 
-#endif // COMMENTSTABLEMODEL_H
+#endif // REVIEWSTSTABLEMODEL_H

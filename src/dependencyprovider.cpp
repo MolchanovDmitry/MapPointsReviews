@@ -29,12 +29,12 @@ QSqlDatabase getDatabase() {
 MapViewModel *DependenciesProvider::provideMapViewModel(QGuiApplication *app) {
     auto db = getDatabase();
     auto stringProvidet = new StringProvider(app);
-    auto commentDataSource = new CommentsDataSource(db, app);
+    auto reviewsDataSource = new ReviewsDataSource(db, app);
     auto mapPointsDbDataSource = new MapPointsDbDataSource(db, app);
     auto notificationSender = new NotificationSender(stringProvidet, app);
 
     auto repository = new RepositoryImpl(mapPointsDbDataSource,
-                                         commentDataSource,
+                                         reviewsDataSource,
                                          notificationSender,
                                          stringProvidet,
                                          app);
@@ -43,9 +43,9 @@ MapViewModel *DependenciesProvider::provideMapViewModel(QGuiApplication *app) {
     auto getMapPointModelUseCase = new GetMapPointModelUseCase(repository);
     auto fetchAllMapPointsUseCase = new FetchAllMapPointsUseCase(repository);
 
-    auto addCommentUseCase = new AddCommentUseCase(repository);
-    auto getCommentsByIdUseCase = new GetCommentsByIdUseCase(repository);
-    auto fetchCommentsUseCase = new FetchCommentByMapIdUseCase(repository);
+    auto addCommentUseCase = new AddReviewUseCase(repository);
+    auto getCommentsByIdUseCase = new GetReviewsByIdUseCase(repository);
+    auto fetchCommentsUseCase = new FetchReviewsByMapIdUseCase(repository);
 
     return new MapViewModel(fetchAllMapPointsUseCase,
                             getMapPointModelUseCase,
