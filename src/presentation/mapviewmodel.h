@@ -2,14 +2,14 @@
 #define MAPVIEWMODEL_H
 
 #include <QObject>
-#include "mappointsuimodel.h"
+#include "model/mappointsuimodel.h"
 #include "../domain/fetchallmappointsusecase.h"
 #include "../domain/getmappointmodelusecase.h"
 #include "../domain/addmappointusecase.h"
 #include "../domain/addreviewusecase.h"
 #include "../domain/fetchreviewsbymapidusecase.h"
 #include "../domain/getreviewsbyidusecase.h"
-#include "reviewsuimodel.h"
+#include "model/reviewsuimodel.h"
 
 /**
  * Класс MapViewModel представляет собой ViewModel в архитектуре MVVM (Model-View-ViewModel),

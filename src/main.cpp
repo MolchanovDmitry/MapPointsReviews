@@ -7,9 +7,9 @@
 #include <QQmlContext>
 #include <QObject>
 
-#include "presentation/fetchcommentshandler.h"
-#include "presentation/addmappointhandler.h"
-#include "presentation/addcommenthandler.h"
+#include "presentation/handlers/fetchcommentshandler.h"
+#include "presentation/handlers/addmappointhandler.h"
+#include "presentation/handlers/addcommenthandler.h"
 #include "presentation/mapviewmodel.h"
 #include "dependencyprovider.h"
 

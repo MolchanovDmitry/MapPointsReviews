@@ -32,13 +32,13 @@ HEADERS += \
     src/domain/repository.h \
     src/domain/reviews.h \
     src/domain/reviewsbyidmodel.h \
-    src/presentation/addcommenthandler.h \
-    src/presentation/addmappointhandler.h \
-    src/presentation/fetchcommentshandler.h \
-    src/presentation/mappointsuimodel.h \
-    src/presentation/mappointui.h \
+    src/presentation/handlers/addcommenthandler.h \
+    src/presentation/handlers/addmappointhandler.h \
+    src/presentation/handlers/fetchcommentshandler.h \
+    src/presentation/model/mappointsuimodel.h \
+    src/presentation/model/mappointui.h \
+    src/presentation/model/reviewsuimodel.h \
     src/presentation/mapviewmodel.h \
-    src/presentation/reviewsuimodel.h \
     src/stringprovider.h
 
 SOURCES += \
@@ -58,15 +58,17 @@ SOURCES += \
     src/domain/getreviewsbyidusecase.cpp \
     src/domain/mappointmodel.cpp \
     src/domain/reviewsbyidmodel.cpp \
-    src/presentation/addcommenthandler.cpp \
-    src/presentation/addmappointhandler.cpp \
-    src/presentation/fetchcommentshandler.cpp \
-    src/presentation/mappointsuimodel.cpp \
-    src/presentation/mappointui.cpp \
+    src/presentation/handlers/addcommenthandler.cpp \
+    src/presentation/handlers/addmappointhandler.cpp \
+    src/presentation/handlers/fetchcommentshandler.cpp \
+    src/presentation/model/mappointsuimodel.cpp \
+    src/presentation/model/mappointui.cpp \
+    src/presentation/model/reviewsuimodel.cpp \
     src/presentation/mapviewmodel.cpp \
+    src/stringprovider.cpp\
     src/main.cpp \
-    src/presentation/reviewsuimodel.cpp \
-    src/stringprovider.cpp
+
+
 
 DISTFILES += \
     qml/pages/MapPointPage.qml \

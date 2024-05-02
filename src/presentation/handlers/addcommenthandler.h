@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QDateTime>
-#include "../domain/reviews.h"
+#include "../../domain/reviews.h"
 
 /**
  * Обработчик намерения добавить отзыв к точке
