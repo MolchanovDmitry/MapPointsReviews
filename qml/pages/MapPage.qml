@@ -169,10 +169,12 @@ Page {
 
             Component.onCompleted: {
                 console.log("start position: " + latitude + ":" + longitude)
-                if (latitude == 0 && longitude == 0) {
-                    center = QtPositioning.coordinate(55.7520233, 37.6174994)
-                } else {
+
+                if (isLocationCorrect()) {
                     center = QtPositioning.coordinate(latitude, longitude)
+                } else {
+                    // Если локация некорректна - смотрим на Кремль
+                    center = QtPositioning.coordinate(55.7520233, 37.6174994)
                 }
             }
         }
@@ -214,7 +216,7 @@ Page {
                 objectName: "centerButton"
                 sourceIcon: "image://theme/icon-l-whereami?%1"
                 onClicked: {
-                    if (latitude != 0 && longitude != null) {
+                    if (isLocationCorrect()) {
                         map.center = QtPositioning.coordinate(latitude,
                                                               longitude)
                     }
@@ -241,5 +243,14 @@ Page {
                 }
             }
         }
+    }
+
+    // Проверка корректности текущего положения
+    function isLocationCorrect() {
+        var isLocationNotZero = latitude !== 0 && longitude !== 0
+        var isLocationNotNaN = isFinite(latitude) && isFinite(longitude)
+        console.log("isLocationNotZero: " + isLocationNotZero
+                    + " isLocationNotNaN: " + isLocationNotNaN)
+        return isLocationNotZero && isLocationNotNaN
     }
 }

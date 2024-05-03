@@ -76,12 +76,12 @@
         <translation>Добавьте точку</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="233"/>
+        <location filename="../qml/pages/MapPage.qml" line="236"/>
         <source>check_positioning</source>
         <translation>Проверить позиционирование</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="236"/>
+        <location filename="../qml/pages/MapPage.qml" line="239"/>
         <source>About</source>
         <translation>О приложении</translation>
     </message>

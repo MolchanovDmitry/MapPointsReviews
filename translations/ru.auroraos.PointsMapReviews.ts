@@ -76,12 +76,12 @@
         <translation>Add point</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="233"/>
+        <location filename="../qml/pages/MapPage.qml" line="236"/>
         <source>check_positioning</source>
         <translation>Positioning check</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="236"/>
+        <location filename="../qml/pages/MapPage.qml" line="239"/>
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
