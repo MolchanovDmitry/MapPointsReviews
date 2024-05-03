@@ -13,7 +13,6 @@ Dialog {
     objectName: "aboutPage"
     allowedOrientations: Orientation.All
 
-    property variant imageUrls: []
     property real latitude
     property real longitude
 
@@ -114,7 +113,6 @@ Dialog {
             console.log(url)
 
             if (!isImageAlreadyExists(url)) {
-                imageUrls.push(url)
                 imageModel.append({
                                       "imgSource": url
                                   })
@@ -131,11 +129,20 @@ Dialog {
         return false
     }
 
+    function getImageList() {
+        var imagesArray = []
+        for (var i = 0; i < imageModel.count; i++) {
+            imagesArray.push(imageModel.get(i).imgSource)
+        }
+        return imagesArray
+    }
+
     onAccepted: {
         console.log("Намерение создания точки: latitude = " + latitude
                     + " longitude = " + longitude)
         addMapPointHandler.onMapPointAddRequest(titleText.text,
                                                 descriptionText.text,
-                                                imageUrls, latitude, longitude)
+                                                getImageList(), latitude,
+                                                longitude)
     }
 }

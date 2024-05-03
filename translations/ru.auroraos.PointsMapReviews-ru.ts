@@ -22,27 +22,27 @@
 <context>
     <name>AddMapPointPage</name>
     <message>
-        <location filename="../qml/pages/AddMapPointPage.qml" line="24"/>
+        <location filename="../qml/pages/AddMapPointPage.qml" line="23"/>
         <source>save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AddMapPointPage.qml" line="25"/>
+        <location filename="../qml/pages/AddMapPointPage.qml" line="24"/>
         <source>cancel</source>
         <translation>Отменить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AddMapPointPage.qml" line="74"/>
+        <location filename="../qml/pages/AddMapPointPage.qml" line="73"/>
         <source>select_photos</source>
         <translation>Выберите фото</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AddMapPointPage.qml" line="84"/>
+        <location filename="../qml/pages/AddMapPointPage.qml" line="83"/>
         <source>add_place_name</source>
         <translation>Укажите имя места</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AddMapPointPage.qml" line="95"/>
+        <location filename="../qml/pages/AddMapPointPage.qml" line="94"/>
         <source>add_place_description</source>
         <translation>Укажите описание места</translation>
     </message>
@@ -76,12 +76,12 @@
         <translation>Добавьте точку</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="236"/>
+        <location filename="../qml/pages/MapPage.qml" line="235"/>
         <source>check_positioning</source>
         <translation>Проверить позиционирование</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPage.qml" line="239"/>
+        <location filename="../qml/pages/MapPage.qml" line="238"/>
         <source>About</source>
         <translation>О приложении</translation>
     </message>
