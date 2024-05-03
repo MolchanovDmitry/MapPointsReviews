@@ -4,8 +4,8 @@
 #include <QObject>
 #include <QMutex>
 
-#include "mappointsdbdatasource.h"
-#include "reviewsdatasource.h"
+#include "datasource/mappointsdbdatasource.h"
+#include "datasource/reviewsdatasource.h"
 #include "notificationsender.h"
 #include "../domain/repository.h"
 #include "../stringprovider.h"

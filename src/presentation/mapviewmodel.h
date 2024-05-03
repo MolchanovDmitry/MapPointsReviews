@@ -3,12 +3,12 @@
 
 #include <QObject>
 #include "model/mappointsuimodel.h"
-#include "../domain/fetchallmappointsusecase.h"
-#include "../domain/getmappointmodelusecase.h"
-#include "../domain/addmappointusecase.h"
-#include "../domain/addreviewusecase.h"
-#include "../domain/fetchreviewsbymapidusecase.h"
-#include "../domain/getreviewsbyidusecase.h"
+#include "../domain/usecases/fetchallmappointsusecase.h"
+#include "../domain/usecases/getmappointmodelusecase.h"
+#include "../domain/usecases/addmappointusecase.h"
+#include "../domain/usecases/addreviewusecase.h"
+#include "../domain/usecases/fetchreviewsbymapidusecase.h"
+#include "../domain/usecases/getreviewsbyidusecase.h"
 #include "model/reviewsuimodel.h"
 
 /**
@@ -27,7 +27,7 @@ class MapViewModel : public QObject {
         AddMapPointUseCase *addMapPointUseCase,
         AddReviewUseCase *addReviewUseCase,
         FetchReviewsByMapIdUseCase *fetchReviewsUseCase,
-        GetReviewsByIdUseCase *getReviewsByIdUseCase,
+        GetReviewsByIdModelUseCase *getReviewsByIdUseCase,
         QObject *parent = nullptr
     );
 
@@ -56,7 +56,7 @@ class MapViewModel : public QObject {
 
     FetchReviewsByMapIdUseCase *fetchReviewsUseCase;
 
-    GetReviewsByIdUseCase *getReviewsByIdUseCase;
+    GetReviewsByIdModelUseCase *getReviewsByIdUseCase;
 
     MapPointsUiModel *mapPointsUiModel = new MapPointsUiModel(this);
 

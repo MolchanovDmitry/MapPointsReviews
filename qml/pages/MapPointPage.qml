@@ -129,7 +129,18 @@ Page {
 
             SectionHeader {
                 text: qsTr("comments")
-                visible: isConfirmed
+            }
+
+            Text {
+                text: qsTr("comments_unavailable")
+                anchors.right: parent.right
+                anchors.top: icon.top
+                color: Theme.primaryColor
+                visible: !isConfirmed
+                anchors.bottom: rating.bottom
+                wrapMode: Text.Wrap
+                width: parent.width
+                textFormat: Text.RichText
             }
 
             ListView {

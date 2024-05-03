@@ -44,7 +44,7 @@ MapViewModel *DependenciesProvider::provideMapViewModel(QGuiApplication *app) {
     auto fetchAllMapPointsUseCase = new FetchAllMapPointsUseCase(repository);
 
     auto addCommentUseCase = new AddReviewUseCase(repository);
-    auto getCommentsByIdUseCase = new GetReviewsByIdUseCase(repository);
+    auto getCommentsByIdUseCase = new GetReviewsByIdModelUseCase(repository);
     auto fetchCommentsUseCase = new FetchReviewsByMapIdUseCase(repository);
 
     return new MapViewModel(fetchAllMapPointsUseCase,

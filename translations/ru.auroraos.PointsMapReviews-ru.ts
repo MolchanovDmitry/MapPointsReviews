@@ -109,7 +109,12 @@
         <translation>Отзывы</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MapPointPage.qml" line="161"/>
+        <location filename="../qml/pages/MapPointPage.qml" line="135"/>
+        <source>comments_unavailable</source>
+        <translation>Комментария для неподтвержденных точек недоступны</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MapPointPage.qml" line="172"/>
         <source>anonymous</source>
         <translation>Аноним</translation>
     </message>

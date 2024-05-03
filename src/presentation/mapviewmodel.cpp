@@ -6,7 +6,7 @@ MapViewModel::MapViewModel(
     AddMapPointUseCase *addMapPointUseCase,
     AddReviewUseCase *addCommentUseCase,
     FetchReviewsByMapIdUseCase *fetchCommentsUseCase,
-    GetReviewsByIdUseCase *getCommentsByIdUseCase,
+    GetReviewsByIdModelUseCase *getCommentsByIdUseCase,
     QObject *parent)
     : QObject(parent)
     , addMapPointUseCase(addMapPointUseCase)

@@ -3,7 +3,7 @@
 
 #include <QAbstractItemModel>
 #include <QQmlListProperty>
-#include "../../domain/reviews.h"
+#include "../../domain/model/reviews.h"
 
 /**
  * Модель отзывов, на который подписывается UI

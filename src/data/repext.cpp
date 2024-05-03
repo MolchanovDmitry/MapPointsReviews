@@ -2,8 +2,8 @@
 #include <QStandardPaths>
 #include <QSqlDatabase>
 #include <QDir>
-#include "../domain/mappoint.h"
-#include "mappointsdbdatasource.h"
+#include "../domain/model/mappoint.h"
+#include "datasource/mappointsdbdatasource.h"
 
 /** Вернет случайно 1 или -1 */
 int getRandomSign() {

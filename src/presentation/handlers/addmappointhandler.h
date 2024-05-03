@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QDebug>
-#include "../../domain/mappoint.h"
+#include "../../domain/model/mappoint.h"
 
 /**
  * Обработчик намерения добавить новую точку на карте

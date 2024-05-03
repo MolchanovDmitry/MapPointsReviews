@@ -2,9 +2,9 @@
 #define REPOSITORY_H
 
 #include <QObject>
-#include "mappoint.h"
-#include "mappointmodel.h"
-#include "reviewsbyidmodel.h"
+#include "model/mappoint.h"
+#include "model/mappointmodel.h"
+#include "model/reviewsbyidmodel.h"
 
 /**
  * Контракт репозитория, который служит ориентиром для реализации для слоя источника данных
