@@ -42,7 +42,7 @@ class RepositoryImpl : public Repository {
     /** Возвращает бизнес модель точек на карте. */
     MapPointModel *getMapPointModel() override;
 
-    /** Возвращает бизнес модель комментариев к точке на карте. */
+    /** Возвращает бизнес модель отзывов к точке на карте. */
     ReviewsByIdModel *getReviewsByIdModel() override;
 
   private:

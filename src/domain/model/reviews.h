@@ -27,7 +27,7 @@ struct Reviews {
     /** Идентификатор точки на карте. */
     qint64 mapPointId;
 
-    /** Комментарии к точке */
+    /** Отзывы к точке */
     QList<Review> *reviews = new QList<Review>();
 };
 

@@ -5,7 +5,7 @@
 #include "../repository.h"
 
 /**
- * Сценарий добавления комментария к точке.
+ * Сценарий добавления отзыва к точке.
  */
 class AddReviewUseCase : public QObject {
     Q_OBJECT

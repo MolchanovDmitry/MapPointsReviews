@@ -1,12 +1,12 @@
 #include "getreviewsbyidusecase.h"
 
-GetReviewsByIdUseCase::GetReviewsByIdUseCase(Repository *repository, QObject *parent)
+GetReviewsByIdModelUseCase::GetReviewsByIdModelUseCase(Repository *repository, QObject *parent)
     : QObject(parent),
       repository(repository) {
 
 }
 
-ReviewsByIdModel *GetReviewsByIdUseCase::run() {
+ReviewsByIdModel *GetReviewsByIdModelUseCase::run() {
     return repository->getReviewsByIdModel();
 }
 

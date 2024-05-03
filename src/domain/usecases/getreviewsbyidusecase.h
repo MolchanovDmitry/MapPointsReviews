@@ -8,10 +8,10 @@
 /**
  * Сценарий получения модели отзывов к точке.
  */
-class GetReviewsByIdUseCase : public QObject {
+class GetReviewsByIdModelUseCase : public QObject {
     Q_OBJECT
   public:
-    explicit GetReviewsByIdUseCase(Repository *repository, QObject *parent = nullptr);
+    explicit GetReviewsByIdModelUseCase(Repository *repository, QObject *parent = nullptr);
 
     ReviewsByIdModel* run();
 

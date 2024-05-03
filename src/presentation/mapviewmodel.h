@@ -45,7 +45,7 @@ class MapViewModel : public QObject {
     /** Добавить новый отзыв к точке */
     void addReview(int mapPointId, Review review);
 
-    /** Получить комментарии к точке. */
+    /** Получить отзывы к точке. */
     void fetchReviews(int mapPointId);
 
   private:
