@@ -4,10 +4,10 @@
     <img src="https://img.shields.io/badge/qt-5.15-green)?logo=qt">
   </a>
   <a href="https://auroraos.ru/">
-    <img src="https://img.shields.io/badge/Aurora OS-5.0-green)">
+    <img src="https://img.shields.io/badge/Aurora OS-5.0-red">
   </a>
     <a href="https://developer.auroraos.ru/doc/software_development/sdk">
-    <img src="https://img.shields.io/badge/Aurora SDK-5.0.1.27-green)">
+    <img src="https://img.shields.io/badge/Aurora SDK-5.0.1.27-red">
   </a>
 </p>
 Проектная работа курса "Разработка прикладного ПО на Qt и ОС «Аврора»" на тему "Отзывы на карте".
